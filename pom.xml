@@ -22,6 +22,19 @@
                 </configuration>
             </plugin>
         </plugins>
+
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>true</filtering>
+            </testResource>
+        </testResources>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
     </build>
 
     <dependencies>
@@ -77,6 +90,11 @@
             <artifactId>commons-dbcp</artifactId>
             <version>${dbcp.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <version>${jdbc.version}</version>
+        </dependency>
 
         <!-- Spring orm dependencies -->
         <dependency>
@@ -116,6 +134,7 @@
         <persistence.version>1.0.2.GA</persistence.version>
         <dbcp.version>1.4</dbcp.version>
         <slf4j.version>1.5.11</slf4j.version>
+        <jdbc.version>10.2.0.4.0</jdbc.version>
 
         <!-- Configuration properties -->
         <!--    Database configuration -->
@@ -128,6 +147,6 @@
         <db.password>Get password from the settings.xml</db.password>
         <!--    Hibernate configuration -->
         <hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</hibernate.dialect>
-        
+
     </properties>
 </project>
