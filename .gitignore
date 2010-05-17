@@ -1,3 +1,5 @@
+settings*.xml
+
 debug.iml
 debug.ipr
 debug.iws
