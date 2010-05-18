@@ -145,6 +145,8 @@
         <db.driver>oracle.jdbc.driver.OracleDriver</db.driver>
         <db.username>Get username from the settings.xml</db.username>
         <db.password>Get password from the settings.xml</db.password>
+        <db.admin.username>Get username from the settings.xml</db.admin.username>
+        <db.admin.password>Get password from the settings.xml</db.admin.password>
         <!--    Hibernate configuration -->
         <hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</hibernate.dialect>
 
