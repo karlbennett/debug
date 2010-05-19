@@ -1,8 +1,8 @@
 package org.youthnet.debug.domain.admin;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * User: karl
@@ -20,6 +20,9 @@ public class Collective extends BaseObject {
 
     @Column
     private String password;
+
+    @OneToMany( mappedBy = "collective", targetEntity = Vuo.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER )
+    private Set<Vuo> vuos = new HashSet<Vuo>();
 
     
     public String getName() {
@@ -44,5 +47,13 @@ public class Collective extends BaseObject {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Vuo> getVuos() {
+        return vuos;
+    }
+
+    public void setVuos(Set<Vuo> vuos) {
+        this.vuos = vuos;
     }
 }

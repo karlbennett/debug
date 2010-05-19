@@ -6,10 +6,12 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.youthnet.debug.domain.admin.Collective;
+import org.youthnet.debug.domain.admin.Vuo;
 import org.youthnet.debug.domain.common.impl.UuidTypeImpl;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Set;
 
 /**
  * User: karl
@@ -28,6 +30,10 @@ public class CollectiveDaoTest {
     public void testRequest() {
         Collective collective = collectiveDao.request(UuidTypeImpl.fromString(COLLECTIVEID));
         assertNotNull("request collective", collective);
+
+        Set<Vuo> vuos = collective.getVuos();
+        assertNotNull("request vuos", vuos);
+        assertTrue("vuos found", vuos.size() > 0);
     }
 
     @Test

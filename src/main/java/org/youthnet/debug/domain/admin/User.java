@@ -1,6 +1,8 @@
 package org.youthnet.debug.domain.admin;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * User: karl
@@ -40,7 +42,11 @@ public class User extends BaseObject {
     @Version
     private Integer version;
 
-//    private Set<Role> roles = new HashSet<Role>();
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
+    @JoinTable( name="user_role",
+                joinColumns = @JoinColumn( name = "user_id", columnDefinition = "raw(16)"),
+                inverseJoinColumns = @JoinColumn( name = "role_id"))
+    private Set<Role> roles = new HashSet<Role>();
 
     @Column(name="account_enabled")
     private boolean enabled;
@@ -54,7 +60,9 @@ public class User extends BaseObject {
     @Column(name="credentials_expired",nullable=false)
     private boolean credentialsExpired;
 
-//    private Vuo vuo;
+    @ManyToOne( fetch = FetchType.EAGER )
+    @JoinColumn(name = "vuo_id", columnDefinition = "raw(16)")
+    private Vuo vuo;
 
 
     public String getUsername() {
@@ -145,6 +153,14 @@ public class User extends BaseObject {
         this.enabled = enabled;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     public boolean isAccountExpired() {
         return accountExpired;
     }
@@ -167,5 +183,13 @@ public class User extends BaseObject {
 
     public void setCredentialsExpired(boolean credentialsExpired) {
         this.credentialsExpired = credentialsExpired;
+    }
+
+    public Vuo getVuo() {
+        return vuo;
+    }
+
+    public void setVuo(Vuo vuo) {
+        this.vuo = vuo;
     }
 }
