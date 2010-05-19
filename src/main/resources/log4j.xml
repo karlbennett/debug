@@ -19,7 +19,7 @@
     </logger>
 
     <logger name="org.springframework.context.support">
-        <level value="WARN"/>
+        <level value="DEBUG"/>
     </logger>
 
     <logger name="org.youthnet.debug.util.HibernateUtil">

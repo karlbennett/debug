@@ -10,9 +10,6 @@
                             http://www.springframework.org/schema/tx
                             http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
-    <import resource="classpath:config/spring/adminApplicationContext.xml"/>
-    <import resource="classpath:config/spring/coreApplicationContext.xml"/>
-
     <bean id="server" class="org.eclipse.jetty.server.Server"
           init-method="start" destroy-method="stop">
 
@@ -49,5 +46,4 @@
             </bean>
         </property>
     </bean>
-
 </beans>
