@@ -22,8 +22,12 @@
         <level value="WARN"/>
     </logger>
 
+    <logger name="org.youthnet.debug.util.HibernateUtil">
+        <level value="INFO"/>
+    </logger>
+
     <root>
-        <level value="WARN"/>
+        <level value="ERROR"/>
         <appender-ref ref="CONSOLE"/>
     </root>
 
