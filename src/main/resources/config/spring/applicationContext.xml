@@ -37,7 +37,7 @@
                             <property name="handlers">
                                 <bean class="org.eclipse.jetty.webapp.WebAppContext">
                                     <property name="contextPath" value="/"/>
-                                    <property name="resourceBase" value="src/main/resources/config/web"/>
+                                    <property name="resourceBase" value="src/main/webapp"/>
                                 </bean>
                             </property>
                         </bean>

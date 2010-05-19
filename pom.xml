@@ -81,6 +81,11 @@
             <version>${spring.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate</artifactId>
             <version>${hibernate.version}</version>
@@ -103,7 +108,12 @@
         <dependency>
             <groupId>org.eclipse.jetty.aggregate</groupId>
             <artifactId>jetty-webapp</artifactId>
-            <version>7.0.1.v20091125</version>
+            <version>${jetty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jetty</groupId>
+            <artifactId>jsp</artifactId>
+            <version>${jetty.jsp.version}</version>
         </dependency>
 
         <!-- Spring orm dependencies -->
@@ -145,6 +155,8 @@
         <dbcp.version>1.4</dbcp.version>
         <slf4j.version>1.5.11</slf4j.version>
         <jdbc.version>10.2.0.4.0</jdbc.version>
+        <jetty.version>7.0.1.v20091125</jetty.version>
+        <jetty.jsp.version>2.1-6.0.2</jetty.jsp.version>
 
         <!-- Configuration properties -->
         <!--    Database configuration -->
