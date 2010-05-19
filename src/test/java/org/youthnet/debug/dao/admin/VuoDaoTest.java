@@ -18,7 +18,7 @@ import java.util.Set;
  * Date: 19-May-2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/adminApplicationContext.xml"})
+@ContextConfiguration(locations = {"/config/spring/adminApplicationContext.xml"})
 public class VuoDaoTest {
 
     @Resource(name = "vuoDao")

@@ -1,0 +1,47 @@
+<web-app id="WebApp_9" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="   http://java.sun.com/xml/ns/j2ee
+                                http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+    <display-name>vbase 3 Debug Client</display-name>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:config/spring/platform-config.xml</param-value>
+    </context-param>
+
+    <servlet>
+        <servlet-name>serviceCommandHandlerExporter</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:config/spring/service-command-handler-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    <servlet>
+        <servlet-name>remoteAuthenticationManagerExporter</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:config/spring/remote-authentication-manager-servlet.xml</param-value>
+        </init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>serviceCommandHandlerExporter</servlet-name>
+        <url-pattern>/ServiceCommandHandler</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>remoteAuthenticationManagerExporter</servlet-name>
+        <url-pattern>/RemoteAuthenticationManager</url-pattern>
+    </servlet-mapping>
+
+</web-app>

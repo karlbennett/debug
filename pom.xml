@@ -95,6 +95,11 @@
             <artifactId>ojdbc14</artifactId>
             <version>${jdbc.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.aggregate</groupId>
+            <artifactId>jetty-webapp</artifactId>
+            <version>7.0.1.v20091125</version>
+        </dependency>
 
         <!-- Spring orm dependencies -->
         <dependency>
