@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation=" http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                            http://www.springframework.org/schema/context
+                            http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                            http://www.springframework.org/schema/tx
+                            http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <bean id="adminDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${db.driver}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.admin.username}"/>
+        <property name="password" value="${db.admin.password}"/>
+    </bean>
+
+    <bean id="adminSessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="adminDataSource"/>
+        <!-- Explicitly list domain classes so that they are seen within the onejar.  -->
+        <property name="annotatedClasses">
+            <list>
+                <value>org.youthnet.debug.domain.admin.BaseObject</value>
+                <value>org.youthnet.debug.domain.admin.Collective</value>
+                <value>org.youthnet.debug.domain.admin.Role</value>
+                <value>org.youthnet.debug.domain.admin.User</value>
+                <value>org.youthnet.debug.domain.admin.Vuo</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.hbm2ddl.auto">validate</prop>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.query.substitutions">true '1', false '0'</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.c3p0.minPoolSize">5</prop>
+                <prop key="hibernate.c3p0.maxPoolSize">20</prop>
+                <prop key="hibernate.c3p0.timeout">600</prop>
+                <prop key="hibernate.c3p0.max_statement">50</prop>
+                <prop key="hibernate.c3p0.testConnectionOnCheckout">false</prop>
+            </props>
+        </property>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="adminTransactionManager" order="0"/>
+
+    <bean id="adminTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="adminSessionFactory"/>
+        <property name="dataSource" ref="adminDataSource"/>
+    </bean>
+
+    <!-- Explicitly list required beans so that they are seen within the onejar.  -->
+    <context:annotation-config/>
+    <bean id="adminDao" class="org.youthnet.debug.dao.admin.AdminDao"/>
+    <bean id="collectiveDao" class="org.youthnet.debug.dao.admin.CollectiveDao"/>
+    <bean id="roleDao" class="org.youthnet.debug.dao.admin.RoleDao"/>
+    <bean id="userDao" class="org.youthnet.debug.dao.admin.UserDao"/>
+    <bean id="vuoDao" class="org.youthnet.debug.dao.admin.VuoDao"/>
+
+</beans>
