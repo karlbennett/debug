@@ -21,7 +21,37 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.youthnet.debug.DebugServer</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.dstovall</groupId>
+                <artifactId>onejar-maven-plugin</artifactId>
+                <version>1.4.1</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <mainClass>org.youthnet.debug.DebugServerOneJar</mainClass>
+                            <onejarVersion>0.96</onejarVersion>
+                            <attachToBuild>true</attachToBuild>
+                            <classifier>onejar</classifier>
+                        </configuration>
+                        <goals>
+                            <goal>one-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+
 
         <testResources>
             <testResource>
@@ -114,6 +144,12 @@
             <groupId>org.mortbay.jetty</groupId>
             <artifactId>jetty-runner</artifactId>
             <version>${jetty.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-webapp</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>jetty</groupId>
@@ -158,7 +194,14 @@
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
-        
+
+        <!-- Dependency for OneJar Class Loader -->
+        <dependency>
+            <groupId>com.simontuffs.onejar</groupId>
+            <artifactId>onejar</artifactId>
+            <version>0.96</version>
+        </dependency>
+
     </dependencies>
 
     <properties>

@@ -29,9 +29,10 @@
                         <bean id="contexts"
                               class="org.eclipse.jetty.server.handler.ContextHandlerCollection">
                             <property name="handlers">
-                                <bean class="org.eclipse.jetty.webapp.WebAppContext">
-                                    <property name="contextPath" value="/"/>
-                                    <property name="resourceBase" value="src/main/webapp"/>
+                                <bean
+                                        class="org.youthnet.debug.util.ClassPathWebAppContextFactoryBean">
+                                    <constructor-arg name="webAppClassPath" value="webapp"/>
+                                    <constructor-arg name="contextPath" value="/"/>
                                 </bean>
                             </property>
                         </bean>
