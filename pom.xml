@@ -32,24 +32,6 @@
                     </archive>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.dstovall</groupId>
-                <artifactId>onejar-maven-plugin</artifactId>
-                <version>1.4.1</version>
-                <executions>
-                    <execution>
-                        <configuration>
-                            <mainClass>org.youthnet.debug.DebugServerOneJar</mainClass>
-                            <onejarVersion>0.96</onejarVersion>
-                            <attachToBuild>true</attachToBuild>
-                            <classifier>onejar</classifier>
-                        </configuration>
-                        <goals>
-                            <goal>one-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
         </plugins>
 
 
@@ -194,14 +176,6 @@
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j.version}</version>
         </dependency>
-
-        <!-- Dependency for OneJar Class Loader -->
-        <dependency>
-            <groupId>com.simontuffs.onejar</groupId>
-            <artifactId>onejar</artifactId>
-            <version>0.96</version>
-        </dependency>
-
     </dependencies>
 
     <properties>

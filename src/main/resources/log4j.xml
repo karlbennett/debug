@@ -27,7 +27,7 @@
     </logger>
 
     <logger name="org.youthnet.debug.util.ClassPathWebAppContextFactoryBean">
-        <level value="INFO"/>
+        <level value="ERROR"/>
     </logger>
 
     <root>
