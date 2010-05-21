@@ -133,8 +133,8 @@
             <version>${dbcp.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.oracle</groupId>
-            <artifactId>ojdbc14</artifactId>
+            <groupId>${jdbc.groupId}</groupId>
+            <artifactId>${jdbc.artifactId}</artifactId>
             <version>${jdbc.version}</version>
         </dependency>
         <dependency>
@@ -207,6 +207,8 @@
         <persistence.version>1.0.2.GA</persistence.version>
         <dbcp.version>1.4</dbcp.version>
         <slf4j.version>1.5.11</slf4j.version>
+        <jdbc.groupId>com.oracle</jdbc.groupId>
+        <jdbc.artifactId>ojdbc14</jdbc.artifactId>
         <jdbc.version>10.2.0.4.0</jdbc.version>
         <jetty.version>7.0.1.v20091125</jetty.version>
         <jetty.jsp.version>2.1-6.0.2</jetty.jsp.version>
@@ -223,8 +225,36 @@
         <db.password>Get password from the settings.xml</db.password>
         <db.admin.username>Get username from the settings.xml</db.admin.username>
         <db.admin.password>Get password from the settings.xml</db.admin.password>
+        <db.id.type>raw(16)</db.id.type>
         <!--    Hibernate configuration -->
         <hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</hibernate.dialect>
+        <hiernate.hbm2ddl>validate</hiernate.hbm2ddl>
+        <hibernate.substitutions>true '1', false '0'</hibernate.substitutions>
 
     </properties>
+
+    <profiles>
+        <profile>
+            <id>derby</id>
+            <properties>
+                <!-- Dependency properties -->
+                <jdbc.groupId>org.apache.derby</jdbc.groupId>
+                <jdbc.artifactId>derby</jdbc.artifactId>
+                <jdbc.version>10.4.2.0</jdbc.version>
+
+                <!-- Configuration properties -->
+                <!--    Database configuration -->
+                <db.url>jdbc:derby:derbydb;create=true</db.url>
+                <db.driver>org.hibernate.dialect.DerbyDialect</db.driver>
+                <db.username></db.username>
+                <db.password></db.password>
+                <db.admin.username></db.admin.username>
+                <db.admin.password></db.admin.password>
+                <!--    Hibernate configuration -->
+                <hibernate.dialect>org.hibernate.dialect.DerbyDialect</hibernate.dialect>
+                <hiernate.hbm2ddl>update</hiernate.hbm2ddl>
+                <hibernate.substitutions>true 'T', false 'F'</hibernate.substitutions>
+            </properties>
+        </profile>
+    </profiles>
 </project>

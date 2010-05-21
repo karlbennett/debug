@@ -4,3 +4,6 @@ target/*
 debug.iml
 debug.ipr
 debug.iws
+
+derby.log
+derbydb
