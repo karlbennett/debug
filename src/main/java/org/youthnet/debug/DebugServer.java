@@ -11,5 +11,6 @@ public class DebugServer {
 
     public static void main(String[] args) {
         AbstractApplicationContext context = new ClassPathXmlApplicationContext("config/spring/server-config.xml");
+        context.registerShutdownHook();
     }
 }
