@@ -3,6 +3,6 @@
         <TITLE>vBase 3 debug</TITLE>
     </HEAD>
     <BODY>
-        <LABEL></LABEL><LABEL></LABEL><LABEL></LABEL>
+        <LABEL>Database</LABEL><LABEL>Webservices</LABEL><LABEL>Logs</LABEL>
     </BODY>
 </HTML> 
