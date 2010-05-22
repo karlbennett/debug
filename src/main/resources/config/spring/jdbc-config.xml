@@ -7,10 +7,8 @@
                             http://www.springframework.org/schema/context
                             http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <import resource="classpath:config/spring/admin-hibernate-config.xml"/>
+    <import resource="classpath:config/spring/admin-jdbc-config.xml"/>
     <import resource="classpath:config/spring/core-hibernate-config.xml"/>
 
-    <context:component-scan base-package="org.youthnet.debug.dao.admin"/>
-    <context:component-scan base-package="org.youthnet.debug.dao.core"/>
-
+    <context:component-scan base-package="org.youthnet.debug.dao.jdbc"/>
 </beans>
