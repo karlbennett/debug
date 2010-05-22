@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+        xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd"
+        version="1.0">
+
+    <package>org.youthnet.debug.domain.admin</package>
+
+    <entity class="BaseObject">
+        <inheritance strategy="TABLE_PER_CLASS"/>
+
+        <attributes>
+            <!-- Override the id configuration so that it will definitely work with Derby. -->
+            <id name="id">
+                <!-- Make sure that the column definition is correct -->
+                <column name="id" column-definition="varchar(16) for bit data"/>
+            </id>
+        </attributes>
+    </entity>
+
+    <entity class="Collective">
+        <attributes>
+            <one-to-many name="vuos"
+                         target-entity="org.youthnet.debug.domain.admin.Vuo"
+                         fetch="EAGER">
+                <join-column name="col_id" column-definition="varchar(16) for bit data"/>
+                <cascade/>
+            </one-to-many>
+        </attributes>
+    </entity>
+
+    <entity class="User">
+        <attributes>
+            <many-to-one name="vuo"
+                         fetch="EAGER"
+                         target-entity="org.youthnet.debug.domain.admin.Vuo">
+                <join-column name="vuo_id"
+                             column-definition="varchar(16) for bit data"/>
+            </many-to-one>
+            <many-to-many name="roles"
+                          fetch="EAGER"
+                          target-entity="org.youthnet.debug.domain.admin.Role">
+                <join-table name="user_role">
+                    <join-column name="user_id" column-definition="varchar(16) for bit data"/>
+                    <inverse-join-column name="role_id"/>
+                </join-table>
+            </many-to-many>
+        </attributes>
+    </entity>
+
+    <entity class="Vuo">
+        <attributes>
+            <basic name="organisationId">
+                <column name="organisationId" column-definition="varchar(16) for bit data"/>
+            </basic>
+            <many-to-one name="collective"
+                         fetch="EAGER"
+                         target-entity="org.youthnet.debug.domain.admin.Collective">
+                <join-column name="col_id"
+                             column-definition="varchar(16) for bit data"/>
+            </many-to-one>
+            <one-to-many name="users"
+                         target-entity="org.youthnet.debug.domain.admin.User"
+                         fetch="EAGER">
+                <join-column name="vuo_id" column-definition="varchar(16) for bit data"/>
+                <cascade/>
+            </one-to-many>
+        </attributes>
+    </entity>
+
+</entity-mappings>

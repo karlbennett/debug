@@ -20,6 +20,7 @@
     <bean id="adminSessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="adminDataSource"/>
         <property name="packagesToScan" value="org.youthnet.debug.domain.admin"/>
+        <property name="mappingResources" value="${hibernate.mapping}"/>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.hbm2ddl.auto">${hiernate.hbm2ddl}</prop>

@@ -230,6 +230,7 @@
         <hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</hibernate.dialect>
         <hiernate.hbm2ddl>validate</hiernate.hbm2ddl>
         <hibernate.substitutions>true '1', false '0'</hibernate.substitutions>
+        <hibernate.mapping>config/spring/mapping-empty.xml</hibernate.mapping>
 
     </properties>
 
@@ -254,6 +255,7 @@
                 <hibernate.dialect>org.hibernate.dialect.DerbyDialect</hibernate.dialect>
                 <hiernate.hbm2ddl>update</hiernate.hbm2ddl>
                 <hibernate.substitutions>true 'T', false 'F'</hibernate.substitutions>
+                <hibernate.mapping>config/spring/mapping.xml</hibernate.mapping>
             </properties>
         </profile>
     </profiles>
