@@ -10,17 +10,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.youthnet.debug.dao.jdbc.JdbcDao;
 import org.youthnet.debug.dao.util.JdbcTestUtil;
-import org.youthnet.debug.dao.util.SqlSyntaxUtil;
 import org.youthnet.debug.domain.admin.Collective;
 import org.youthnet.debug.domain.admin.Vuo;
 import org.youthnet.debug.domain.common.impl.UuidTypeImpl;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 
 /**
