@@ -26,35 +26,36 @@ import java.util.Set;
  * Date: 19-May-2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/config/spring/admin-hibernate-config.xml",
+@ContextConfiguration(locations = {"/test-config.xml",
+        "/config/spring/admin-hibernate-config.xml",
         "/config/spring/admin-jdbc-config.xml"})
 public class VuoDaoTest {
 
     private static final Log log = LogFactory.getLog(VuoDaoTest.class);
 
-    @Resource(name = "adminJdbcDaoImpl")
-    private JdbcDao adminJdbcDao;
+    @Resource(name = "jdbcTestUtil")
+    JdbcTestUtil jdbcTestUtil;
 
     @Resource(name = "vuoDao")
     private VuoDao vuoDao;
 
     @Before
     public void buildUp() {
-        JdbcTestUtil.createCollective(adminJdbcDao);
-        JdbcTestUtil.createVuo(adminJdbcDao);
-        JdbcTestUtil.createUser(adminJdbcDao);    
+        jdbcTestUtil.createCollective();
+        jdbcTestUtil.createVuo();
+        jdbcTestUtil.createUser();
     }
 
     @After
     public void tearDown() {
-        JdbcTestUtil.deleteUser(adminJdbcDao);
-        JdbcTestUtil.deleteVuo(adminJdbcDao);    
-        JdbcTestUtil.deleteCollective(adminJdbcDao);
+        jdbcTestUtil.deleteUser();
+        jdbcTestUtil.deleteVuo();
+        jdbcTestUtil.deleteCollective();
     }
 
     @Test
     public void testRequest() {
-        Vuo vuo = vuoDao.request(UuidTypeImpl.fromString(JdbcTestUtil.VUOID));
+        Vuo vuo = vuoDao.request(UuidTypeImpl.fromString(jdbcTestUtil.getVUOID()));
         assertNotNull("request vuo", vuo);
 
         Set<User> users = vuo.getUsers();

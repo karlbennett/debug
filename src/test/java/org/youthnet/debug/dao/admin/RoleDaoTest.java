@@ -23,31 +23,32 @@ import java.util.Random;
  * Date: 19-May-2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/config/spring/admin-hibernate-config.xml",
+@ContextConfiguration(locations = {"/test-config.xml",
+        "/config/spring/admin-hibernate-config.xml",
         "/config/spring/admin-jdbc-config.xml"})
 public class RoleDaoTest {
 
     private static final Log log = LogFactory.getLog(RoleDaoTest.class);
 
-    @Resource(name = "adminJdbcDaoImpl")
-    private JdbcDao adminJdbcDao;
+    @Resource(name = "jdbcTestUtil")
+    JdbcTestUtil jdbcTestUtil;
 
     @Resource(name = "roleDao")
     private RoleDao roleDao;
 
     @Before
     public void buildUp() {
-        JdbcTestUtil.createRole(adminJdbcDao);
+        jdbcTestUtil.createRole();
     }
 
     @After
     public void tearDown() {
-        JdbcTestUtil.deleteRole(adminJdbcDao);
+        jdbcTestUtil.deleteRole();
     }
 
     @Test
     public void testRequest() {
-        Role role = roleDao.request(JdbcTestUtil.ROLEID);
+        Role role = roleDao.request(jdbcTestUtil.getROLEID());
         assertNotNull("request role", role);
     }
 

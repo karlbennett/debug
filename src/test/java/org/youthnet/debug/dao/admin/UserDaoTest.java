@@ -26,39 +26,40 @@ import java.util.Set;
  * Date: 19-May-2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/config/spring/admin-hibernate-config.xml",
+@ContextConfiguration(locations = {"/test-config.xml",
+        "/config/spring/admin-hibernate-config.xml",
         "/config/spring/admin-jdbc-config.xml"})
 public class UserDaoTest {
 
     private static final Log log = LogFactory.getLog(UserDaoTest.class);
 
-    @Resource(name = "adminJdbcDaoImpl")
-    private JdbcDao adminJdbcDao;
+    @Resource(name = "jdbcTestUtil")
+    JdbcTestUtil jdbcTestUtil;
 
     @Resource(name = "userDao")
     private UserDao userDao;
 
     @Before
     public void buildUp() {
-        JdbcTestUtil.createCollective(adminJdbcDao);
-        JdbcTestUtil.createVuo(adminJdbcDao);
-        JdbcTestUtil.createUser(adminJdbcDao);
-        JdbcTestUtil.createRole(adminJdbcDao);
-        JdbcTestUtil.addRole(adminJdbcDao);    
+        jdbcTestUtil.createCollective();
+        jdbcTestUtil.createVuo();
+        jdbcTestUtil.createUser();
+        jdbcTestUtil.createRole();
+        jdbcTestUtil.addRole();
     }
 
     @After
     public void tearDown() {
-        JdbcTestUtil.removeRole(adminJdbcDao);
-        JdbcTestUtil.deleteRole(adminJdbcDao);
-        JdbcTestUtil.deleteUser(adminJdbcDao);
-        JdbcTestUtil.deleteVuo(adminJdbcDao);
-        JdbcTestUtil.deleteCollective(adminJdbcDao);
+        jdbcTestUtil.removeRole();
+        jdbcTestUtil.deleteRole();
+        jdbcTestUtil.deleteUser();
+        jdbcTestUtil.deleteVuo();
+        jdbcTestUtil.deleteCollective();
     }
 
     @Test
     public void testRequest() {
-        User user = userDao.request(UuidTypeImpl.fromString(JdbcTestUtil.USERID));
+        User user = userDao.request(UuidTypeImpl.fromString(jdbcTestUtil.getUSERID()));
         assertNotNull("request user", user);
 
         Set<Role> roles = user.getRoles();
