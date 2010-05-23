@@ -58,20 +58,20 @@ public class JdbcTestUtil {
     }
 
     public void createCollective() {
-        adminJdbcDao.executeQuery("INSERT INTO collective(id, name, shortname) VALUES ("
+        adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntaxUtil.getAdminSchema() + "collective(id, name, shortname) VALUES ("
                 + sqlSyntaxUtil.getBinTypeStart() + COLLECTIVEID.replace("-", "") + sqlSyntaxUtil.getBinTypeEnd()
                 + ", '" + COLNAME + "', '" + COLSHORTNAME + "')");
     }
 
     public void createVuo() {
-        adminJdbcDao.executeQuery("INSERT INTO vuo(id, name, vuoCode, col_id) VALUES ("
+        adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntaxUtil.getAdminSchema() + "vuo(id, name, vuoCode, col_id) VALUES ("
                 + sqlSyntaxUtil.getBinTypeStart() + VUOID.replace("-", "") + sqlSyntaxUtil.getBinTypeEnd() + ", '"
                 + VUONAME + "', '" + VUOCODE + "', " + sqlSyntaxUtil.getBinTypeStart() + COLLECTIVEID.replace("-", "")
                 + "')");
     }
 
     public void createUser() {
-        adminJdbcDao.executeQuery("INSERT INTO app_user(id, username, password, password_hint, first_name, " +
+        adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntaxUtil.getAdminSchema() + "app_user(id, username, password, password_hint, first_name, " +
                 "last_name, email, phone_number, website, account_enabled, account_expired, account_locked, " +
                 "credentials_expired, vuo_id) VALUES (" + sqlSyntaxUtil.getBinTypeStart() + USERID.replace("-", "")
                 + sqlSyntaxUtil.getBinTypeEnd() + ", '" + USERNAME + "', '" + USRPASSWORD + "', '" + USRPASSWORDHINT
@@ -82,36 +82,36 @@ public class JdbcTestUtil {
     }
 
     public void createRole() {
-        adminJdbcDao.executeQuery("INSERT INTO role(id, name, description) VALUES ("
+        adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntaxUtil.getAdminSchema() + "role(id, name, description) VALUES ("
                 + ROLEID + ", '" + ROLNAME.substring(0, 19) + "', '" + ROLDESCRIPTION + "')");
     }
 
     public void addRole() {
-        adminJdbcDao.executeQuery("INSERT INTO user_role(user_id, role_id) VALUES (" + sqlSyntaxUtil.getBinTypeStart()
+        adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntaxUtil.getAdminSchema() + "user_role(user_id, role_id) VALUES (" + sqlSyntaxUtil.getBinTypeStart()
                 + USERID.replace("-", "") + sqlSyntaxUtil.getBinTypeEnd() + ", " + ROLEID + ")");
     }
 
     public void deleteCollective() {
-        adminJdbcDao.executeQuery("DELETE FROM collective WHERE id = " + sqlSyntaxUtil.getBinTypeStart()
+        adminJdbcDao.executeQuery("DELETE FROM " + sqlSyntaxUtil.getAdminSchema() + "collective WHERE id = " + sqlSyntaxUtil.getBinTypeStart()
                 + COLLECTIVEID.replace("-", "") + sqlSyntaxUtil.getBinTypeEnd());
     }
 
     public void deleteVuo() {
-        adminJdbcDao.executeQuery("DELETE FROM vuo WHERE id = " + sqlSyntaxUtil.getBinTypeStart()
+        adminJdbcDao.executeQuery("DELETE FROM " + sqlSyntaxUtil.getAdminSchema() + "vuo WHERE id = " + sqlSyntaxUtil.getBinTypeStart()
                 + VUOID.replace("-", "") + sqlSyntaxUtil.getBinTypeEnd());
     }
 
     public void deleteUser() {
-        adminJdbcDao.executeQuery("DELETE FROM app_user WHERE id = " + sqlSyntaxUtil.getBinTypeStart()
+        adminJdbcDao.executeQuery("DELETE FROM " + sqlSyntaxUtil.getAdminSchema() + "app_user WHERE id = " + sqlSyntaxUtil.getBinTypeStart()
                 + USERID.replace("-", "") + sqlSyntaxUtil.getBinTypeEnd());
     }
 
     public void deleteRole() {
-        adminJdbcDao.executeQuery("DELETE FROM role WHERE id = " + ROLEID);
+        adminJdbcDao.executeQuery("DELETE FROM " + sqlSyntaxUtil.getAdminSchema() + "role WHERE id = " + ROLEID);
     }
 
     public void removeRole() {
-        adminJdbcDao.executeQuery("DELETE FROM user_role WHERE user_id = " + sqlSyntaxUtil.getBinTypeStart()
+        adminJdbcDao.executeQuery("DELETE FROM " + sqlSyntaxUtil.getAdminSchema() + "user_role WHERE user_id = " + sqlSyntaxUtil.getBinTypeStart()
                 + USERID.replace("-", "") + sqlSyntaxUtil.getBinTypeEnd());
     }
 

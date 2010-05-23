@@ -9,6 +9,8 @@ public class SqlSyntaxUtil {
     private String sqlFalse;
     private String binTypeStart;
     private String binTypeEnd;
+    private String schema;
+    private String adminSchema;
 
     public String getSqlTrue() {
         return sqlTrue;
@@ -40,5 +42,21 @@ public class SqlSyntaxUtil {
 
     public void setBinTypeEnd(String binTypeEnd) {
         this.binTypeEnd = binTypeEnd;
+    }
+
+    public String getSchema() {
+        return schema;
+    }
+
+    public void setSchema(String schema) {
+        this.schema = schema;
+    }
+
+    public String getAdminSchema() {
+        return adminSchema;
+    }
+
+    public void setAdminSchema(String adminSchema) {
+        this.adminSchema = adminSchema;
     }
 }

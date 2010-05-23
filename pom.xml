@@ -223,13 +223,14 @@
         <db.driver>oracle.jdbc.driver.OracleDriver</db.driver>
         <db.username>Get username from the settings.xml</db.username>
         <db.password>Get password from the settings.xml</db.password>
+        <db.schema>Get schema from the settings.xml</db.schema>
         <db.admin.username>Get username from the settings.xml</db.admin.username>
         <db.admin.password>Get password from the settings.xml</db.admin.password>
-        <db.id.type>raw(16)</db.id.type>
-        <sql.true></sql.true>
-        <sql.false></sql.false>
-        <sql.binTypeStart></sql.binTypeStart>
-        <sql.binTypeEnd></sql.binTypeEnd>
+        <db.admin.schema>Get schema from the settings.xml</db.admin.schema>
+        <sql.true>'1'</sql.true>
+        <sql.false>'0'</sql.false>
+        <sql.binTypeStart>hextoraw('</sql.binTypeStart>
+        <sql.binTypeEnd>')</sql.binTypeEnd>
         <!--    Hibernate configuration -->
         <hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</hibernate.dialect>
         <hiernate.hbm2ddl>validate</hiernate.hbm2ddl>
@@ -253,8 +254,10 @@
                 <db.driver>org.hibernate.dialect.DerbyDialect</db.driver>
                 <db.username></db.username>
                 <db.password></db.password>
+                <db.schema></db.schema>
                 <db.admin.username></db.admin.username>
                 <db.admin.password></db.admin.password>
+                <db.admin.schema></db.admin.schema>
                 <sql.true>1</sql.true>
                 <sql.false>0</sql.false>
                 <sql.binTypeStart>X'</sql.binTypeStart>

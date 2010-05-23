@@ -12,6 +12,8 @@
         <property name="sqlFalse" value="${sql.false}"/>
         <property name="binTypeStart" value="${sql.binTypeStart}"/>
         <property name="binTypeEnd" value="${sql.binTypeEnd}"/>
+        <property name="schema" value="${db.schema}"/>
+        <property name="adminSchema" value="${db.admin.schema}"/>
     </bean>
 
     <context:component-scan base-package="org.youthnet.debug.dao.util"/>
