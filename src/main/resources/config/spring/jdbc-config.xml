@@ -9,6 +9,4 @@
 
     <import resource="classpath:config/spring/admin-jdbc-config.xml"/>
     <import resource="classpath:config/spring/core-hibernate-config.xml"/>
-
-    <context:component-scan base-package="org.youthnet.debug.dao.jdbc"/>
 </beans>

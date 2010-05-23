@@ -1,16 +1,25 @@
 package org.youthnet.debug.dao.admin;
 
 import static junit.framework.Assert.*;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.youthnet.debug.dao.jdbc.JdbcDao;
+import org.youthnet.debug.dao.util.JdbcTestUtil;
 import org.youthnet.debug.domain.admin.Collective;
 import org.youthnet.debug.domain.admin.Vuo;
 import org.youthnet.debug.domain.common.impl.UuidTypeImpl;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -18,17 +27,33 @@ import java.util.Set;
  * Date: 19-May-2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/config/spring/admin-hibernate-config.xml"})
+@ContextConfiguration(locations = {"/config/spring/admin-hibernate-config.xml",
+        "/config/spring/admin-jdbc-config.xml"})
 public class CollectiveDaoTest {
+
+    private static final Log log = LogFactory.getLog(CollectiveDaoTest.class);
+
+    @Resource(name = "adminJdbcDaoImpl")
+    private JdbcDao adminJdbcDao;
 
     @Resource(name = "collectiveDao")
     private CollectiveDao collectiveDao;
 
-    public static final String COLLECTIVEID = "10936943-f832-4d33-943a-d087ecfab0f1";
+    @Before
+    public void buildUp() {
+        JdbcTestUtil.createCollective(adminJdbcDao);
+        JdbcTestUtil.createVuo(adminJdbcDao);
+    }
+
+    @After
+    public void tearDown() {
+        JdbcTestUtil.deleteVuo(adminJdbcDao);
+        JdbcTestUtil.deleteCollective(adminJdbcDao);
+    }
 
     @Test
     public void testRequest() {
-        Collective collective = collectiveDao.request(UuidTypeImpl.fromString(COLLECTIVEID));
+        Collective collective = collectiveDao.request(UuidTypeImpl.fromString(JdbcTestUtil.COLLECTIVEID));
         assertNotNull("request collective", collective);
 
         Set<Vuo> vuos = collective.getVuos();

@@ -1,16 +1,24 @@
 package org.youthnet.debug.dao.admin;
 
 import static junit.framework.Assert.*;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.youthnet.debug.dao.jdbc.JdbcDao;
+import org.youthnet.debug.dao.util.JdbcTestUtil;
 import org.youthnet.debug.domain.admin.User;
 import org.youthnet.debug.domain.admin.Vuo;
 import org.youthnet.debug.domain.common.impl.UuidTypeImpl;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -18,17 +26,35 @@ import java.util.Set;
  * Date: 19-May-2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/config/spring/admin-hibernate-config.xml"})
+@ContextConfiguration(locations = {"/config/spring/admin-hibernate-config.xml",
+        "/config/spring/admin-jdbc-config.xml"})
 public class VuoDaoTest {
+
+    private static final Log log = LogFactory.getLog(VuoDaoTest.class);
+
+    @Resource(name = "adminJdbcDaoImpl")
+    private JdbcDao adminJdbcDao;
 
     @Resource(name = "vuoDao")
     private VuoDao vuoDao;
 
-    public static final String VUOID = "1d38cd2e-dc06-462c-bbc3-bbe58d1ccc54";
+    @Before
+    public void buildUp() {
+        JdbcTestUtil.createCollective(adminJdbcDao);
+        JdbcTestUtil.createVuo(adminJdbcDao);
+        JdbcTestUtil.createUser(adminJdbcDao);    
+    }
+
+    @After
+    public void tearDown() {
+        JdbcTestUtil.deleteUser(adminJdbcDao);
+        JdbcTestUtil.deleteVuo(adminJdbcDao);    
+        JdbcTestUtil.deleteCollective(adminJdbcDao);
+    }
 
     @Test
     public void testRequest() {
-        Vuo vuo = vuoDao.request(UuidTypeImpl.fromString(VUOID));
+        Vuo vuo = vuoDao.request(UuidTypeImpl.fromString(JdbcTestUtil.VUOID));
         assertNotNull("request vuo", vuo);
 
         Set<User> users = vuo.getUsers();
