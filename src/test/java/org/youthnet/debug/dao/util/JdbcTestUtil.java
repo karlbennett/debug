@@ -68,7 +68,7 @@ public class JdbcTestUtil {
         adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntaxUtil.getAdminSchema()
                 + "vuo(id, name, vuoCode, col_id) VALUES (" + sqlSyntaxUtil.getBinTypeStart() + VUOID.replace("-", "")
                 + sqlSyntaxUtil.getBinTypeEnd() + ", '" + VUONAME + "', '" + VUOCODE + "', "
-                + sqlSyntaxUtil.getBinTypeStart() + COLLECTIVEID.replace("-", "") + "')");
+                + sqlSyntaxUtil.getBinTypeStart() + COLLECTIVEID.replace("-", "") + sqlSyntaxUtil.getBinTypeEnd() + ")");
     }
 
     public void createUser() {
