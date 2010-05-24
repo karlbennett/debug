@@ -34,6 +34,15 @@
                         <LI CLASS="tab">
                             <A HREF="" CLASS="tabLink">Roles</A>
                         </LI>
+                        <LI CLASS="tab">
+                            <A HREF="" CLASS="tabLink">Volunteers</A>
+                        </LI>
+                        <LI CLASS="tab">
+                            <A HREF="" CLASS="tabLink">Organisations</A>
+                        </LI>
+                        <LI CLASS="tab">
+                            <A HREF="" CLASS="tabLink">Opportunities</A>
+                        </LI>
                     </UL>
                 </DIV>
             </c:if>

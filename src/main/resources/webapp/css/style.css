@@ -11,18 +11,21 @@ div.content
     height: 100%;
     margin-left: auto ;
     margin-right: auto ;
+    text-align: left;
 }
 
 div.tab_row_1
 {
     clear:both;
-    text-align: left;
+    width: 100%;
+    height: 40px;
 }
 
 div.tab_row_2
 {
     clear:both;
-    text-align: left;
+    width: 100%;
+    height: 80px;
 }
 
 ul.tabList
@@ -36,14 +39,14 @@ li.tab
     list-style-type: none;
     list-style-image: none;
     list-style-position: outside;
-    background-color:#EAEAEA;
+    background-color:#F4F4F4;
     position: relative;
-    width: 150px;
-    margin-left: 10px;
+    min-width: 100px;
+    margin-left: 5px;
     margin-right: 0px;
-    margin-top: 10px;
+    margin-top: 5px;
     margin-bottom: 0px;
-    border-bottom: 4px solid #286EA0;
+    border-bottom: 4px solid #CCCCCC;
     float: left;
 }
 
@@ -54,7 +57,7 @@ a.tabLink
     height: 20px;
     padding: 5px;
     text-decoration: none;
-    color:#286EA0;
+    color:#777777;
     font-weight: bold;
     font-size: 0.8em;
     line-height: 1.1em;
