@@ -39,6 +39,9 @@ public class User extends BaseObject {
     @Column
     private String website;
 
+    @Version
+    private Integer version;
+
     @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
     @JoinTable( name="user_role",
                 joinColumns = @JoinColumn( name = "user_id", columnDefinition = "raw(16)"),
