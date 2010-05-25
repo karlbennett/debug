@@ -4,10 +4,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
+import org.hibernate.mapping.RootClass;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 
 import javax.annotation.Resource;
 import java.lang.reflect.Constructor;
+import java.util.Iterator;
 
 /**
  * User: karl
@@ -17,7 +19,8 @@ public class HibernateUtil {
 
     private static final Log log = LogFactory.getLog(HibernateUtil.class);
 
-    private HibernateUtil() {}
+    private HibernateUtil() {
+    }
 
     public static String[] getSchema(AnnotationSessionFactoryBean sessionFactory) {
         Configuration hibernateConfiguration = sessionFactory.getConfiguration();
@@ -45,5 +48,27 @@ public class HibernateUtil {
         for (String line : getSchema(sessionFactory)) {
             log.info(line);
         }
+    }
+
+    public static Class getClassForTableName(AnnotationSessionFactoryBean sessionFactory, String tableName) {
+
+        Iterator mappingIterator = sessionFactory.getConfiguration().getClassMappings();
+        RootClass rootClass = null;
+        while (mappingIterator.hasNext()) {
+            rootClass = (RootClass) mappingIterator.next();
+            log.debug("Checking mapped table " + rootClass.getTable().getName() + " against table name " + tableName);
+            if (rootClass.getTable().getName().equals(tableName)) {
+                try {
+                    log.debug("Class " + rootClass.getClassName() + " found for table: " + tableName);
+                    return Class.forName(rootClass.getClassName());
+                } catch (ClassNotFoundException e) {
+                    log.error("Failed to create the domain class. " + e.getMessage());
+                    log.error(e.getStackTrace());
+                }
+            }
+        }
+
+        log.warn("Domain class not found for table: " + tableName);
+        return null;
     }
 }

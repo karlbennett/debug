@@ -1,4 +1,3 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <HTML>
     <HEAD>
         <LINK REL="stylesheet" TYPE="text/css" HREF="css/style.css" />

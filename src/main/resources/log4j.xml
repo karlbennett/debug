@@ -23,11 +23,19 @@
     </logger>
 
     <logger name="org.youthnet.debug.util.HibernateUtil">
-        <level value="INFO"/>
+        <level value="DEBUG"/>
     </logger>
 
     <logger name="org.youthnet.debug.util.ClassPathWebAppContextFactoryBean">
         <level value="ERROR"/>
+    </logger>
+
+    <logger name="org.youthnet.debug.controllers.TableController">
+        <level value="DEBUG"/>
+    </logger>
+
+    <logger name="org.youthnet.debug.DebugClient">
+        <level value="DEBUG"/>
     </logger>
 
     <root>

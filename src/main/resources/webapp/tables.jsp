@@ -5,9 +5,10 @@
         <TITLE>vBase 3 debug</TITLE>
     </HEAD>
     <BODY>
-        <DIV CLASS="content">
+        <DIV CLASS="main">
             <%@include file='/mainTabs.jsp'%>
             <%@include file='/tableTabs.jsp'%>
+
         </DIV>
     </BODY>
 </HTML> 
