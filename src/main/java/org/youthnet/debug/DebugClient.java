@@ -24,6 +24,6 @@ public class DebugClient {
     @PostConstruct
     public void init() {
         HibernateUtil.logSchema(sessionFactory);
-        HibernateUtil.getClassForTableName(sessionFactory, "collective");
+        HibernateUtil.getClassForTableName("collective", sessionFactory);
     }
 }

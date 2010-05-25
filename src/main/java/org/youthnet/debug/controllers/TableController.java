@@ -2,14 +2,19 @@ package org.youthnet.debug.controllers;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.youthnet.debug.dao.admin.AdminGenericDao;
 import org.youthnet.debug.dao.jdbc.JdbcDao;
+import org.youthnet.debug.util.HibernateUtil;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: karl
@@ -20,21 +25,28 @@ public class TableController {
 
     private static final Log log = LogFactory.getLog(TableController.class);
 
-    @Resource(name = "adminJdbcDaoImpl")
-    private JdbcDao adminJdbcDao;
+    @Resource(name = "&adminSessionFactory")
+    AnnotationSessionFactoryBean sessionFactory;
+
+    @Resource(name = "adminGenericDao")
+    private AdminGenericDao adminGenericDao;
 
     @RequestMapping("/tables.html")
-    public String handleRequest(@RequestParam(required = false)String tableName, ModelMap modelMap) throws Exception {
+    public String handleRequest(@RequestParam(required = false) String tableName, ModelMap modelMap) throws Exception {
         log.debug("Table controller");
 
         // Add the table names to be used to auto generate and name the table tabs.
-        List<String> tableNames = adminJdbcDao.getTableNames();
-
-        for (String name : tableNames) {
-            log.debug(" -- Table name: " + name);
-        }
-
+        List<String> tableNames = HibernateUtil.getDomainTableNames(sessionFactory);
+        Collections.sort(tableNames);
         modelMap.addAttribute("tableNames", tableNames);
+
+        // If a table name has not been  given set it to the first table in the tab list.
+        if (tableName == null || tableName.equals("")) {
+            tableName = tableNames.get(0);
+        }
+        modelMap.addAttribute("tableRows", HibernateUtil.createRowList(
+                adminGenericDao.requestAll(
+                        HibernateUtil.getClassForTableName(tableName, sessionFactory))));
 
         return "tables.jsp";
     }

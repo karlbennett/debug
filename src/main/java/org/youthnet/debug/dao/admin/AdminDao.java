@@ -34,4 +34,12 @@ public abstract class AdminDao<D,I> {
     public List<D> requestAll() {
         return sessionFactory.getCurrentSession().createCriteria(this.persistentClass).list();
     }
+
+    protected Class<D> getPersistentClass() {
+        return persistentClass;
+    }
+
+    protected void setPersistentClass(Class<D> persistentClass) {
+        this.persistentClass = persistentClass;
+    }
 }
