@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
+import org.hibernate.mapping.PersistentClass;
 import org.hibernate.mapping.RootClass;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 
@@ -53,9 +54,9 @@ public class HibernateUtil {
     public static Class getClassForTableName(AnnotationSessionFactoryBean sessionFactory, String tableName) {
 
         Iterator mappingIterator = sessionFactory.getConfiguration().getClassMappings();
-        RootClass rootClass = null;
+        PersistentClass rootClass = null;
         while (mappingIterator.hasNext()) {
-            rootClass = (RootClass) mappingIterator.next();
+            rootClass = (PersistentClass) mappingIterator.next();
             log.debug("Checking mapped table " + rootClass.getTable().getName() + " against table name " + tableName);
             if (rootClass.getTable().getName().equals(tableName)) {
                 try {
