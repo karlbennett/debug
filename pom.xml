@@ -231,6 +231,7 @@
         <sql.false>'0'</sql.false>
         <sql.binTypeStart>hextoraw('</sql.binTypeStart>
         <sql.binTypeEnd>')</sql.binTypeEnd>
+        <sql.selectTableNames>SELECT table_name FROM user_tables</sql.selectTableNames>
         <!--    Hibernate configuration -->
         <hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</hibernate.dialect>
         <hiernate.hbm2ddl>validate</hiernate.hbm2ddl>
@@ -262,6 +263,7 @@
                 <sql.false>0</sql.false>
                 <sql.binTypeStart>X'</sql.binTypeStart>
                 <sql.binTypeEnd>'</sql.binTypeEnd>
+                <sql.selectTableNames><![CDATA[SELECT tablename FROM sys.systables WHERE tablename <> 'GENERICTABLE' AND tablename NOT LIKE 'SYS%']]></sql.selectTableNames>
                 <!--    Hibernate configuration -->
                 <hibernate.dialect>org.hibernate.dialect.DerbyDialect</hibernate.dialect>
                 <hiernate.hbm2ddl>update</hiernate.hbm2ddl>

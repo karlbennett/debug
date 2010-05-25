@@ -12,5 +12,7 @@
     </bean>
 
     <context:annotation-config/>
-    <bean id="adminJdbcDaoImpl" class="org.youthnet.debug.dao.jdbc.impl.AdminJdbcDaoImpl"/>
+    <bean id="adminJdbcDaoImpl" class="org.youthnet.debug.dao.jdbc.impl.AdminJdbcDaoImpl">
+        <property name="selectTableNamesQuery" value="${sql.selectTableNames}"/>
+    </bean>
 </beans>

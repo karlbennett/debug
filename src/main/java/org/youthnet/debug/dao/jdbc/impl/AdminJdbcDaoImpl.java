@@ -16,7 +16,9 @@ import java.util.Map;
 public class AdminJdbcDaoImpl implements JdbcDao {
 
     @Resource(name = "adminJdbcTemplate")
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
+
+    private String selectTableNamesQuery;
 
     @Override
     public void executeQuery(String query) {
@@ -26,5 +28,18 @@ public class AdminJdbcDaoImpl implements JdbcDao {
     @Override
     public List<Map<String, Object>> queryForRows(String query) {
         return jdbcTemplate.queryForList(query);
+    }
+
+    @Override
+    public List<String> getTableNames() {
+        return jdbcTemplate.queryForList(selectTableNamesQuery, String.class);
+    }
+
+    public String getSelectTableNamesQuery() {
+        return selectTableNamesQuery;
+    }
+
+    public void setSelectTableNamesQuery(String selectTableNamesQuery) {
+        this.selectTableNamesQuery = selectTableNamesQuery;
     }
 }

@@ -32,7 +32,7 @@ public class VuoDaoTest {
     private static final Log log = LogFactory.getLog(VuoDaoTest.class);
 
     @Resource(name = "jdbcTestUtil")
-    JdbcTestUtil jdbcTestUtil;
+    private JdbcTestUtil jdbcTestUtil;
 
     @Resource(name = "vuoDao")
     private VuoDao vuoDao;

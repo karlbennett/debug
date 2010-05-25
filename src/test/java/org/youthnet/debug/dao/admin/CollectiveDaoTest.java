@@ -32,7 +32,7 @@ public class CollectiveDaoTest {
     private static final Log log = LogFactory.getLog(CollectiveDaoTest.class);
 
     @Resource(name = "jdbcTestUtil")
-    JdbcTestUtil jdbcTestUtil;
+    private JdbcTestUtil jdbcTestUtil;
 
     @Resource(name = "collectiveDao")
     private CollectiveDao collectiveDao;

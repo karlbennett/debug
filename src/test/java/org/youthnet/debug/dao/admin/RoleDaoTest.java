@@ -29,7 +29,7 @@ public class RoleDaoTest {
     private static final Log log = LogFactory.getLog(RoleDaoTest.class);
 
     @Resource(name = "jdbcTestUtil")
-    JdbcTestUtil jdbcTestUtil;
+    private JdbcTestUtil jdbcTestUtil;
 
     @Resource(name = "roleDao")
     private RoleDao roleDao;
