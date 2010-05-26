@@ -18,6 +18,7 @@ public class AdminJdbcDaoImpl implements JdbcDao {
     @Resource(name = "adminJdbcTemplate")
     private JdbcTemplate jdbcTemplate;
 
+    // Variable to hold the SQL statement that should be used to select a list of the current schema's table names.
     private String selectTableNamesQuery;
 
     @Override
@@ -33,6 +34,11 @@ public class AdminJdbcDaoImpl implements JdbcDao {
     @Override
     public List<String> getTableNames() {
         return jdbcTemplate.queryForList(selectTableNamesQuery, String.class);
+    }
+
+    @Override
+    public List<Map<String, Object>> getTableRows(String tableName) {
+        return queryForRows("SELECT * FROM " + tableName);
     }
 
     public String getSelectTableNamesQuery() {

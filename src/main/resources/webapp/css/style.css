@@ -28,6 +28,11 @@ div.tab_row_2
     height: 80px;
 }
 
+div.content
+{
+    width: 100%;   
+}
+
 ul.tabList
 {
     margin: 0;

@@ -10,6 +10,7 @@ import org.youthnet.debug.dao.jdbc.JdbcDao;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: karl
@@ -29,5 +30,12 @@ public class AdminJdbcDaoImplTest {
 
         assertNotNull("names list exist", names);
         assertTrue("names list contains values", names.size() > 0);
+    }
+
+    @Test
+    public void testGetTableRows() throws Exception {
+        List<Map <String, Object>> rows = adminJdbcDao.getTableRows("collective");
+        assertNotNull("get table rows", rows);
+        assertTrue("table rows exist", rows.size() > 0);
     }
 }

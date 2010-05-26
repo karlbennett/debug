@@ -25,18 +25,15 @@ public class TableController {
 
     private static final Log log = LogFactory.getLog(TableController.class);
 
-    @Resource(name = "&adminSessionFactory")
-    AnnotationSessionFactoryBean sessionFactory;
-
-    @Resource(name = "adminGenericDao")
-    private AdminGenericDao adminGenericDao;
+    @Resource(name = "adminJdbcDaoImpl")
+    private JdbcDao adminJdbcDao;
 
     @RequestMapping("/tables.html")
     public String handleRequest(@RequestParam(required = false) String tableName, ModelMap modelMap) throws Exception {
         log.debug("Table controller");
 
         // Add the table names to be used to auto generate and name the table tabs.
-        List<String> tableNames = HibernateUtil.getDomainTableNames(sessionFactory);
+        List<String> tableNames = adminJdbcDao.getTableNames();
         Collections.sort(tableNames);
         modelMap.addAttribute("tableNames", tableNames);
 
@@ -44,9 +41,7 @@ public class TableController {
         if (tableName == null || tableName.equals("")) {
             tableName = tableNames.get(0);
         }
-        modelMap.addAttribute("tableRows", HibernateUtil.createRowList(
-                adminGenericDao.requestAll(
-                        HibernateUtil.getClassForTableName(tableName, sessionFactory))));
+        modelMap.addAttribute("tableRows", adminJdbcDao.getTableRows(tableName));
 
         return "tables.jsp";
     }

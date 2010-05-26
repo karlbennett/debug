@@ -8,7 +8,22 @@
         <DIV CLASS="main">
             <%@include file='/mainTabs.jsp'%>
             <%@include file='/tableTabs.jsp'%>
-
+            <DIV CLASS="content">
+                <TABLE>
+                    <TR>
+                        <c:forEach var="column" items="${tableRows[0]}">
+                            <TD><c:out value="${column.key}" /></TD>
+                        </c:forEach>
+                    </TR>
+                    <c:forEach var="row" items="${tableRows}">
+                        <TR>
+                            <c:forEach var="column" items="${row}">
+                                <TD><c:out value="${column.value}" /></TD>
+                            </c:forEach>
+                        </TR>
+                    </c:forEach>
+                </TABLE>
+            </DIV>
         </DIV>
     </BODY>
 </HTML> 
