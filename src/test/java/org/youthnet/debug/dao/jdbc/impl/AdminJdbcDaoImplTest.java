@@ -21,16 +21,7 @@ import java.util.List;
 public class AdminJdbcDaoImplTest {
 
     @Resource(name = "adminJdbcDaoImpl")
-    JdbcDao adminJdbcDao;
-
-    @Test
-    public void testExecuteQuery() throws Exception {
-
-    }
-
-    @Test
-    public void testQueryForRows() throws Exception {
-    }
+    private JdbcDao adminJdbcDao;
 
     @Test
     public void testGetTableNames() throws Exception {
