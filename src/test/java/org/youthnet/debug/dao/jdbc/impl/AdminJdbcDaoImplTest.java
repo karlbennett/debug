@@ -34,8 +34,19 @@ public class AdminJdbcDaoImplTest {
 
     @Test
     public void testGetTableRows() throws Exception {
-        List<Map <String, Object>> rows = adminJdbcDao.getTableRows("collective");
+        List<Map <String, Object>> rows = adminJdbcDao.getTableRows("vuo");
         assertNotNull("get table rows", rows);
         assertTrue("table rows exist", rows.size() > 0);
+
+        for(Map<String, Object> row : rows) {
+            for(String key : row.keySet()) {
+                System.out.println("Column name: " + key + " value: " + row.get(key));
+                if( row.get(key) instanceof byte[]) {
+                    System.out.println("Value is a byte array.");
+                }
+                System.out.println();
+                System.out.println();
+            }
+        }
     }
 }

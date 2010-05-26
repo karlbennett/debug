@@ -12,13 +12,19 @@
                 <TABLE>
                     <TR>
                         <c:forEach var="column" items="${tableRows[0]}">
-                            <TD><c:out value="${column.key}" /></TD>
+                            <TD CLASS="cell headingCell">
+                                <LABEL CLASS="tableHeading fontSet"><c:out value="${column.key}" /></LABEL>
+                            </TD>
                         </c:forEach>
                     </TR>
                     <c:forEach var="row" items="${tableRows}">
                         <TR>
                             <c:forEach var="column" items="${row}">
-                                <TD><c:out value="${column.value}" /></TD>
+                                <TD CLASS="cell normalCell">
+                                    <LABEL CLASS="tableLabel fontSet">
+                                        <c:out value="${column.value}" />
+                                    </LABEL>
+                                </TD>
                             </c:forEach>
                         </TR>
                     </c:forEach>

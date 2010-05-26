@@ -3,6 +3,7 @@ package org.youthnet.debug.dao.jdbc.impl;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.youthnet.debug.dao.jdbc.JdbcDao;
+import org.youthnet.debug.util.UuidConverter;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -38,7 +39,15 @@ public class AdminJdbcDaoImpl implements JdbcDao {
 
     @Override
     public List<Map<String, Object>> getTableRows(String tableName) {
-        return queryForRows("SELECT * FROM " + tableName);
+        List<Map<String, Object>> tableRows = queryForRows("SELECT * FROM " + tableName);
+        for(Map<String, Object> row : tableRows) {
+            for(String key : row.keySet()) {
+                if( row.get(key) instanceof byte[]) {
+                    row.put(key, UuidConverter.convertByteArrayToUuid((byte[]) row.get(key)));
+                }
+            }
+        }
+        return tableRows;
     }
 
     public String getSelectTableNamesQuery() {

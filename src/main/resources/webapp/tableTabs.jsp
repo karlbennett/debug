@@ -2,7 +2,7 @@
     <UL CLASS="tabList">
         <c:forEach var="tableName" items="${tableNames}">
             <LI CLASS="tab">
-                <A HREF="?tableName=<c:out value="${fn:toLowerCase(tableName)}"/>" CLASS="tabLink">
+                <A HREF="?tableName=<c:out value="${fn:toLowerCase(tableName)}"/>" CLASS="tabLink fontSet">
                     <c:out value="${fn:toLowerCase(tableName)}"/>
                 </A>
             </LI>
