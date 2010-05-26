@@ -2,11 +2,15 @@ package org.youthnet.debug.dao.jdbc.impl;
 
 import static junit.framework.Assert.*;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.youthnet.debug.dao.jdbc.JdbcDao;
+import org.youthnet.debug.dao.util.JdbcTestUtil;
+import org.youthnet.debug.domain.common.UuidType;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -17,12 +21,30 @@ import java.util.Map;
  * Date: 25-May-2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/config/spring/admin-hibernate-config.xml",
+@ContextConfiguration(locations = {"/test-config.xml",
+        "/config/spring/admin-hibernate-config.xml",
         "/config/spring/admin-jdbc-config.xml"})
 public class AdminJdbcDaoImplTest {
 
+    @Resource(name = "jdbcTestUtil")
+    private JdbcTestUtil jdbcTestUtil;
+
     @Resource(name = "adminJdbcDaoImpl")
     private JdbcDao adminJdbcDao;
+
+    @Before
+    public void buildUp() {
+        jdbcTestUtil.createCollective();
+        jdbcTestUtil.createVuo();
+        jdbcTestUtil.createUser();
+    }
+
+    @After
+    public void tearDown() {
+        jdbcTestUtil.deleteUser();
+        jdbcTestUtil.deleteVuo();
+        jdbcTestUtil.deleteCollective();
+    }
 
     @Test
     public void testGetTableNames() throws Exception {
@@ -37,16 +59,18 @@ public class AdminJdbcDaoImplTest {
         List<Map <String, Object>> rows = adminJdbcDao.getTableRows("vuo");
         assertNotNull("get table rows", rows);
         assertTrue("table rows exist", rows.size() > 0);
+        assertTrue("table rows id converted", rows.get(0).get("ID") instanceof UuidType);
+    }
 
-        for(Map<String, Object> row : rows) {
-            for(String key : row.keySet()) {
-                System.out.println("Column name: " + key + " value: " + row.get(key));
-                if( row.get(key) instanceof byte[]) {
-                    System.out.println("Value is a byte array.");
-                }
-                System.out.println();
-                System.out.println();
-            }
-        }
+    @Test
+    public void testGetRowById() throws Exception {
+        Map <String, Object> row = adminJdbcDao.getRowById(jdbcTestUtil.getVUOID());
+        assertNotNull("get row by id", row);
+        assertTrue("row by id exists", row.size() > 0);
+        assertTrue("row id converted", row.get("ID") instanceof UuidType);
+        assertEquals("correct vuo name", jdbcTestUtil.getVUONAME(), row.get("NAME"));
+        assertEquals("correct vuo code", jdbcTestUtil.getVUOCODE(), row.get("VUOCODE"));
+        assertNotNull("table name added", row.get("tableName"));
+        assertEquals("table name correct", "VUO", row.get("tableName"));
     }
 }

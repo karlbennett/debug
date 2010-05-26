@@ -2,6 +2,7 @@ package org.youthnet.debug.dao.util;
 
 import org.springframework.stereotype.Component;
 import org.youthnet.debug.dao.jdbc.JdbcDao;
+import org.youthnet.debug.util.SqlSyntaxUtil;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;

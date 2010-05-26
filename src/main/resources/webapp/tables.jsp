@@ -22,7 +22,14 @@
                             <c:forEach var="column" items="${row}">
                                 <TD CLASS="cell normalCell">
                                     <LABEL CLASS="tableLabel fontSet">
-                                        <c:out value="${column.value}" />
+                                        <c:choose>
+                                            <c:when test="${column.key != 'ID' && column.value.class.name == 'org.youthnet.debug.domain.common.impl.UuidTypeImpl'}">
+                                                <A HREF="?id=<c:out value="${column.value}" />&columnName=<c:out value="${column.key}" />"><c:out value="${column.value}" /></A>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <c:out value="${column.value}" />
+                                            </c:otherwise>
+                                        </c:choose>
                                     </LABEL>
                                 </TD>
                             </c:forEach>

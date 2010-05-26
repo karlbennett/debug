@@ -29,7 +29,10 @@ public class TableController {
     private JdbcDao adminJdbcDao;
 
     @RequestMapping("/tables.html")
-    public String handleRequest(@RequestParam(required = false) String tableName, ModelMap modelMap) throws Exception {
+    public String handleRequest(@RequestParam(required = false) String tableName,
+                                @RequestParam(required = false) String id,
+                                @RequestParam(required = false) String columnName,
+                                ModelMap modelMap) throws Exception {
         log.debug("Table controller");
 
         // Add the table names to be used to auto generate and name the table tabs.

@@ -38,6 +38,10 @@
         <level value="DEBUG"/>
     </logger>
 
+    <logger name="org.youthnet.debug.dao.jdbc.impl.AdminJdbcDaoImpl">
+        <level value="DEBUG"/>
+    </logger>
+
     <root>
         <level value="ERROR"/>
         <appender-ref ref="CONSOLE"/>

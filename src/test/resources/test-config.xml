@@ -7,14 +7,7 @@
                             http://www.springframework.org/schema/context
                             http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     
-    <bean name="sqlSyntaxUtil" class="org.youthnet.debug.dao.util.SqlSyntaxUtil">
-        <property name="sqlTrue" value="${sql.true}"/>
-        <property name="sqlFalse" value="${sql.false}"/>
-        <property name="binTypeStart" value="${sql.binTypeStart}"/>
-        <property name="binTypeEnd" value="${sql.binTypeEnd}"/>
-        <property name="schema" value="${db.schema}"/>
-        <property name="adminSchema" value="${db.admin.schema}"/>
-    </bean>
+    
 
     <context:component-scan base-package="org.youthnet.debug.dao.util"/>
 

@@ -1,4 +1,4 @@
-package org.youthnet.debug.dao.util;
+package org.youthnet.debug.util;
 
 /**
  * User: Karl
