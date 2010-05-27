@@ -7,14 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.youthnet.debug.dao.admin.AdminGenericDao;
 import org.youthnet.debug.dao.jdbc.JdbcDao;
 import org.youthnet.debug.util.HibernateUtil;
 
 import javax.annotation.Resource;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 /**
  * User: karl
@@ -55,7 +53,8 @@ public class TableController {
     @RequestMapping("/row.html")
     public String handleColumnRequest(@RequestParam(required = false) String id,
                                       @RequestParam(required = false) String columnName) {
-        return "redirect:tables.html?tableName=" + HibernateUtil.getTableNameForColumnReference(columnName.toLowerCase(), 
-                sessionFactory) + "&id=" + id + "#" + id;
+        return "redirect:tables.html?tableName="
+                + HibernateUtil.getTableNameForClass(HibernateUtil.getTableClassNameForColumnReference(
+                columnName.toLowerCase(), sessionFactory), sessionFactory) + "&id=" + id + "#" + id;
     }
 }

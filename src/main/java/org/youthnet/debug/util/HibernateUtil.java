@@ -5,15 +5,15 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.mapping.*;
-import org.hibernate.mapping.Set;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 
-import javax.persistence.Column;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.HashMap;
 
 /**
  * User: karl
@@ -22,6 +22,10 @@ import java.util.Map;
 public class HibernateUtil {
 
     private static final Log log = LogFactory.getLog(HibernateUtil.class);
+
+    private static Map<String, Class> classToTableMap = new HashMap<String, Class>();
+    private static Map<String, String> tableToClassMap = new HashMap<String, String>();
+    private static Map<String, String> columnToTableMap = new HashMap<String, String>();
 
     private HibernateUtil() {
     }
@@ -56,23 +60,43 @@ public class HibernateUtil {
 
     public static Class getClassForTableName(String tableName, AnnotationSessionFactoryBean sessionFactory) {
 
-        Iterator mappingIterator = sessionFactory.getConfiguration().getClassMappings();
-        PersistentClass rootClass = null;
-        while (mappingIterator.hasNext()) {
-            rootClass = (PersistentClass) mappingIterator.next();
-            log.debug("Checking mapped table " + rootClass.getTable().getName() + " against table name " + tableName);
-            if (rootClass.getTable().getName().equals(tableName)) {
-                try {
-                    log.debug("Class " + rootClass.getClassName() + " found for table: " + tableName);
-                    return Class.forName(rootClass.getClassName());
-                } catch (ClassNotFoundException e) {
-                    log.error("Failed to create the domain class. " + e.getMessage());
-                    log.error(e.getStackTrace());
+        Class tableClass = classToTableMap.get(tableName);
+
+        try {
+            if (tableClass != null) {
+                return tableClass;
+            }
+
+            Iterator mappingIterator = sessionFactory.getConfiguration().getClassMappings();
+            PersistentClass persistentClass = null;
+            String className = null;
+            while (mappingIterator.hasNext()) {
+                persistentClass = (PersistentClass) mappingIterator.next();
+                if (persistentClass.getTable().getName().equals(tableName)) {
+                    className = persistentClass.getClassName();
+                    tableClass = Class.forName(className);
+                    classToTableMap.put(tableName, tableClass);
+                    return tableClass;
                 }
             }
+        } catch (ClassNotFoundException e) {
+            log.error("Failed to create the domain class. " + e.getMessage());
+            log.error(e.getStackTrace());
         }
 
         log.warn("Domain class not found for table: " + tableName);
+        return null;
+    }
+
+    public static String getTableNameForClass(String classname, AnnotationSessionFactoryBean sessionFactory) {
+        Iterator mappingIterator = sessionFactory.getConfiguration().getClassMappings();
+        PersistentClass persistentClass = null;
+        String tableName = "";
+        while (mappingIterator.hasNext()) {
+            persistentClass = (PersistentClass) mappingIterator.next();
+            if (persistentClass.getClassName().equals(classname)) return persistentClass.getTable().getName();
+        }
+
         return null;
     }
 
@@ -81,18 +105,15 @@ public class HibernateUtil {
         String columnName = null;
         Object columnValue = null;
         for (Field field : row.getClass().getDeclaredFields()) {
-            log.debug("Field: " + field.getName());
             field.setAccessible(true);
-            Column columnAnnotation = field.getAnnotation(Column.class);
+            javax.persistence.Column columnAnnotation = field.getAnnotation(javax.persistence.Column.class);
             if (columnAnnotation != null) {
-                log.debug(" -- Found column.");
                 columnName = columnAnnotation.name();
                 if (columnName == null || columnName.equals("")) {
                     columnName = field.getName();
                 }
                 try {
                     columnValue = field.get(row);
-                    log.debug(" -- Column name: " + columnName + " value: " + columnValue);
                     rowMap.put(columnName, columnValue);
                 } catch (IllegalAccessException e) {
                     log.error("Unable to access field: " + e.getMessage());
@@ -122,45 +143,27 @@ public class HibernateUtil {
         return domainTableNames;
     }
 
-    public static String getTableNameForColumnReference(String columnName, AnnotationSessionFactoryBean sessionFactory) {
+    public static String getTableClassNameForColumnReference(String columnName, AnnotationSessionFactoryBean sessionFactory) {
 
-        Iterator mappingIterator = sessionFactory.getConfiguration().getClassMappings();
-        Iterator propertyIterator = null;
+        Iterator mappingIterator = sessionFactory.getConfiguration().getTableMappings();
+        Iterator foreignKeyIterator = null;
         Iterator columnIterator = null;
-        RootClass mappingClass = null;
+        Table table = null;
+        Column column = null;
+        ForeignKey foreignKey = null;
+        String tableClassName = null;
         while (mappingIterator.hasNext()) {
-            mappingClass = (RootClass) mappingIterator.next();
-            propertyIterator = mappingClass.getPropertyIterator();
-            while (propertyIterator.hasNext()) {
-                Property property = (Property) propertyIterator.next();
-                if (property.getValue() instanceof SimpleValue) {
-                    columnIterator = property.getValue().getColumnIterator();
-                    while (columnIterator.hasNext()) {
-                        org.hibernate.mapping.Column column = (org.hibernate.mapping.Column) columnIterator.next();
-                        if (column.getName().equals(columnName)) return getTableNameForClass(
-                                ((SimpleValue) property.getValue()).getTypeName(), sessionFactory);
-                    }
-                } else if (property.getValue() instanceof Set) {
-                    Set mappingSet = (Set) property.getValue();
-                    columnIterator = mappingSet.getKey().getColumnIterator();
-                    while (columnIterator.hasNext()) {
-                        org.hibernate.mapping.Column column = (org.hibernate.mapping.Column) columnIterator.next();
-                        if (column.getName().equals(columnName)) return mappingSet.getOwner().getTable().getName();
-                    }
+            table = (Table) mappingIterator.next();
+            foreignKeyIterator = table.getForeignKeyIterator();
+            while (foreignKeyIterator.hasNext()) {
+                foreignKey = (ForeignKey)foreignKeyIterator.next();
+                tableClassName = foreignKey.getReferencedEntityName();
+                columnIterator = foreignKey.getColumnIterator();
+                while (columnIterator.hasNext()) {
+                    column = (Column)columnIterator.next();
+                    if (column.getName().equals(columnName)) return tableClassName;
                 }
             }
-        }
-
-        return null;
-    }
-
-    public static String getTableNameForClass(String classname, AnnotationSessionFactoryBean sessionFactory) {
-        Iterator mappingIterator = sessionFactory.getConfiguration().getClassMappings();
-        PersistentClass rootClass = null;
-        String tableName = "";
-        while (mappingIterator.hasNext()) {
-            rootClass = (PersistentClass) mappingIterator.next();
-            if (rootClass.getClassName().equals(classname) ) return rootClass.getTable().getName();
         }
 
         return null;

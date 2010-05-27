@@ -92,18 +92,18 @@ public class HibernateUtilTest {
     }
 
     @Test
-    public void testGetTableNameForColumnReference() throws Exception {
-        String tableName = HibernateUtil.getTableNameForColumnReference("col_id", sessionFactory);
-        assertNotNull("table name found", tableName);
-        assertEquals("table name correct", "collective", tableName);
+    public void testGetTableClassNameForColumnReference() throws Exception {
+        String tableClassName = HibernateUtil.getTableClassNameForColumnReference("col_id", sessionFactory);
+        assertNotNull("table name found", tableClassName);
+        assertEquals("table name correct", "org.youthnet.debug.domain.admin.Collective", tableClassName);
 
-        tableName = HibernateUtil.getTableNameForColumnReference("vuo_id", sessionFactory);
-        assertNotNull("table name found", tableName);
-        assertEquals("table name correct", "vuo", tableName);
+        tableClassName = HibernateUtil.getTableClassNameForColumnReference("vuo_id", sessionFactory);
+        assertNotNull("table name found", tableClassName);
+        assertEquals("table name correct", "org.youthnet.debug.domain.admin.Vuo", tableClassName);
 
-        tableName = HibernateUtil.getTableNameForColumnReference("user_id", sessionFactory);
-        assertNotNull("table name found", tableName);
-        assertEquals("table name correct", "app_user", tableName);
+        tableClassName = HibernateUtil.getTableClassNameForColumnReference("user_id", sessionFactory);
+        assertNotNull("table name found", tableClassName);
+        assertEquals("table name correct", "org.youthnet.debug.domain.admin.User", tableClassName);
     }
 
     @Test
