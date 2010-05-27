@@ -23,7 +23,7 @@
     </logger>
 
     <logger name="org.youthnet.debug.util.HibernateUtil">
-        <level value="DEBUG"/>
+        <level value="WARN"/>
     </logger>
 
     <logger name="org.youthnet.debug.util.ClassPathWebAppContextFactoryBean">

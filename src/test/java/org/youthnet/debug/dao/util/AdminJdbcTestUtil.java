@@ -12,8 +12,8 @@ import java.util.Random;
  * User: Karl
  * Date: 23-May-2010
  */
-@Component("jdbcTestUtil")
-public class JdbcTestUtil {
+@Component("adminJdbcTestUtil")
+public class AdminJdbcTestUtil {
 
     @Resource(name = "adminJdbcDaoImpl")
     private JdbcDao adminJdbcDao;
@@ -22,7 +22,7 @@ public class JdbcTestUtil {
     private SqlSyntaxUtil sqlSyntaxUtil;
 
     private final Random RANDOM = new Random();
-    private final int RANDNUM = RANDOM.nextInt(999999999);
+    private final int RANDNUM = RANDOM.nextInt(99999);
 
     private final String COLLECTIVEID = "99999999-9999-9999-9999-999999999999";
     private final String COLNAME = "TEST COLLECTIVE " + RANDNUM;
@@ -86,7 +86,7 @@ public class JdbcTestUtil {
 
     public void createRole() {
         adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntaxUtil.getAdminSchema()
-                + "role(id, name, description) VALUES (" + ROLEID + ", '" + ROLNAME.substring(0, 19) + "', '"
+                + "role(id, name, description) VALUES (" + ROLEID + ", '" + ROLNAME + "', '"
                 + ROLDESCRIPTION + "')");
     }
 

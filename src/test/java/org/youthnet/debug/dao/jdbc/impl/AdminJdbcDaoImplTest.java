@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.youthnet.debug.dao.jdbc.JdbcDao;
-import org.youthnet.debug.dao.util.JdbcTestUtil;
+import org.youthnet.debug.dao.util.AdminJdbcTestUtil;
 import org.youthnet.debug.domain.common.UuidType;
 import org.youthnet.debug.domain.common.impl.UuidTypeImpl;
 
@@ -23,33 +23,33 @@ import java.util.Map;
  * Date: 25-May-2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/test-config.xml",
+@ContextConfiguration(locations = {"/admin-test-config.xml",
         "/config/spring/admin-hibernate-config.xml",
         "/config/spring/admin-jdbc-config.xml"})
 public class AdminJdbcDaoImplTest {
 
-    @Resource(name = "jdbcTestUtil")
-    private JdbcTestUtil jdbcTestUtil;
+    @Resource(name = "adminJdbcTestUtil")
+    private AdminJdbcTestUtil adminJdbcTestUtil;
 
     @Resource(name = "adminJdbcDaoImpl")
     private JdbcDao adminJdbcDao;
 
     @Before
     public void buildUp() {
-        jdbcTestUtil.createCollective();
-        jdbcTestUtil.createVuo();
-        jdbcTestUtil.createUser();
-        jdbcTestUtil.createRole();
-        jdbcTestUtil.addRole();
+        adminJdbcTestUtil.createCollective();
+        adminJdbcTestUtil.createVuo();
+        adminJdbcTestUtil.createUser();
+        adminJdbcTestUtil.createRole();
+        adminJdbcTestUtil.addRole();
     }
 
     @After
     public void tearDown() {
-        jdbcTestUtil.removeRole();
-        jdbcTestUtil.deleteRole();
-        jdbcTestUtil.deleteUser();
-        jdbcTestUtil.deleteVuo();
-        jdbcTestUtil.deleteCollective();
+        adminJdbcTestUtil.removeRole();
+        adminJdbcTestUtil.deleteRole();
+        adminJdbcTestUtil.deleteUser();
+        adminJdbcTestUtil.deleteVuo();
+        adminJdbcTestUtil.deleteCollective();
     }
 
     @Test
@@ -70,44 +70,44 @@ public class AdminJdbcDaoImplTest {
 
     @Test
     public void testGetRowById() throws Exception {
-        Map <String, Object> row = adminJdbcDao.getRowById(UuidTypeImpl.fromString(jdbcTestUtil.getVUOID()));
+        Map <String, Object> row = adminJdbcDao.getRowById(UuidTypeImpl.fromString(adminJdbcTestUtil.getVUOID()));
         assertNotNull("get row by id", row);
         assertTrue("row by id exists", row.size() > 0);
         assertEquals("row id converted", UuidTypeImpl.class.getName(), row.get("ID").getClass().getName());
-        assertEquals("correct vuo name", jdbcTestUtil.getVUONAME(), row.get("NAME"));
-        assertEquals("correct vuo code", jdbcTestUtil.getVUOCODE(), row.get("VUOCODE"));
+        assertEquals("correct vuo name", adminJdbcTestUtil.getVUONAME(), row.get("NAME"));
+        assertEquals("correct vuo code", adminJdbcTestUtil.getVUOCODE(), row.get("VUOCODE"));
         assertNotNull("table name added", row.get("tableName"));
         assertEquals("table name correct", "VUO", row.get("tableName"));
 
-        row = adminJdbcDao.getRowById(jdbcTestUtil.getROLEID());
+        row = adminJdbcDao.getRowById(adminJdbcTestUtil.getROLEID());
         assertNotNull("get row by id", row);
         assertTrue("row by id exists", row.size() > 0);
         assertEquals("row id converted", BigDecimal.class.getName(), row.get("ID").getClass().getName());
-        assertEquals("correct vuo name", jdbcTestUtil.getROLNAME(), row.get("NAME"));
-        assertEquals("correct vuo code", jdbcTestUtil.getROLDESCRIPTION(), row.get("DESCRIPTION"));
+        assertEquals("correct vuo name", adminJdbcTestUtil.getROLNAME(), row.get("NAME"));
+        assertEquals("correct vuo code", adminJdbcTestUtil.getROLDESCRIPTION(), row.get("DESCRIPTION"));
         assertNotNull("table name added", row.get("tableName"));
         assertEquals("table name correct", "ROLE", row.get("tableName"));
     }
 
     @Test
     public void testGetRowByUuid() throws Exception {
-        Map <String, Object> row = adminJdbcDao.getRowByUuidString(jdbcTestUtil.getVUOID());
+        Map <String, Object> row = adminJdbcDao.getRowByUuidString(adminJdbcTestUtil.getVUOID());
         assertNotNull("get row by id", row);
         assertTrue("row by id exists", row.size() > 0);
         assertEquals("row id converted", UuidTypeImpl.class.getName(), row.get("ID").getClass().getName());
-        assertEquals("correct vuo name", jdbcTestUtil.getVUONAME(), row.get("NAME"));
-        assertEquals("correct vuo code", jdbcTestUtil.getVUOCODE(), row.get("VUOCODE"));
+        assertEquals("correct vuo name", adminJdbcTestUtil.getVUONAME(), row.get("NAME"));
+        assertEquals("correct vuo code", adminJdbcTestUtil.getVUOCODE(), row.get("VUOCODE"));
         assertNotNull("table name added", row.get("tableName"));
         assertEquals("table name correct", "VUO", row.get("tableName"));
     }
 
     @Test
     public void testGetRowByIdWithTable() throws Exception {
-        Map <String, Object> row = adminJdbcDao.getRowById(UuidTypeImpl.fromString(jdbcTestUtil.getVUOID()), "vuo");
+        Map <String, Object> row = adminJdbcDao.getRowById(UuidTypeImpl.fromString(adminJdbcTestUtil.getVUOID()), "vuo");
         assertNotNull("get row by id", row);
         assertTrue("row by id exists", row.size() > 0);
         assertEquals("row id converted", UuidTypeImpl.class.getName(), row.get("ID").getClass().getName());
-        assertEquals("correct vuo name", jdbcTestUtil.getVUONAME(), row.get("NAME"));
-        assertEquals("correct vuo code", jdbcTestUtil.getVUOCODE(), row.get("VUOCODE"));
+        assertEquals("correct vuo name", adminJdbcTestUtil.getVUONAME(), row.get("NAME"));
+        assertEquals("correct vuo code", adminJdbcTestUtil.getVUOCODE(), row.get("VUOCODE"));
     }
 }

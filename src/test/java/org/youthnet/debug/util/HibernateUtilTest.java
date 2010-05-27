@@ -10,7 +10,7 @@ import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBea
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.youthnet.debug.dao.admin.CollectiveDao;
-import org.youthnet.debug.dao.util.JdbcTestUtil;
+import org.youthnet.debug.dao.util.AdminJdbcTestUtil;
 import org.youthnet.debug.domain.admin.Collective;
 import org.youthnet.debug.domain.common.impl.UuidTypeImpl;
 
@@ -23,13 +23,13 @@ import java.util.Map;
  * Date: 25-May-2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/test-config.xml",
+@ContextConfiguration(locations = {"/admin-test-config.xml",
         "/config/spring/admin-hibernate-config.xml",
         "/config/spring/admin-jdbc-config.xml"})
 public class HibernateUtilTest {
 
-    @Resource(name = "jdbcTestUtil")
-    private JdbcTestUtil jdbcTestUtil;
+    @Resource(name = "adminJdbcTestUtil")
+    private AdminJdbcTestUtil adminJdbcTestUtil;
 
     @Resource(name = "&adminSessionFactory")
     AnnotationSessionFactoryBean sessionFactory;
@@ -39,14 +39,14 @@ public class HibernateUtilTest {
 
     @Before
     public void buildUp() {
-        jdbcTestUtil.createCollective();
-        jdbcTestUtil.createVuo();
+        adminJdbcTestUtil.createCollective();
+        adminJdbcTestUtil.createVuo();
     }
 
     @After
     public void tearDown() {
-        jdbcTestUtil.deleteVuo();
-        jdbcTestUtil.deleteCollective();
+        adminJdbcTestUtil.deleteVuo();
+        adminJdbcTestUtil.deleteCollective();
     }
 
     @Test
@@ -71,7 +71,7 @@ public class HibernateUtilTest {
     @Test
     public void testCreateRowMap() throws Exception {
         Map<String, Object> row = HibernateUtil.createRowMap(collectiveDao.request(
-                UuidTypeImpl.fromString(jdbcTestUtil.getCOLLECTIVEID())));
+                UuidTypeImpl.fromString(adminJdbcTestUtil.getCOLLECTIVEID())));
         assertNotNull("get row", row);
         assertTrue("found row", row.size() > 0);
     }

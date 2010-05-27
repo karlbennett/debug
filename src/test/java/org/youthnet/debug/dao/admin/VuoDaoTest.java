@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.youthnet.debug.dao.util.JdbcTestUtil;
+import org.youthnet.debug.dao.util.AdminJdbcTestUtil;
 import org.youthnet.debug.domain.admin.User;
 import org.youthnet.debug.domain.admin.Vuo;
 import org.youthnet.debug.domain.common.impl.UuidTypeImpl;
@@ -24,36 +24,36 @@ import java.util.Set;
  * Date: 19-May-2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/test-config.xml",
+@ContextConfiguration(locations = {"/admin-test-config.xml",
         "/config/spring/admin-hibernate-config.xml",
         "/config/spring/admin-jdbc-config.xml"})
 public class VuoDaoTest {
 
     private static final Log log = LogFactory.getLog(VuoDaoTest.class);
 
-    @Resource(name = "jdbcTestUtil")
-    private JdbcTestUtil jdbcTestUtil;
+    @Resource(name = "adminJdbcTestUtil")
+    private AdminJdbcTestUtil adminJdbcTestUtil;
 
     @Resource(name = "vuoDao")
     private VuoDao vuoDao;
 
     @Before
     public void buildUp() {
-        jdbcTestUtil.createCollective();
-        jdbcTestUtil.createVuo();
-        jdbcTestUtil.createUser();
+        adminJdbcTestUtil.createCollective();
+        adminJdbcTestUtil.createVuo();
+        adminJdbcTestUtil.createUser();
     }
 
     @After
     public void tearDown() {
-        jdbcTestUtil.deleteUser();
-        jdbcTestUtil.deleteVuo();
-        jdbcTestUtil.deleteCollective();
+        adminJdbcTestUtil.deleteUser();
+        adminJdbcTestUtil.deleteVuo();
+        adminJdbcTestUtil.deleteCollective();
     }
 
     @Test
     public void testRequest() {
-        Vuo vuo = vuoDao.request(UuidTypeImpl.fromString(jdbcTestUtil.getVUOID()));
+        Vuo vuo = vuoDao.request(UuidTypeImpl.fromString(adminJdbcTestUtil.getVUOID()));
         assertNotNull("request vuo", vuo);
 
         Set<User> users = vuo.getUsers();

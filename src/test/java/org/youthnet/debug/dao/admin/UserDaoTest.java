@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.youthnet.debug.dao.util.JdbcTestUtil;
+import org.youthnet.debug.dao.util.AdminJdbcTestUtil;
 import org.youthnet.debug.domain.admin.Role;
 import org.youthnet.debug.domain.admin.User;
 import org.youthnet.debug.domain.common.impl.UuidTypeImpl;
@@ -24,40 +24,40 @@ import java.util.Set;
  * Date: 19-May-2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/test-config.xml",
+@ContextConfiguration(locations = {"/admin-test-config.xml",
         "/config/spring/admin-hibernate-config.xml",
         "/config/spring/admin-jdbc-config.xml"})
 public class UserDaoTest {
 
     private static final Log log = LogFactory.getLog(UserDaoTest.class);
 
-    @Resource(name = "jdbcTestUtil")
-    private JdbcTestUtil jdbcTestUtil;
+    @Resource(name = "adminJdbcTestUtil")
+    private AdminJdbcTestUtil adminJdbcTestUtil;
 
     @Resource(name = "userDao")
     private UserDao userDao;
 
     @Before
     public void buildUp() {
-        jdbcTestUtil.createCollective();
-        jdbcTestUtil.createVuo();
-        jdbcTestUtil.createUser();
-        jdbcTestUtil.createRole();
-        jdbcTestUtil.addRole();
+        adminJdbcTestUtil.createCollective();
+        adminJdbcTestUtil.createVuo();
+        adminJdbcTestUtil.createUser();
+        adminJdbcTestUtil.createRole();
+        adminJdbcTestUtil.addRole();
     }
 
     @After
     public void tearDown() {
-        jdbcTestUtil.removeRole();
-        jdbcTestUtil.deleteRole();
-        jdbcTestUtil.deleteUser();
-        jdbcTestUtil.deleteVuo();
-        jdbcTestUtil.deleteCollective();
+        adminJdbcTestUtil.removeRole();
+        adminJdbcTestUtil.deleteRole();
+        adminJdbcTestUtil.deleteUser();
+        adminJdbcTestUtil.deleteVuo();
+        adminJdbcTestUtil.deleteCollective();
     }
 
     @Test
     public void testRequest() {
-        User user = userDao.request(UuidTypeImpl.fromString(jdbcTestUtil.getUSERID()));
+        User user = userDao.request(UuidTypeImpl.fromString(adminJdbcTestUtil.getUSERID()));
         assertNotNull("request user", user);
 
         Set<Role> roles = user.getRoles();

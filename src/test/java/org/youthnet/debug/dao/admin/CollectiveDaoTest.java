@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.youthnet.debug.dao.util.JdbcTestUtil;
+import org.youthnet.debug.dao.util.AdminJdbcTestUtil;
 import org.youthnet.debug.domain.admin.Collective;
 import org.youthnet.debug.domain.admin.Vuo;
 import org.youthnet.debug.domain.common.impl.UuidTypeImpl;
@@ -24,34 +24,34 @@ import java.util.Set;
  * Date: 19-May-2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/test-config.xml",
+@ContextConfiguration(locations = {"/admin-test-config.xml",
         "/config/spring/admin-hibernate-config.xml",
         "/config/spring/admin-jdbc-config.xml"})
 public class CollectiveDaoTest {
 
     private static final Log log = LogFactory.getLog(CollectiveDaoTest.class);
 
-    @Resource(name = "jdbcTestUtil")
-    private JdbcTestUtil jdbcTestUtil;
+    @Resource(name = "adminJdbcTestUtil")
+    private AdminJdbcTestUtil adminJdbcTestUtil;
 
     @Resource(name = "collectiveDao")
     private CollectiveDao collectiveDao;
 
     @Before
     public void buildUp() {
-        jdbcTestUtil.createCollective();
-        jdbcTestUtil.createVuo();
+        adminJdbcTestUtil.createCollective();
+        adminJdbcTestUtil.createVuo();
     }
 
     @After
     public void tearDown() {
-        jdbcTestUtil.deleteVuo();
-        jdbcTestUtil.deleteCollective();
+        adminJdbcTestUtil.deleteVuo();
+        adminJdbcTestUtil.deleteCollective();
     }
 
     @Test
     public void testRequest() {
-        Collective collective = collectiveDao.request(UuidTypeImpl.fromString(jdbcTestUtil.getCOLLECTIVEID()));
+        Collective collective = collectiveDao.request(UuidTypeImpl.fromString(adminJdbcTestUtil.getCOLLECTIVEID()));
         assertNotNull("request collective", collective);
 
         Set<Vuo> vuos = collective.getVuos();

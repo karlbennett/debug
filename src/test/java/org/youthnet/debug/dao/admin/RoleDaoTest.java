@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.youthnet.debug.dao.util.JdbcTestUtil;
+import org.youthnet.debug.dao.util.AdminJdbcTestUtil;
 import org.youthnet.debug.domain.admin.Role;
 
 import javax.annotation.Resource;
@@ -21,32 +21,32 @@ import java.util.List;
  * Date: 19-May-2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/test-config.xml",
+@ContextConfiguration(locations = {"/admin-test-config.xml",
         "/config/spring/admin-hibernate-config.xml",
         "/config/spring/admin-jdbc-config.xml"})
 public class RoleDaoTest {
 
     private static final Log log = LogFactory.getLog(RoleDaoTest.class);
 
-    @Resource(name = "jdbcTestUtil")
-    private JdbcTestUtil jdbcTestUtil;
+    @Resource(name = "adminJdbcTestUtil")
+    private AdminJdbcTestUtil adminJdbcTestUtil;
 
     @Resource(name = "roleDao")
     private RoleDao roleDao;
 
     @Before
     public void buildUp() {
-        jdbcTestUtil.createRole();
+        adminJdbcTestUtil.createRole();
     }
 
     @After
     public void tearDown() {
-        jdbcTestUtil.deleteRole();
+        adminJdbcTestUtil.deleteRole();
     }
 
     @Test
     public void testRequest() {
-        Role role = roleDao.request(jdbcTestUtil.getROLEID());
+        Role role = roleDao.request(adminJdbcTestUtil.getROLEID());
         assertNotNull("request role", role);
     }
 
