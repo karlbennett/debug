@@ -22,7 +22,7 @@ public class JdbcTestUtil {
     private SqlSyntaxUtil sqlSyntaxUtil;
 
     private final Random RANDOM = new Random();
-    private final int RANDNUM = RANDOM.nextInt();
+    private final int RANDNUM = RANDOM.nextInt(999999999);
 
     private final String COLLECTIVEID = "99999999-9999-9999-9999-999999999999";
     private final String COLNAME = "TEST COLLECTIVE " + RANDNUM;
