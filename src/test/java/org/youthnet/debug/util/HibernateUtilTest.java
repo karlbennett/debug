@@ -82,4 +82,35 @@ public class HibernateUtilTest {
         assertNotNull("get rows", rows);
         assertTrue("found rows", rows.size() > 0);
     }
+
+    @Test
+    public void testGetDomainTableNames() throws Exception {
+        List<String> tableNames = HibernateUtil.getDomainTableNames(sessionFactory);
+        assertNotNull("get table names", tableNames);
+        assertTrue("table names found", tableNames.size() > 0);
+        assertTrue("table names contain collective", tableNames.contains("collective"));
+    }
+
+    @Test
+    public void testGetTableNameForColumnReference() throws Exception {
+        String tableName = HibernateUtil.getTableNameForColumnReference("col_id", sessionFactory);
+        assertNotNull("table name found", tableName);
+        assertEquals("table name correct", "collective", tableName);
+
+        tableName = HibernateUtil.getTableNameForColumnReference("vuo_id", sessionFactory);
+        assertNotNull("table name found", tableName);
+        assertEquals("table name correct", "vuo", tableName);
+
+        tableName = HibernateUtil.getTableNameForColumnReference("user_id", sessionFactory);
+        assertNotNull("table name found", tableName);
+        assertEquals("table name correct", "app_user", tableName);
+    }
+
+    @Test
+    public void testGetTableNameForClass() throws Exception {
+        String tabeName = HibernateUtil.getTableNameForClass("org.youthnet.debug.domain.admin.User",
+                sessionFactory);
+        assertNotNull("user table name found", tabeName);
+        assertEquals("user table name correct", "app_user", tabeName);
+    }
 }

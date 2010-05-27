@@ -6,6 +6,8 @@
     <BODY>
         <DIV CLASS="content">
             <%@include file='/mainTabs.jsp'%>
+            <DIV CLASS="content">
+            </DIV>
         </DIV>
     </BODY>
 </HTML> 

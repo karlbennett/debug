@@ -1,7 +1,10 @@
 body
 {
-    background-color:#F4F4F4;
+    background-color:#FFFFFF;
     font-family: Tahoma,"Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
+    padding: 0;
+    margin: 0;
+    text-align: left;
 }
 
 .fontSet
@@ -11,36 +14,27 @@ body
     line-height: 1.1em;
 }
 
-div.main
-{
-    background-color:#FFFFFF;
-    width: 700px;
-    height: auto;
-    margin-left: auto ;
-    margin-right: auto ;
-    text-align: left;
-}
-
 div.tab_row_1
 {
     clear:both;
-    width: 100%;
-    height: 40px;
+    min-height: 40px;
 }
 
 div.tab_row_2
 {
     clear:both;
-    width: 100%;
-    height: 80px;
+    min-height: 40px;
 }
 
 div.content
 {
-    width: 100%;
+    width: auto;
     height: auto;
     min-height:400px;
-    overflow: auto;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    margin-bottom: 0px;
 }
 
 ul.tabList
@@ -65,12 +59,29 @@ li.tab
     float: left;
 }
 
+li.selectedTab
+{
+    background-color:#EAEAEA;
+    border-bottom-color: #286EA0;
+}
+
 a.tabLink
 {
     display: block;
     width: 90%;
     height: 20px;
     padding: 5px;
+    color:#777777;
+    text-decoration: none;
+}
+
+a.selectedTabLink
+{
+    color:#286EA0;   
+}
+
+a.idLink
+{
     color:#777777;
     text-decoration: none;
 }
@@ -89,6 +100,11 @@ td.headingCell
 td.normalCell
 {
     background-color:#F4F4F4;
+}
+
+td.highlightCell
+{
+    background-color:#969696;
 }
 
 label.tableHeading

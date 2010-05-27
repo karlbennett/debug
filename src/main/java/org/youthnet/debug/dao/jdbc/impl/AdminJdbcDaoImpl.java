@@ -99,6 +99,16 @@ public class AdminJdbcDaoImpl implements JdbcDao {
         return row;
     }
 
+    public Map<String, Object> convertByteColumnsToString(Map<String, Object> row) {
+        for (String key : row.keySet()) {
+            if (row.get(key) instanceof byte[]) {
+                row.put(key, UuidConverter.convertByteArrayToUuid((byte[]) row.get(key)).toString());
+            }
+        }
+
+        return row;
+    }
+
     public String getSelectTableNamesQuery() {
         return selectTableNamesQuery;
     }

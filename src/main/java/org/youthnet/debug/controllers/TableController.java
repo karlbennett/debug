@@ -28,10 +28,12 @@ public class TableController {
     @Resource(name = "adminJdbcDaoImpl")
     private JdbcDao adminJdbcDao;
 
+    @Resource(name = "&adminSessionFactory")
+    AnnotationSessionFactoryBean sessionFactory;
+
     @RequestMapping("/tables.html")
     public String handleRequest(@RequestParam(required = false) String tableName,
                                 @RequestParam(required = false) String id,
-                                @RequestParam(required = false) String columnName,
                                 ModelMap modelMap) throws Exception {
         log.debug("Table controller");
 
@@ -45,7 +47,15 @@ public class TableController {
             tableName = tableNames.get(0);
         }
         modelMap.addAttribute("tableRows", adminJdbcDao.getTableRows(tableName));
+        modelMap.addAttribute("rowId", id);
 
         return "tables.jsp";
+    }
+
+    @RequestMapping("/row.html")
+    public String handleColumnRequest(@RequestParam(required = false) String id,
+                                      @RequestParam(required = false) String columnName) {
+        return "redirect:tables.html?tableName=" + HibernateUtil.getTableNameForColumnReference(columnName.toLowerCase(), 
+                sessionFactory) + "&id=" + id + "#" + id;
     }
 }
