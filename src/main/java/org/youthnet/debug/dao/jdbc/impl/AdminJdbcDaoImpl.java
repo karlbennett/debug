@@ -60,18 +60,17 @@ public class AdminJdbcDaoImpl implements JdbcDao {
     }
 
     @Override
-    public Map<String, Object> getRowById(UuidType id) {
-        return getRowById(id.toString());
-    }
-
-    @Override
-    public Map<String, Object> getRowById(String id) {
+    public Map<String, Object> getRowById(Object id) {
 
         Map<String, Object> row = null;
         for (String tableName : getTableNames()) {
             try {
-                row = jdbcTemplate.queryForMap("SELECT * FROM " + tableName + " WHERE id = "
-                        + sqlSyntaxUtil.getBinTypeStart() + id.replace("-", "") + sqlSyntaxUtil.getBinTypeEnd());
+                if (id instanceof UuidType) {
+                    row = jdbcTemplate.queryForMap("SELECT * FROM " + tableName + " WHERE id = "
+                            + sqlSyntaxUtil.getBinTypeStart() + id.toString().replace("-", "") + sqlSyntaxUtil.getBinTypeEnd());
+                }
+
+                row = jdbcTemplate.queryForMap("SELECT * FROM " + tableName + " WHERE id = '" + id.toString() + "'");
             } catch (EmptyResultDataAccessException e) {
                 log.info("ID: " + id + " not found in " + tableName + ".");
             } catch (BadSqlGrammarException e) {
@@ -87,6 +86,22 @@ public class AdminJdbcDaoImpl implements JdbcDao {
         }
 
         return null;
+    }
+
+    @Override
+    public Map<String, Object> getRowById(Object id, String tableName) {
+        if (id instanceof UuidType) {
+            return convertByteColumnsToUuidType(jdbcTemplate.queryForMap("SELECT * FROM " + tableName + " WHERE id = "
+                    + sqlSyntaxUtil.getBinTypeStart() + id.toString().replace("-", "") + sqlSyntaxUtil.getBinTypeEnd()));
+        }
+
+        return convertByteColumnsToUuidType(jdbcTemplate.queryForMap("SELECT * FROM " + tableName + " WHERE id = '"
+                + id.toString() + "'"));
+    }
+
+    @Override
+    public Map<String, Object> getRowByUuidString(String id) {
+        return this.getRowById(UuidTypeImpl.fromString(id));
     }
 
     public Map<String, Object> convertByteColumnsToUuidType(Map<String, Object> row) {

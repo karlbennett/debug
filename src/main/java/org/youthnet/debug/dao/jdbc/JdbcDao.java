@@ -20,7 +20,9 @@ public interface JdbcDao {
 
     public List<Map <String, Object>> getTableRows(String tableName);
 
-    public Map <String, Object> getRowById(UuidType id);
+    public Map <String, Object> getRowById(Object id);
 
-    public Map <String, Object> getRowById(String id);
+    public Map <String, Object> getRowById(Object id, String tableName);
+
+    public Map <String, Object> getRowByUuidString(String id);
 }
