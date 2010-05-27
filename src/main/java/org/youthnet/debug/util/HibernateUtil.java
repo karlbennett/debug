@@ -23,14 +23,17 @@ public class HibernateUtil {
 
     private static final Log log = LogFactory.getLog(HibernateUtil.class);
 
-    private static Map<String, Class> classToTableMap = new HashMap<String, Class>();
-    private static Map<String, String> tableToClassMap = new HashMap<String, String>();
+    private static String[] schema = null;
+    private static Map<String, Class> tableToClassMap = new HashMap<String, Class>();
+    private static Map<String, String> classToTableMap = new HashMap<String, String>();
     private static Map<String, String> columnToTableMap = new HashMap<String, String>();
 
     private HibernateUtil() {
     }
 
     public static String[] getSchema(AnnotationSessionFactoryBean sessionFactory) {
+        if (schema != null) return schema;
+
         Configuration hibernateConfiguration = sessionFactory.getConfiguration();
         String hibernateDialect = hibernateConfiguration.getProperty("hibernate.dialect");
 
@@ -49,7 +52,8 @@ public class HibernateUtil {
             log.error("Initialisation Failed: " + hibernateDialect + " Exception Message: " + e.getMessage());
         }
 
-        return hibernateConfiguration.generateSchemaCreationScript(dialect);
+        schema = hibernateConfiguration.generateSchemaCreationScript(dialect);
+        return schema;
     }
 
     public static void logSchema(AnnotationSessionFactoryBean sessionFactory) {
@@ -59,14 +63,11 @@ public class HibernateUtil {
     }
 
     public static Class getClassForTableName(String tableName, AnnotationSessionFactoryBean sessionFactory) {
+        Class tableClass = tableToClassMap.get(tableName);
 
-        Class tableClass = classToTableMap.get(tableName);
+        if (tableClass != null) return tableClass;
 
         try {
-            if (tableClass != null) {
-                return tableClass;
-            }
-
             Iterator mappingIterator = sessionFactory.getConfiguration().getClassMappings();
             PersistentClass persistentClass = null;
             String className = null;
@@ -75,7 +76,7 @@ public class HibernateUtil {
                 if (persistentClass.getTable().getName().equals(tableName)) {
                     className = persistentClass.getClassName();
                     tableClass = Class.forName(className);
-                    classToTableMap.put(tableName, tableClass);
+                    tableToClassMap.put(tableName, tableClass);
                     return tableClass;
                 }
             }
@@ -89,15 +90,26 @@ public class HibernateUtil {
     }
 
     public static String getTableNameForClass(String classname, AnnotationSessionFactoryBean sessionFactory) {
+        String tableName = classToTableMap.get(classname);
+
+        if(tableName != null) return tableName;
+
         Iterator mappingIterator = sessionFactory.getConfiguration().getClassMappings();
         PersistentClass persistentClass = null;
-        String tableName = "";
         while (mappingIterator.hasNext()) {
             persistentClass = (PersistentClass) mappingIterator.next();
-            if (persistentClass.getClassName().equals(classname)) return persistentClass.getTable().getName();
+            if (persistentClass.getClassName().equals(classname)) {
+                tableName = persistentClass.getTable().getName();
+                classToTableMap.put(classname, tableName);
+                return tableName;
+            }
         }
 
         return null;
+    }
+
+    public static String getTableNameForClass(Class clazz, AnnotationSessionFactoryBean sessionFactory) {
+        return getTableNameForClass(clazz.getName(), sessionFactory);   
     }
 
     public static Map<String, Object> createRowMap(Object row) {
@@ -144,6 +156,9 @@ public class HibernateUtil {
     }
 
     public static String getTableClassNameForColumnReference(String columnName, AnnotationSessionFactoryBean sessionFactory) {
+        String tableClassName = columnToTableMap.get(columnName);
+
+        if(tableClassName != null) return tableClassName;
 
         Iterator mappingIterator = sessionFactory.getConfiguration().getTableMappings();
         Iterator foreignKeyIterator = null;
@@ -151,17 +166,19 @@ public class HibernateUtil {
         Table table = null;
         Column column = null;
         ForeignKey foreignKey = null;
-        String tableClassName = null;
         while (mappingIterator.hasNext()) {
             table = (Table) mappingIterator.next();
             foreignKeyIterator = table.getForeignKeyIterator();
             while (foreignKeyIterator.hasNext()) {
-                foreignKey = (ForeignKey)foreignKeyIterator.next();
+                foreignKey = (ForeignKey) foreignKeyIterator.next();
                 tableClassName = foreignKey.getReferencedEntityName();
                 columnIterator = foreignKey.getColumnIterator();
                 while (columnIterator.hasNext()) {
-                    column = (Column)columnIterator.next();
-                    if (column.getName().equals(columnName)) return tableClassName;
+                    column = (Column) columnIterator.next();
+                    if (column.getName().equals(columnName)) {
+                        columnToTableMap.put(columnName, tableClassName);
+                        return tableClassName;
+                    }
                 }
             }
         }
