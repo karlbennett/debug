@@ -60,8 +60,9 @@ public class TableController {
     @RequestMapping("/row.html")
     public String handleColumnRequest(@RequestParam(required = false) String id,
                                       @RequestParam(required = false) String columnName) {
+        String tableName = HibernateUtil.getTableNameForClass(HibernateUtil.getTableClassNameForColumnReference(
+                columnName.toLowerCase(), adminSessionFactory), adminSessionFactory);
         return "redirect:tables.html?tableName="
-                + HibernateUtil.getTableNameForClass(HibernateUtil.getTableClassNameForColumnReference(
-                columnName.toLowerCase(), adminSessionFactory), adminSessionFactory) + "&id=" + id + "#" + id;
+                + tableName + "&id=" + id + "#" + tableName;
     }
 }
