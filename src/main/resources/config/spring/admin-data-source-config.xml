@@ -4,7 +4,11 @@
        xsi:schemaLocation=" http://www.springframework.org/schema/beans
                             http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <import resource="classpath:config/spring/admin-hibernate-config.xml"/>
-    <import resource="classpath:config/spring/core-hibernate-config.xml"/>
+    <bean id="adminDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${db.driver}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.admin.username}"/>
+        <property name="password" value="${db.admin.password}"/>
+    </bean>
 
 </beans>

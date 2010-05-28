@@ -23,7 +23,7 @@
     </logger>
 
     <logger name="org.youthnet.debug.util.HibernateUtil">
-        <level value="WARN"/>
+        <level value="DEBUG"/>
     </logger>
 
     <logger name="org.youthnet.debug.util.ClassPathWebAppContextFactoryBean">
@@ -38,12 +38,12 @@
         <level value="DEBUG"/>
     </logger>
 
-    <logger name="org.youthnet.debug.dao.jdbc.impl.AdminJdbcDaoImpl">
+    <logger name="org.youthnet.debug.dao.jdbc.AbstractJdbcDao">
         <level value="DEBUG"/>
     </logger>
 
     <root>
-        <level value="DEBUG"/>
+        <level value="INFO"/>
         <appender-ref ref="CONSOLE"/>
     </root>
 
