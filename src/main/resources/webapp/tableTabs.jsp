@@ -5,7 +5,8 @@
         <c:choose>
             <c:when test="${param.tableName == fn:toLowerCase(tableName)}">
                 <LI CLASS="tableTab selectedTab">
-                    <A HREF="?tableName=<c:out value="${fn:toLowerCase(tableName)}"/>"
+                    <A NAME="<c:out value="${fn:toLowerCase(tableName)}"/>"
+                        HREF="?tableName=<c:out value="${fn:toLowerCase(tableName)}"/>#<c:out value="${fn:toLowerCase(tableName)}"/>"
                         CLASS="tabLink fontSet selectedTabLink">
                         <c:out value="${fn:toLowerCase(tableName)}"/>
                     </A>
@@ -13,7 +14,8 @@
             </c:when>
             <c:otherwise>
                 <LI CLASS="tableTab">
-                    <A HREF="?tableName=<c:out value="${fn:toLowerCase(tableName)}"/>"
+                    <A NAME="<c:out value="${fn:toLowerCase(tableName)}"/>"
+                        HREF="?tableName=<c:out value="${fn:toLowerCase(tableName)}"/>#<c:out value="${fn:toLowerCase(tableName)}"/>"
                         CLASS="tabLink fontSet">
                         <c:out value="${fn:toLowerCase(tableName)}"/>
                     </A>
