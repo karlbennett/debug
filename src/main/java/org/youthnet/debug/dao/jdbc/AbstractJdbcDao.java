@@ -43,11 +43,11 @@ public abstract class AbstractJdbcDao implements JdbcDao {
         try {
             return jdbcTemplate.queryForList(query);
         } catch (Exception e) {
-            if(e.getMessage().contains("ORA-00942")) log.warn("Table not found in query: " + query);
+            if (e.getMessage().contains("ORA-00942")) log.warn("Table not found in query: " + query);
             else log.warn(e.getStackTrace());
         }
 
-        return new ArrayList<Map<String, Object>>();
+        return null;
     }
 
     @Override
@@ -58,8 +58,10 @@ public abstract class AbstractJdbcDao implements JdbcDao {
     @Override
     public List<Map<String, Object>> getTableRows(String tableName) {
         List<Map<String, Object>> tableRows = queryForRows("SELECT * FROM " + tableName);
-        for (Map<String, Object> row : tableRows) {
-            convertByteColumnsToUuidType(row);
+        if (tableRows != null) { // Check for null so foreach doesn't break. 
+            for (Map<String, Object> row : tableRows) {
+                convertByteColumnsToUuidType(row);
+            }
         }
         return tableRows;
     }
