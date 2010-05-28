@@ -36,8 +36,8 @@ div.content
     margin-top: 5px;
     margin-bottom: 0px;
     position: absolute;
-    left: 230;
-    top: 50;
+    left: 240;
+    top: 40;
 }
 
 ul.tabList
@@ -48,10 +48,15 @@ ul.tabList
 
 ul.tableTabList
 {
-    margin: 0;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 5px;
+    margin-bottom: 0px;
     padding: 0;
-    min-width: 100px;
-    max-width: 220px;
+    width: 240px;
+    height: 95%;
+    overflow: auto;
+    position: fixed;
 }
 
 li.tab
