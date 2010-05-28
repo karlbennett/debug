@@ -12,6 +12,8 @@ import org.youthnet.debug.util.SqlSyntaxUtil;
 import org.youthnet.debug.util.UuidConverter;
 
 import javax.annotation.Resource;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -38,7 +40,14 @@ public abstract class AbstractJdbcDao implements JdbcDao {
 
     @Override
     public List<Map<String, Object>> queryForRows(String query) {
-        return jdbcTemplate.queryForList(query);
+        try {
+            return jdbcTemplate.queryForList(query);
+        } catch (Exception e) {
+            if(e.getMessage().contains("ORA-00942")) log.warn("Table not found in query: " + query);
+            else log.warn(e.getStackTrace());
+        }
+
+        return new ArrayList<Map<String, Object>>();
     }
 
     @Override
