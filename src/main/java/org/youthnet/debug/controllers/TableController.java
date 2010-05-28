@@ -26,8 +26,14 @@ public class TableController {
     @Resource(name = "adminJdbcDaoImpl")
     private JdbcDao adminJdbcDao;
 
+    @Resource(name = "coreJdbcDaoImpl")
+    private JdbcDao coreJdbcDao;
+
     @Resource(name = "&adminSessionFactory")
-    AnnotationSessionFactoryBean sessionFactory;
+    AnnotationSessionFactoryBean adminSessionFactory;
+
+    @Resource(name = "&coreSessionFactory")
+    AnnotationSessionFactoryBean coreSessionFactory;
 
     @RequestMapping("/tables.html")
     public String handleRequest(@RequestParam(required = false) String tableName,
@@ -37,6 +43,7 @@ public class TableController {
 
         // Add the table names to be used to auto generate and name the table tabs.
         List<String> tableNames = adminJdbcDao.getTableNames();
+        tableNames.addAll(coreJdbcDao.getTableNames());
         Collections.sort(tableNames);
         modelMap.addAttribute("tableNames", tableNames);
 
@@ -55,6 +62,6 @@ public class TableController {
                                       @RequestParam(required = false) String columnName) {
         return "redirect:tables.html?tableName="
                 + HibernateUtil.getTableNameForClass(HibernateUtil.getTableClassNameForColumnReference(
-                columnName.toLowerCase(), sessionFactory), sessionFactory) + "&id=" + id + "#" + id;
+                columnName.toLowerCase(), adminSessionFactory), adminSessionFactory) + "&id=" + id + "#" + id;
     }
 }
