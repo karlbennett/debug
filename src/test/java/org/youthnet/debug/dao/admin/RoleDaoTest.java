@@ -22,7 +22,6 @@ import java.util.List;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/admin-test-config.xml",
-        "/config/spring/admin-data-source-config.xml",
         "/config/spring/admin-hibernate-config.xml",
         "/config/spring/admin-jdbc-config.xml"})
 public class RoleDaoTest {

@@ -10,6 +10,8 @@
                             http://www.springframework.org/schema/tx
                             http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
+    <import resource="classpath:config/spring/core-data-source-config.xml"/>
+
     <bean id="coreSessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="coreDataSource"/>
         <property name="packagesToScan" value="org.youthnet.debug.domain.core"/>

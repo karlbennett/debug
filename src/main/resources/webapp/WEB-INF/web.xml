@@ -12,9 +12,10 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-            classpath:config/spring/data-source-config.xml
-            classpath:config/spring/hibernate-config.xml
-            classpath:config/spring/jdbc-config.xml
+            classpath:config/spring/admin-hibernate-config.xml
+            classpath:config/spring/admin-jdbc-config.xml
+            classpath:config/spring/core-hibernate-config.xml
+            classpath:config/spring/core-jdbc-config.xml
             classpath:config/spring/client-config.xml
         </param-value>
     </context-param>
