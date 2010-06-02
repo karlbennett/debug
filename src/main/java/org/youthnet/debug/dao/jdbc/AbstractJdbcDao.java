@@ -30,9 +30,6 @@ public abstract class AbstractJdbcDao implements JdbcDao {
     @Resource(name = "sqlSyntaxUtil")
     private SqlSyntaxUtil sqlSyntaxUtil;
 
-    // Variable to hold the SQL statement that should be used to select a list of the current schema's table names.
-    private String selectTableNamesQuery;
-
     @Override
     public void executeQuery(String query) {
         jdbcTemplate.execute(query);
@@ -52,7 +49,7 @@ public abstract class AbstractJdbcDao implements JdbcDao {
 
     @Override
     public List<String> getTableNames() {
-        return jdbcTemplate.queryForList(selectTableNamesQuery, String.class);
+        return jdbcTemplate.queryForList(sqlSyntaxUtil.getSelectTableNamesQuery(), String.class);
     }
 
     @Override
@@ -137,13 +134,5 @@ public abstract class AbstractJdbcDao implements JdbcDao {
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
-    }
-
-    public String getSelectTableNamesQuery() {
-        return selectTableNamesQuery;
-    }
-
-    public void setSelectTableNamesQuery(String selectTableNamesQuery) {
-        this.selectTableNamesQuery = selectTableNamesQuery;
     }
 }

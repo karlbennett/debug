@@ -11,6 +11,10 @@ public class SqlSyntaxUtil {
     private String binTypeEnd;
     private String schema;
     private String adminSchema;
+    // Variable to hold the SQL statement that should be used to select a list of the current schema's table names.
+    private String selectTableNamesQuery;
+    // Variable to hold the SQL statement that should be used to select a list of the current schema names.
+    private String selectSchemaNamesQuery;
 
     public String getSqlTrue() {
         return sqlTrue;
@@ -58,5 +62,21 @@ public class SqlSyntaxUtil {
 
     public void setAdminSchema(String adminSchema) {
         this.adminSchema = adminSchema;
+    }
+
+    public String getSelectTableNamesQuery() {
+        return selectTableNamesQuery;
+    }
+
+    public void setSelectTableNamesQuery(String selectTableNamesQuery) {
+        this.selectTableNamesQuery = selectTableNamesQuery;
+    }
+
+    public String getSelectSchemaNamesQuery() {
+        return selectSchemaNamesQuery;
+    }
+
+    public void setSelectSchemaNamesQuery(String selectSchemaNamesQuery) {
+        this.selectSchemaNamesQuery = selectSchemaNamesQuery;
     }
 }
