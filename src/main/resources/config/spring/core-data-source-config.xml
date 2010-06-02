@@ -7,15 +7,20 @@
                             http://www.springframework.org/schema/util
                             http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-    <bean id="coreDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+    <bean id="coreDefaultDataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="${db.driver}"/>
         <property name="url" value="${db.url}"/>
         <property name="username" value="${db.username}"/>
         <property name="password" value="${db.password}"/>
     </bean>
 
-    <util:map id="coreDataSourceMap" key-type="java.lang.String" value-type="org.apache.commons.dbcp.BasicDataSource">
-        <entry key="default" value-ref="coreDataSource"/>
-    </util:map>
+    <bean id="coreDataSource" class="org.youthnet.debug.db.DataSourceAutoProxy">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String" value-type="javax.sql.DataSource">
+                <entry key="${db.username}" value-ref="coreDefaultDataSource"/>
+            </map>
+        </property>
+        <property name="defaultTargetDataSource" ref="coreDefaultDataSource"/>
+    </bean>
 
 </beans>
