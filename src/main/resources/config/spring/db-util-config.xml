@@ -15,5 +15,19 @@
         <property name="schema" value="${db.schema}"/>
         <property name="adminSchema" value="${db.admin.schema}"/>
     </bean>
-    
+
+    <bean name="DbPropertiesUtil" class="org.youthnet.debug.util.DbPropertiesUtil">
+        <property name="domain" value="${db.domain}"/>
+        <property name="port" value="${db.port}"/>
+        <property name="sid" value="${db.sid}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="driver" value="${db.driver}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
+        <property name="schema" value="${db.schema}"/>
+        <property name="adminUsername" value="${db.admin.username}"/>
+        <property name="adminPassword" value="${db.admin.password}"/>
+        <property name="adminSchema" value="${db.admin.schema}"/>
+    </bean>
+
 </beans>
