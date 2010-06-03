@@ -9,11 +9,11 @@ public class SqlSyntaxUtil {
     private String sqlFalse;
     private String binTypeStart;
     private String binTypeEnd;
-    private String schema;
-    private String adminSchema;
-    // Variable to hold the SQL statement that should be used to select a list of the current schema's table names.
+    private String schemaPrefix;
+    private String adminSchemaPrefix;
+    // Variable to hold the SQL statement that should be used to select a list of the current schemaPrefix's table names.
     private String selectTableNamesQuery;
-    // Variable to hold the SQL statement that should be used to select a list of the current schema names.
+    // Variable to hold the SQL statement that should be used to select a list of the current schemaPrefix names.
     private String selectSchemaNamesQuery;
 
     public String getSqlTrue() {
@@ -48,20 +48,20 @@ public class SqlSyntaxUtil {
         this.binTypeEnd = binTypeEnd;
     }
 
-    public String getSchema() {
-        return schema;
+    public String getSchemaPrefix() {
+        return schemaPrefix;
     }
 
-    public void setSchema(String schema) {
-        this.schema = schema;
+    public void setSchemaPrefix(String schemaPrefix) {
+        this.schemaPrefix = schemaPrefix;
     }
 
-    public String getAdminSchema() {
-        return adminSchema;
+    public String getAdminSchemaPrefix() {
+        return adminSchemaPrefix;
     }
 
-    public void setAdminSchema(String adminSchema) {
-        this.adminSchema = adminSchema;
+    public void setAdminSchemaPrefix(String adminSchemaPrefix) {
+        this.adminSchemaPrefix = adminSchemaPrefix;
     }
 
     public String getSelectTableNamesQuery() {

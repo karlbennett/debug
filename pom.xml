@@ -223,16 +223,16 @@
         <db.driver>oracle.jdbc.driver.OracleDriver</db.driver>
         <db.username>Get username from the settings.xml</db.username>
         <db.password>Get password from the settings.xml</db.password>
-        <db.schema>Get schema from the settings.xml</db.schema>
+        <db.schema.prefix>Get schema from the settings.xml</db.schema.prefix>
         <db.admin.username>Get username from the settings.xml</db.admin.username>
         <db.admin.password>Get password from the settings.xml</db.admin.password>
-        <db.admin.schema>Get schema from the settings.xml</db.admin.schema>
+        <db.admin.schema.prefix>Get schema from the settings.xml</db.admin.schema.prefix>
         <sql.true>'1'</sql.true>
         <sql.false>'0'</sql.false>
         <sql.binTypeStart>hextoraw('</sql.binTypeStart>
         <sql.binTypeEnd>')</sql.binTypeEnd>
         <sql.selectTableNames>SELECT table_name FROM user_tables</sql.selectTableNames>
-        <sql.selectSchemaNames></sql.selectSchemaNames>
+        <sql.selectSchemaNames>"SELECT * FROM all_users WHERE username LIKE '${db.username}%'</sql.selectSchemaNames>
         <!--    Hibernate configuration -->
         <hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</hibernate.dialect>
         <hiernate.hbm2ddl>validate</hiernate.hbm2ddl>
@@ -256,16 +256,16 @@
                 <db.driver>org.hibernate.dialect.DerbyDialect</db.driver>
                 <db.username></db.username>
                 <db.password></db.password>
-                <db.schema></db.schema>
+                <db.schema.prefix></db.schema.prefix>
                 <db.admin.username></db.admin.username>
                 <db.admin.password></db.admin.password>
-                <db.admin.schema></db.admin.schema>
+                <db.admin.schema.prefix></db.admin.schema.prefix>
                 <sql.true>1</sql.true>
                 <sql.false>0</sql.false>
                 <sql.binTypeStart>X'</sql.binTypeStart>
                 <sql.binTypeEnd>'</sql.binTypeEnd>
                 <sql.selectTableNames><![CDATA[SELECT tablename FROM sys.systables WHERE tablename NOT LIKE 'GENERICTABLE' AND tablename NOT LIKE 'SYS%']]></sql.selectTableNames>
-                <sql.selectSchemaNames></sql.selectSchemaNames>
+                <sql.selectSchemaNames>SELECT schemaname FROM sys.sysschemas</sql.selectSchemaNames>
                 <!--    Hibernate configuration -->
                 <hibernate.dialect>org.hibernate.dialect.DerbyDialect</hibernate.dialect>
                 <hiernate.hbm2ddl>update</hiernate.hbm2ddl>

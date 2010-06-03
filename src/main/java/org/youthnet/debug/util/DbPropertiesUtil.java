@@ -11,12 +11,12 @@ public class DbPropertiesUtil {
     private String sid;
     private String url;
     private String driver;
-    private String username;
+    private String userName;
     private String password;
-    private String schema;
-    private String adminUsername;
+    private String schemaPrefix;
+    private String adminUserName;
     private String adminPassword;
-    private String adminSchema;
+    private String adminSchemaPrefix;
 
     public String getDomain() {
         return domain;
@@ -58,12 +58,12 @@ public class DbPropertiesUtil {
         this.driver = driver;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -74,20 +74,20 @@ public class DbPropertiesUtil {
         this.password = password;
     }
 
-    public String getSchema() {
-        return schema;
+    public String getSchemaPrefix() {
+        return schemaPrefix;
     }
 
-    public void setSchema(String schema) {
-        this.schema = schema;
+    public void setSchemaPrefix(String schemaPrefix) {
+        this.schemaPrefix = schemaPrefix;
     }
 
-    public String getAdminUsername() {
-        return adminUsername;
+    public String getAdminUserName() {
+        return adminUserName;
     }
 
-    public void setAdminUsername(String adminUsername) {
-        this.adminUsername = adminUsername;
+    public void setAdminUserName(String adminUserName) {
+        this.adminUserName = adminUserName;
     }
 
     public String getAdminPassword() {
@@ -98,11 +98,11 @@ public class DbPropertiesUtil {
         this.adminPassword = adminPassword;
     }
 
-    public String getAdminSchema() {
-        return adminSchema;
+    public String getAdminSchemaPrefix() {
+        return adminSchemaPrefix;
     }
 
-    public void setAdminSchema(String adminSchema) {
-        this.adminSchema = adminSchema;
+    public void setAdminSchemaPrefix(String adminSchemaPrefix) {
+        this.adminSchemaPrefix = adminSchemaPrefix;
     }
 }

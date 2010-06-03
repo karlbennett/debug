@@ -12,8 +12,8 @@
         <property name="sqlFalse" value="${sql.false}"/>
         <property name="binTypeStart" value="${sql.binTypeStart}"/>
         <property name="binTypeEnd" value="${sql.binTypeEnd}"/>
-        <property name="schema" value="${db.schema}"/>
-        <property name="adminSchema" value="${db.admin.schema}"/>
+        <property name="schemaPrefix" value="${db.schema.prefix}"/>
+        <property name="adminSchemaPrefix" value="${db.admin.schema.prefix}"/>
         <property name="selectTableNamesQuery" value="${sql.selectTableNames}"/>
     </bean>
 
@@ -23,12 +23,12 @@
         <property name="sid" value="${db.sid}"/>
         <property name="url" value="${db.url}"/>
         <property name="driver" value="${db.driver}"/>
-        <property name="username" value="${db.username}"/>
+        <property name="userName" value="${db.username}"/>
         <property name="password" value="${db.password}"/>
-        <property name="schema" value="${db.schema}"/>
-        <property name="adminUsername" value="${db.admin.username}"/>
+        <property name="schemaPrefix" value="${db.schema.prefix}"/>
+        <property name="adminUserName" value="${db.admin.username}"/>
         <property name="adminPassword" value="${db.admin.password}"/>
-        <property name="adminSchema" value="${db.admin.schema}"/>
+        <property name="adminSchemaPrefix" value="${db.admin.schema.prefix}"/>
     </bean>
 
 </beans>
