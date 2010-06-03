@@ -48,6 +48,11 @@ public abstract class AbstractJdbcDao implements JdbcDao {
     }
 
     @Override
+    public List<String> getSchemaNames() {
+        return jdbcTemplate.queryForList("SELECT shortname FROM " + sqlSyntaxUtil.getAdminSchemaPrefix() + "collective", String.class);
+    }
+
+    @Override
     public List<String> getTableNames() {
         return jdbcTemplate.queryForList(sqlSyntaxUtil.getSelectTableNamesQuery(), String.class);
     }

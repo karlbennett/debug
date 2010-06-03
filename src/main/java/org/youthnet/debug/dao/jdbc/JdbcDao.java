@@ -16,6 +16,8 @@ public interface JdbcDao {
 
     public List<Map<String, Object>> queryForRows(String query);
 
+    public List<String> getSchemaNames();
+
     public List<String> getTableNames();
 
     public List<Map <String, Object>> getTableRows(String tableName);

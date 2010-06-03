@@ -17,14 +17,14 @@
         <property name="selectTableNamesQuery" value="${sql.selectTableNames}"/>
     </bean>
 
-    <bean name="DbPropertiesUtil" class="org.youthnet.debug.util.DbPropertiesUtil">
+    <bean name="dbPropertiesUtil" class="org.youthnet.debug.util.DbPropertiesUtil">
         <property name="domain" value="${db.domain}"/>
         <property name="port" value="${db.port}"/>
         <property name="sid" value="${db.sid}"/>
         <property name="url" value="${db.url}"/>
         <property name="driver" value="${db.driver}"/>
-        <property name="userName" value="${db.username}"/>
-        <property name="password" value="${db.password}"/>
+        <property name="defaultCoreUserName" value="${db.default.username}"/>
+        <property name="defaultCorePassword" value="${db.default.password}"/>
         <property name="schemaPrefix" value="${db.schema.prefix}"/>
         <property name="adminUserName" value="${db.admin.username}"/>
         <property name="adminPassword" value="${db.admin.password}"/>

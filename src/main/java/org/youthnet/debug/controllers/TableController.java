@@ -8,6 +8,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.youthnet.debug.dao.jdbc.JdbcDao;
+import org.youthnet.debug.db.DataSourceGenerationProxy;
+import org.youthnet.debug.db.SchemaSelector;
+import org.youthnet.debug.util.DbPropertiesUtil;
 import org.youthnet.debug.util.HibernateUtil;
 
 import javax.annotation.Resource;
@@ -23,6 +26,9 @@ import java.util.Map;
 public class TableController {
 
     private static final Log log = LogFactory.getLog(TableController.class);
+
+    @Resource(name = "dbPropertiesUtil")
+    private DbPropertiesUtil dbPropertiesUtil;
 
     @Resource(name = "adminJdbcDaoImpl")
     private JdbcDao adminJdbcDao;
@@ -42,12 +48,23 @@ public class TableController {
                                 ModelMap modelMap) throws Exception {
         log.info("Table controller");
 
+        log.info("  -- Getting the current schema name.");
+        // If a schema has not yet been selected...
+        if (SchemaSelector.getSchema() == null || SchemaSelector.getSchema().equals("")) {
+            // ...set it to the default schema/user name.
+            SchemaSelector.setSchema(dbPropertiesUtil.getDefaultCoreUserName());
+        }
+        log.info("      -- Schema name is: " + SchemaSelector.getSchema());
+        modelMap.addAttribute("currentSchemaName", SchemaSelector.getSchema()); // Make the schema names list accessible to the page.
+
         log.info("  -- Getting admin table names.");
+        // Add the schema names to be used to auto generate schema dropdown.
+        modelMap.addAttribute("schemaNames", adminJdbcDao.getSchemaNames()); // Make the schema names list accessible to the page.
+
         // Add the table names to be used to auto generate and name the table tabs.
         List<String> tableNames = adminJdbcDao.getTableNames(); // Get the admin table names.
         log.info("  -- Getting core table names.");
-        tableNames.addAll(coreJdbcDao.getTableNames()); // Add the core table names;
-        Collections.sort(tableNames); // sort the table names alphabetically
+        tableNames.addAll(coreJdbcDao.getTableNames()); // Add the core table names.
         modelMap.addAttribute("tableNames", tableNames); // Make the table names list accessible to the page.
 
         // If a table name has not been  given set it to the first table in the tab list.

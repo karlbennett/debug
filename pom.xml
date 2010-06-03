@@ -221,8 +221,8 @@
         <db.sid>oradev</db.sid>
         <db.url>jdbc:oracle:thin:@${db.domain}:${db.port}:${db.sid}</db.url>
         <db.driver>oracle.jdbc.driver.OracleDriver</db.driver>
-        <db.username>Get username from the settings.xml</db.username>
-        <db.password>Get password from the settings.xml</db.password>
+        <db.default.username>Get username from the settings.xml</db.default.username>
+        <db.default.password>Get password from the settings.xml</db.default.password>
         <db.schema.prefix>Get schema from the settings.xml</db.schema.prefix>
         <db.admin.username>Get username from the settings.xml</db.admin.username>
         <db.admin.password>Get password from the settings.xml</db.admin.password>
@@ -231,8 +231,8 @@
         <sql.false>'0'</sql.false>
         <sql.binTypeStart>hextoraw('</sql.binTypeStart>
         <sql.binTypeEnd>')</sql.binTypeEnd>
-        <sql.selectTableNames>SELECT table_name FROM user_tables</sql.selectTableNames>
-        <sql.selectSchemaNames>"SELECT * FROM all_users WHERE username LIKE '${db.username}%'</sql.selectSchemaNames>
+        <sql.selectTableNames>SELECT table_name FROM user_tables ORDER BY table_name</sql.selectTableNames>
+        <sql.selectSchemaNames>"SELECT * FROM all_users WHERE username LIKE '${db.default.username}%'</sql.selectSchemaNames>
         <!--    Hibernate configuration -->
         <hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</hibernate.dialect>
         <hiernate.hbm2ddl>validate</hiernate.hbm2ddl>
@@ -254,8 +254,8 @@
                 <!--    Database configuration -->
                 <db.url>jdbc:derby:derbydb;create=true</db.url>
                 <db.driver>org.hibernate.dialect.DerbyDialect</db.driver>
-                <db.username></db.username>
-                <db.password></db.password>
+                <db.default.username></db.default.username>
+                <db.default.password></db.default.password>
                 <db.schema.prefix></db.schema.prefix>
                 <db.admin.username></db.admin.username>
                 <db.admin.password></db.admin.password>
@@ -264,7 +264,7 @@
                 <sql.false>0</sql.false>
                 <sql.binTypeStart>X'</sql.binTypeStart>
                 <sql.binTypeEnd>'</sql.binTypeEnd>
-                <sql.selectTableNames><![CDATA[SELECT tablename FROM sys.systables WHERE tablename NOT LIKE 'GENERICTABLE' AND tablename NOT LIKE 'SYS%']]></sql.selectTableNames>
+                <sql.selectTableNames><![CDATA[SELECT tablename FROM sys.systables WHERE tablename NOT LIKE 'GENERICTABLE' AND tablename NOT LIKE 'SYS%' ORDER BY tablename]]></sql.selectTableNames>
                 <sql.selectSchemaNames>SELECT schemaname FROM sys.sysschemas</sql.selectSchemaNames>
                 <!--    Hibernate configuration -->
                 <hibernate.dialect>org.hibernate.dialect.DerbyDialect</hibernate.dialect>

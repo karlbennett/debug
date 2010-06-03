@@ -13,6 +13,6 @@ public class SchemaSelector {
     }
 
     public static String getSchema() {
-        return schemaName.get();    
+        return schemaName.get();
     }
 }

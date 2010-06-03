@@ -12,7 +12,7 @@ import java.util.Map;
  * User: karl
  * Date: 02-Jun-2010
  */
-public class DataSourceAutoProxy extends AbstractRoutingDataSource {
+public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
 
     // Bean to hold all the properties that were used to configure the data sources at start up.
     private DbPropertiesUtil dbPropertiesUtil;
@@ -54,7 +54,7 @@ public class DataSourceAutoProxy extends AbstractRoutingDataSource {
             dataSource.setDriverClassName(this.dbPropertiesUtil.getDriver());
             dataSource.setUrl(this.dbPropertiesUtil.getUrl());
             dataSource.setUsername((String) determineCurrentLookupKey());
-            dataSource.setPassword(this.dbPropertiesUtil.getPassword());
+            dataSource.setPassword(this.dbPropertiesUtil.getDefaultCorePassword());
             this.targetDataSources.put((String) determineCurrentLookupKey(), dataSource);
 
             this.afterPropertiesSet(); // Reinitialise the routing data source.

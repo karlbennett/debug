@@ -11,8 +11,8 @@ public class DbPropertiesUtil {
     private String sid;
     private String url;
     private String driver;
-    private String userName;
-    private String password;
+    private String defaultCoreUserName;
+    private String defaultCorePassword;
     private String schemaPrefix;
     private String adminUserName;
     private String adminPassword;
@@ -58,20 +58,20 @@ public class DbPropertiesUtil {
         this.driver = driver;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getDefaultCoreUserName() {
+        return defaultCoreUserName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setDefaultCoreUserName(String defaultCoreUserName) {
+        this.defaultCoreUserName = defaultCoreUserName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getDefaultCorePassword() {
+        return defaultCorePassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setDefaultCorePassword(String defaultCorePassword) {
+        this.defaultCorePassword = defaultCorePassword;
     }
 
     public String getSchemaPrefix() {
