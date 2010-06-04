@@ -17,6 +17,7 @@
     </bean>
 
     <bean id="coreDataSource" class="org.youthnet.debug.db.DataSourceGenerationProxy">
+        <property name="schema" ref="schema"/>
         <property name="dbPropertiesUtil" ref="dbPropertiesUtil"/>
         <property name="targetDataSources">
             <map key-type="java.lang.String" value-type="javax.sql.DataSource">

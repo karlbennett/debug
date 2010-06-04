@@ -14,11 +14,21 @@ import java.util.Map;
  */
 public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
 
+    private Schema schema;
+
     // Bean to hold all the properties that were used to configure the data sources at start up.
     private DbPropertiesUtil dbPropertiesUtil;
 
     // Map that holds all the live data sources.
     private Map<String, DataSource> targetDataSources = new HashMap<String, DataSource>();
+
+    public Schema getSchema() {
+        return schema;
+    }
+
+    public void setSchema(Schema schema) {
+        this.schema = schema;
+    }
 
     public DbPropertiesUtil getDbPropertiesUtil() {
         return dbPropertiesUtil;
@@ -38,11 +48,11 @@ public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
     }
 
     /**
-     * Retrieve the key from the global SchemaSelector thread local variable. If this variable is null the default data source will be used if set.
+     * Retrieve the key from the session schema bean variable. If this variable is null the default data source will be used if set.
      */
     @Override
     protected Object determineCurrentLookupKey() {
-        return SchemaSelector.getSchema();
+        return schema.getName();
     }
 
     @Override

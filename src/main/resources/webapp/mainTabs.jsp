@@ -37,5 +37,15 @@
                 </LI>
             </c:otherwise>
         </c:choose>
+        <LI>
+            <FORM method="post" action="setschema.html">
+                <SELECT name="schemaName">
+                    <c:forEach var="schemaName" items="${schemaNames}">
+                        <OPTION value="${schemaName}">${schemaName}</OPTION>
+                    </c:forEach>
+                </SELECT>
+                <INPUT type="submit" value="Set Schema" />
+            </FORM>
+        </LI>
     </UL>
 </DIV>

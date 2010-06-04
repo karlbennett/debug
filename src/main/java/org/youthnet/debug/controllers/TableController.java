@@ -6,15 +6,14 @@ import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBea
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.youthnet.debug.dao.jdbc.JdbcDao;
-import org.youthnet.debug.db.DataSourceGenerationProxy;
-import org.youthnet.debug.db.SchemaSelector;
+import org.youthnet.debug.db.Schema;
 import org.youthnet.debug.util.DbPropertiesUtil;
 import org.youthnet.debug.util.HibernateUtil;
 
 import javax.annotation.Resource;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +26,10 @@ public class TableController {
 
     private static final Log log = LogFactory.getLog(TableController.class);
 
-    @Resource(name = "dbPropertiesUtil")
+    @Resource(name = "schema")
+    private Schema schema;
+
+   @Resource(name = "dbPropertiesUtil")
     private DbPropertiesUtil dbPropertiesUtil;
 
     @Resource(name = "adminJdbcDaoImpl")
@@ -49,13 +51,11 @@ public class TableController {
         log.info("Table controller");
 
         log.info("  -- Getting the current schema name.");
-        // If a schema has not yet been selected...
-        if (SchemaSelector.getSchema() == null || SchemaSelector.getSchema().equals("")) {
-            // ...set it to the default schema/user name.
-            SchemaSelector.setSchema(dbPropertiesUtil.getDefaultCoreUserName());
-        }
-        log.info("      -- Schema name is: " + SchemaSelector.getSchema());
-        modelMap.addAttribute("currentSchemaName", SchemaSelector.getSchema()); // Make the schema names list accessible to the page.
+
+        log.info("      -- Schema name is: " + schema.getName());
+        modelMap.addAttribute("currentSchemaName", schema.getName()); // Make the schema names list accessible to the page.
+
+
 
         log.info("  -- Getting admin table names.");
         // Add the schema names to be used to auto generate schema dropdown.
@@ -91,9 +91,24 @@ public class TableController {
     @RequestMapping("/row.html")
     public String handleColumnRequest(@RequestParam(required = false) String id,
                                       @RequestParam(required = false) String columnName) {
+        log.info("Table controller -- column request handler");
+
+        log.info("  -- Finding the table name.");
         String tableName = HibernateUtil.getTableNameForClass(HibernateUtil.getTableClassNameForColumnReference(
                 columnName.toLowerCase(), adminSessionFactory), adminSessionFactory);
+        log.info("      -- Table name found: " + tableName);
         return "redirect:tables.html?tableName="
                 + tableName + "&id=" + id + "#" + tableName;
+    }
+
+    @RequestMapping(value = "/setschema.html", method = RequestMethod.POST)
+    public String handleSetSchema(@RequestParam String schemaName) {
+        log.info("Table controller -- set schema handler");
+
+        log.info("  -- Set the schema to: " + schemaName);
+//        
+        schema.setName(schemaName);
+        log.info("  -- Schema set to: " + schema.getName());
+        return "redirect:tables.html";
     }
 }
