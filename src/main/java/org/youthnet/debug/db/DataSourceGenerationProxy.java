@@ -14,6 +14,8 @@ import java.util.Map;
  */
 public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
 
+    private int startUp = 0;
+
     private Schema schema;
 
     // Bean to hold all the properties that were used to configure the data sources at start up.
@@ -52,7 +54,12 @@ public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
      */
     @Override
     protected Object determineCurrentLookupKey() {
+        if (this.startUp < 10) {
+            this.startUp++;
+            return null;
+        }
         return schema.getName();
+//        return null;
     }
 
     @Override

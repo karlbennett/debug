@@ -106,9 +106,9 @@ public class TableController {
         log.info("Table controller -- set schema handler");
 
         log.info("  -- Set the schema to: " + schemaName);
-//        
         schema.setName(schemaName);
         log.info("  -- Schema set to: " + schema.getName());
+        
         return "redirect:tables.html";
     }
 }

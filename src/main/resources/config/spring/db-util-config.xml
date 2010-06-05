@@ -7,7 +7,7 @@
                             http://www.springframework.org/schema/aop
                             http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-    <bean name="schema" class="org.youthnet.debug.db.impl.SchemaImpl" scope="session">
+    <bean name="schema" class="org.youthnet.debug.db.impl.SchemaImpl" scope="session" lazy-init="true">
         <property name="name" value="${db.default.username}"/>
         <aop:scoped-proxy proxy-target-class="false"/>
     </bean>
