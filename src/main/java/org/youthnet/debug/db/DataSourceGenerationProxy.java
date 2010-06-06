@@ -1,9 +1,12 @@
 package org.youthnet.debug.db;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.youthnet.debug.util.DbPropertiesUtil;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +17,7 @@ import java.util.Map;
  */
 public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
 
-    private int startUp = 0;
+    private static final Log log = LogFactory.getLog(DataSourceGenerationProxy.class);
 
     private Schema schema;
 
@@ -54,12 +57,9 @@ public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
      */
     @Override
     protected Object determineCurrentLookupKey() {
-        if (this.startUp < 10) {
-            this.startUp++;
-            return null;
-        }
-        return schema.getName();
-//        return null;
+        log.info("Getting schema name: " + schema.getName());
+        if (schema != null) return schema.getName();
+        return null;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
             BasicDataSource dataSource = new BasicDataSource();
             dataSource.setDriverClassName(this.dbPropertiesUtil.getDriver());
             dataSource.setUrl(this.dbPropertiesUtil.getUrl());
-            dataSource.setUsername((String) determineCurrentLookupKey());
+            dataSource.setUsername(this.dbPropertiesUtil.getSchemaPrefix() + ((String)determineCurrentLookupKey()));
             dataSource.setPassword(this.dbPropertiesUtil.getDefaultCorePassword());
             this.targetDataSources.put((String) determineCurrentLookupKey(), dataSource);
 

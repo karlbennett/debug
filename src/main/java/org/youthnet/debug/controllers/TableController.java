@@ -29,7 +29,7 @@ public class TableController {
     @Resource(name = "schema")
     private Schema schema;
 
-   @Resource(name = "dbPropertiesUtil")
+    @Resource(name = "dbPropertiesUtil")
     private DbPropertiesUtil dbPropertiesUtil;
 
     @Resource(name = "adminJdbcDaoImpl")
@@ -54,7 +54,6 @@ public class TableController {
 
         log.info("      -- Schema name is: " + schema.getName());
         modelMap.addAttribute("currentSchemaName", schema.getName()); // Make the schema names list accessible to the page.
-
 
 
         log.info("  -- Getting admin table names.");
@@ -108,7 +107,7 @@ public class TableController {
         log.info("  -- Set the schema to: " + schemaName);
         schema.setName(schemaName);
         log.info("  -- Schema set to: " + schema.getName());
-        
+
         return "redirect:tables.html";
     }
 }
