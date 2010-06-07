@@ -62,6 +62,9 @@ public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
         try {
             log.info("  -- Schema name is: " + schema.getName());
             return schema.getName();
+        } catch(IllegalStateException e) {
+            log.info("  -- Schema bean not available, threw IllegalStateException: "
+                    + e.getMessage());
         } catch(BeanCreationException e) {
             log.info("  -- Schema bean not available, threw BeanCreationException: "
                     + e.getMessage());

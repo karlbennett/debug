@@ -228,10 +228,10 @@
         <db.driver>oracle.jdbc.driver.OracleDriver</db.driver>
         <db.default.username>Get username from the settings.xml</db.default.username>
         <db.default.password>Get password from the settings.xml</db.default.password>
-        <db.schema.prefix>Get schema from the settings.xml</db.schema.prefix>
+        <db.default.schema>Get schema from the settings.xml</db.default.schema>
         <db.admin.username>Get username from the settings.xml</db.admin.username>
         <db.admin.password>Get password from the settings.xml</db.admin.password>
-        <db.admin.schema.prefix>Get schema from the settings.xml</db.admin.schema.prefix>
+        <db.admin.schema>Get schema from the settings.xml</db.admin.schema>
         <sql.true>'1'</sql.true>
         <sql.false>'0'</sql.false>
         <sql.binTypeStart>hextoraw('</sql.binTypeStart>
@@ -261,10 +261,10 @@
                 <db.driver>org.hibernate.dialect.DerbyDialect</db.driver>
                 <db.default.username></db.default.username>
                 <db.default.password></db.default.password>
-                <db.schema.prefix></db.schema.prefix>
+                <db.default.schema></db.default.schema>
                 <db.admin.username></db.admin.username>
                 <db.admin.password></db.admin.password>
-                <db.admin.schema.prefix></db.admin.schema.prefix>
+                <db.admin.schema></db.admin.schema>
                 <sql.true>1</sql.true>
                 <sql.false>0</sql.false>
                 <sql.binTypeStart>X'</sql.binTypeStart>

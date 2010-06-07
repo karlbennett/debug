@@ -13,10 +13,10 @@ public class DbPropertiesUtil {
     private String driver;
     private String defaultCoreUserName;
     private String defaultCorePassword;
-    private String schemaPrefix;
+    private String defaultSchema;
     private String adminUserName;
     private String adminPassword;
-    private String adminSchemaPrefix;
+    private String adminSchema;
 
     public String getDomain() {
         return domain;
@@ -74,12 +74,12 @@ public class DbPropertiesUtil {
         this.defaultCorePassword = defaultCorePassword;
     }
 
-    public String getSchemaPrefix() {
-        return schemaPrefix;
+    public String getDefaultSchema() {
+        return defaultSchema;
     }
 
-    public void setSchemaPrefix(String schemaPrefix) {
-        this.schemaPrefix = schemaPrefix;
+    public void setDefaultSchema(String defaultSchema) {
+        this.defaultSchema = defaultSchema;
     }
 
     public String getAdminUserName() {
@@ -98,11 +98,11 @@ public class DbPropertiesUtil {
         this.adminPassword = adminPassword;
     }
 
-    public String getAdminSchemaPrefix() {
-        return adminSchemaPrefix;
+    public String getAdminSchema() {
+        return adminSchema;
     }
 
-    public void setAdminSchemaPrefix(String adminSchemaPrefix) {
-        this.adminSchemaPrefix = adminSchemaPrefix;
+    public void setAdminSchema(String adminSchema) {
+        this.adminSchema = adminSchema;
     }
 }

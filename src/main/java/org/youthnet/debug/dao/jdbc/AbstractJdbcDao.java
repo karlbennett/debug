@@ -5,15 +5,12 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 import org.youthnet.debug.domain.common.UuidType;
 import org.youthnet.debug.domain.common.impl.UuidTypeImpl;
 import org.youthnet.debug.util.SqlSyntaxUtil;
 import org.youthnet.debug.util.UuidConverter;
 
 import javax.annotation.Resource;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -49,7 +46,7 @@ public abstract class AbstractJdbcDao implements JdbcDao {
 
     @Override
     public List<String> getSchemaNames() {
-        return jdbcTemplate.queryForList("SELECT shortname FROM " + sqlSyntaxUtil.getAdminSchemaPrefix() + "collective", String.class);
+        return jdbcTemplate.queryForList("SELECT shortname FROM " + sqlSyntaxUtil.getAdminSchema() + "collective", String.class);
     }
 
     @Override

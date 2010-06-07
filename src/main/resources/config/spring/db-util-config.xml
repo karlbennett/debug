@@ -17,8 +17,8 @@
         <property name="sqlFalse" value="${sql.false}"/>
         <property name="binTypeStart" value="${sql.binTypeStart}"/>
         <property name="binTypeEnd" value="${sql.binTypeEnd}"/>
-        <property name="schemaPrefix" value="${db.schema.prefix}"/>
-        <property name="adminSchemaPrefix" value="${db.admin.schema.prefix}"/>
+        <property name="defaultSchema" value="${db.default.schema}"/>
+        <property name="adminSchema" value="${db.admin.schema}"/>
         <property name="selectTableNamesQuery" value="${sql.selectTableNames}"/>
     </bean>
 
@@ -30,10 +30,10 @@
         <property name="driver" value="${db.driver}"/>
         <property name="defaultCoreUserName" value="${db.default.username}"/>
         <property name="defaultCorePassword" value="${db.default.password}"/>
-        <property name="schemaPrefix" value="${db.schema.prefix}"/>
+        <property name="defaultSchema" value="${db.default.schema}"/>
         <property name="adminUserName" value="${db.admin.username}"/>
         <property name="adminPassword" value="${db.admin.password}"/>
-        <property name="adminSchemaPrefix" value="${db.admin.schema.prefix}"/>
+        <property name="adminSchema" value="${db.admin.schema}"/>
     </bean>
 
 </beans>
