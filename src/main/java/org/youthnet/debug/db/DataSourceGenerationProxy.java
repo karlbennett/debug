@@ -15,11 +15,16 @@ import java.util.Map;
 /**
  * User: karl
  * Date: 02-Jun-2010
+ *
+ * This class is injected within the Spring context files. This allows the class to be injected differently depending on different profiles.
+ * Also it allows the one class to be used to instantiated with different attributes without having to create sepurate sub classes.
  */
 public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
 
     private static final Log log = LogFactory.getLog(DataSourceGenerationProxy.class);
 
+    // Bean to hold the schema name that should be used to choose the right data source.
+    // This should be a session variable so that it is unique to each user.
     private Schema schema;
 
     // Bean to hold all the properties that were used to configure the data sources at start up.
@@ -61,11 +66,16 @@ public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
         log.info("Getting schema name.");
         try {
             log.info("  -- Schema name is: " + schema.getName());
+            // Try to get the schema name from the session variale. This will fail on start up because there will not be any session threads
+            // available.
             return schema.getName();
         } catch(IllegalStateException e) {
+            // This exception could get thrown within a unit test though all it means is there is no bean available to be injected.
+            // That is fine we can just return null.
             log.info("  -- Schema bean not available, threw IllegalStateException: "
                     + e.getMessage());
         } catch(BeanCreationException e) {
+            // Same as the above exception but  this will get thrown on startup.
             log.info("  -- Schema bean not available, threw BeanCreationException: "
                     + e.getMessage());
         }

@@ -7,8 +7,11 @@
                             http://www.springframework.org/schema/aop
                             http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
+    <!-- Set this bean to be scoped to a session. This means a new bean will be created for every user that accesses the web app. -->
+    <!-- If this bean is to be used by any singleton or unscoped bean it needs to be proxied. -->
     <bean name="schema" class="org.youthnet.debug.db.impl.SchemaImpl" scope="session">
         <property name="name" value="${db.default.username}"/>
+        <!-- Have used the "'standard' JDK interface-based" proxy. -->
         <aop:scoped-proxy proxy-target-class="false"/>
     </bean>
 
