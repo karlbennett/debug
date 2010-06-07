@@ -73,7 +73,7 @@ public class AdminJdbcDaoImplTest {
         Map <String, Object> row = adminJdbcDao.getRowById(UuidTypeImpl.fromString(adminJdbcTestUtil.getVUOID()));
         assertNotNull("get row by id", row);
         assertTrue("row by id exists", row.size() > 0);
-        assertEquals("row id converted", UuidTypeImpl.class.getName(), row.get("ID").getClass().getName());
+        assertTrue("row id converted", row.get("ID") instanceof UuidType);
         assertEquals("correct vuo name", adminJdbcTestUtil.getVUONAME(), row.get("NAME"));
         assertEquals("correct vuo code", adminJdbcTestUtil.getVUOCODE(), row.get("VUOCODE"));
         assertNotNull("table name added", row.get("tableName"));
@@ -82,7 +82,7 @@ public class AdminJdbcDaoImplTest {
         row = adminJdbcDao.getRowById(adminJdbcTestUtil.getROLEID());
         assertNotNull("get row by id", row);
         assertTrue("row by id exists", row.size() > 0);
-        assertEquals("row id converted", BigDecimal.class.getName(), row.get("ID").getClass().getName());
+        assertTrue("row id converted", row.get("ID") instanceof Number);
         assertEquals("correct vuo name", adminJdbcTestUtil.getROLNAME(), row.get("NAME"));
         assertEquals("correct vuo code", adminJdbcTestUtil.getROLDESCRIPTION(), row.get("DESCRIPTION"));
         assertNotNull("table name added", row.get("tableName"));

@@ -74,16 +74,17 @@ public abstract class AbstractJdbcDao implements JdbcDao {
                 if (id instanceof UuidType) {
                     row = jdbcTemplate.queryForMap("SELECT * FROM " + tableName + " WHERE id = "
                             + sqlSyntaxUtil.getBinTypeStart() + id.toString().replace("-", "") + sqlSyntaxUtil.getBinTypeEnd());
+                } else if (id instanceof Number) {
+                    row = jdbcTemplate.queryForMap("SELECT * FROM " + tableName + " WHERE id = " + id.toString());
+                } else {
+                    row = jdbcTemplate.queryForMap("SELECT * FROM " + tableName + " WHERE id = '" + id.toString() + "'");
                 }
 
-                row = jdbcTemplate.queryForMap("SELECT * FROM " + tableName + " WHERE id = '" + id.toString() + "'");
             } catch (EmptyResultDataAccessException e) {
-                log.info("ID: " + id + " not found in " + tableName + ".");
+                log.info("ID: " + id + " not found in " + tableName + ". Error: " + e.getMessage());
             } catch (BadSqlGrammarException e) {
-                if (e.getMessage().contains("ORA-00932")) log.info("ID in " + tableName + " not of type GUID.");
-                else if (e.getMessage().contains("ORA-00904"))
-                    log.info("Table " + tableName + " does not contain ID column.");
-                else throw e;
+                log.info("ID column in " + tableName + " not of type " + id.getClass().getSimpleName()
+                        + " or it doesn't exist. Error: " + e.getMessage());
             }
             if (row != null) {
                 row.put("tableName", tableName);
