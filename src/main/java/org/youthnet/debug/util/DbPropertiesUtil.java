@@ -14,6 +14,7 @@ public class DbPropertiesUtil {
     private String defaultCoreUserName;
     private String defaultCorePassword;
     private String defaultSchema;
+    private String schemaPrefix;
     private String adminUserName;
     private String adminPassword;
     private String adminSchema;
@@ -80,6 +81,14 @@ public class DbPropertiesUtil {
 
     public void setDefaultSchema(String defaultSchema) {
         this.defaultSchema = defaultSchema;
+    }
+
+    public String getSchemaPrefix() {
+        return schemaPrefix;
+    }
+
+    public void setSchemaPrefix(String schemaPrefix) {
+        this.schemaPrefix = schemaPrefix;
     }
 
     public String getAdminUserName() {

@@ -229,6 +229,7 @@
         <db.default.username>Get username from the settings.xml</db.default.username>
         <db.default.password>Get password from the settings.xml</db.default.password>
         <db.default.schema>Get schema from the settings.xml</db.default.schema>
+        <db.schema.prefix>Get schema from the settings.xml</db.schema.prefix>
         <db.admin.username>Get username from the settings.xml</db.admin.username>
         <db.admin.password>Get password from the settings.xml</db.admin.password>
         <db.admin.schema>Get schema from the settings.xml</db.admin.schema>
@@ -262,6 +263,7 @@
                 <db.default.username></db.default.username>
                 <db.default.password></db.default.password>
                 <db.default.schema></db.default.schema>
+                <db.schema.prefix></db.schema.prefix>
                 <db.admin.username></db.admin.username>
                 <db.admin.password></db.admin.password>
                 <db.admin.schema></db.admin.schema>

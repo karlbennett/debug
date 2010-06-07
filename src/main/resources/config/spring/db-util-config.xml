@@ -7,7 +7,7 @@
                             http://www.springframework.org/schema/aop
                             http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
-    <bean name="schema" class="org.youthnet.debug.db.impl.SchemaImpl" scope="session" lazy-init="true">
+    <bean name="schema" class="org.youthnet.debug.db.impl.SchemaImpl" scope="session">
         <property name="name" value="${db.default.username}"/>
         <aop:scoped-proxy proxy-target-class="false"/>
     </bean>
@@ -31,6 +31,7 @@
         <property name="defaultCoreUserName" value="${db.default.username}"/>
         <property name="defaultCorePassword" value="${db.default.password}"/>
         <property name="defaultSchema" value="${db.default.schema}"/>
+        <property name="schemaPrefix" value="${db.schema.prefix}"/>
         <property name="adminUserName" value="${db.admin.username}"/>
         <property name="adminPassword" value="${db.admin.password}"/>
         <property name="adminSchema" value="${db.admin.schema}"/>

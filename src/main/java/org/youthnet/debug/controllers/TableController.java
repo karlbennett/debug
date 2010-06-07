@@ -53,6 +53,7 @@ public class TableController {
         log.info("  -- Getting the current schema name.");
 
         log.info("      -- Schema name is: " + schema.getName());
+        log.info("      -- Schema id is: " + schema.hashCode());
         modelMap.addAttribute("currentSchemaName", schema.getName()); // Make the schema names list accessible to the page.
 
 

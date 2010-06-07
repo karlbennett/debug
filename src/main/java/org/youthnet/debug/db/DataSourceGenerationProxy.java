@@ -80,7 +80,7 @@ public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
             BasicDataSource dataSource = new BasicDataSource();
             dataSource.setDriverClassName(this.dbPropertiesUtil.getDriver());
             dataSource.setUrl(this.dbPropertiesUtil.getUrl());
-            dataSource.setUsername(((String)determineCurrentLookupKey()));
+            dataSource.setUsername(this.dbPropertiesUtil.getSchemaPrefix() + (String)determineCurrentLookupKey());
             dataSource.setPassword(this.dbPropertiesUtil.getDefaultCorePassword());
             this.targetDataSources.put((String) determineCurrentLookupKey(), dataSource);
 
