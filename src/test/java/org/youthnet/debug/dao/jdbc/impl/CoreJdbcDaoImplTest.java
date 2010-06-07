@@ -17,8 +17,8 @@ import java.util.List;
  * Date: 27-May-2010
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"/config/spring/core-hibernate-config.xml",
-        "/config/spring/core-jdbc-config.xml"})
+@ContextConfiguration(locations = {"/config/spring/core/core-hibernate-config.xml",
+        "/config/spring/core/core-jdbc-config.xml"})
 public class CoreJdbcDaoImplTest {
 
     @Resource(name = "coreJdbcDaoImpl")

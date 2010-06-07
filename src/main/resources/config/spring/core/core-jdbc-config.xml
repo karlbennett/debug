@@ -8,12 +8,12 @@
                             http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
     <import resource="classpath:config/spring/db-util-config.xml"/>
-    <import resource="classpath:config/spring/admin-data-source-config.xml"/>
+    <import resource="classpath:config/spring/core/core-data-source-config.xml"/>
 
-    <bean name="adminJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <constructor-arg ref="adminDataSource"/>
+    <bean name="coreJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="coreDataSource"/>
     </bean>
 
     <context:annotation-config/>
-    <bean id="adminJdbcDaoImpl" class="org.youthnet.debug.dao.jdbc.impl.AdminJdbcDaoImpl"/>
+    <bean id="coreJdbcDaoImpl" class="org.youthnet.debug.dao.jdbc.impl.CoreJdbcDaoImpl"/>
 </beans>

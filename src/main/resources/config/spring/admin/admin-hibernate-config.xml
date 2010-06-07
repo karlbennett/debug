@@ -10,7 +10,7 @@
                             http://www.springframework.org/schema/tx
                             http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
-    <import resource="classpath:config/spring/admin-data-source-config.xml"/>
+    <import resource="classpath:config/spring/admin/admin-data-source-config.xml"/>
 
     <bean id="adminSessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="adminDataSource"/>

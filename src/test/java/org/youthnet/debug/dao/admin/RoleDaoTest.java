@@ -22,8 +22,8 @@ import java.util.List;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/admin-test-config.xml",
-        "/config/spring/admin-hibernate-config.xml",
-        "/config/spring/admin-jdbc-config.xml"})
+        "/config/spring/admin/admin-hibernate-config.xml",
+        "/config/spring/admin/admin-jdbc-config.xml"})
 public class RoleDaoTest {
 
     private static final Log log = LogFactory.getLog(RoleDaoTest.class);

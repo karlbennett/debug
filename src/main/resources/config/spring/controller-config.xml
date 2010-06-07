@@ -7,10 +7,10 @@
                             http://www.springframework.org/schema/context
                             http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <import resource="classpath:config/spring/admin-hibernate-config.xml"/>
-    <import resource="classpath:config/spring/admin-jdbc-config.xml"/>
-    <import resource="classpath:config/spring/core-hibernate-config.xml"/>
-    <import resource="classpath:config/spring/core-jdbc-config.xml"/>
+    <import resource="classpath:config/spring/admin/admin-hibernate-config.xml"/>
+    <import resource="classpath:config/spring/admin/admin-jdbc-config.xml"/>
+    <import resource="classpath:config/spring/core/core-hibernate-config.xml"/>
+    <import resource="classpath:config/spring/core/core-jdbc-config.xml"/>
     <import resource="classpath:config/spring/client-config.xml"/>
 
     <context:component-scan base-package="org.youthnet.debug.controllers"/>

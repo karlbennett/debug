@@ -14,7 +14,6 @@ import org.youthnet.debug.domain.common.UuidType;
 import org.youthnet.debug.domain.common.impl.UuidTypeImpl;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -24,8 +23,8 @@ import java.util.Map;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/admin-test-config.xml",
-        "/config/spring/admin-hibernate-config.xml",
-        "/config/spring/admin-jdbc-config.xml"})
+        "/config/spring/admin/admin-hibernate-config.xml",
+        "/config/spring/admin/admin-jdbc-config.xml"})
 public class AdminJdbcDaoImplTest {
 
     @Resource(name = "adminJdbcTestUtil")

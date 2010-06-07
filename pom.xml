@@ -277,7 +277,7 @@
                 <hibernate.dialect>org.hibernate.dialect.DerbyDialect</hibernate.dialect>
                 <hiernate.hbm2ddl>update</hiernate.hbm2ddl>
                 <hibernate.substitutions>true 'T', false 'F'</hibernate.substitutions>
-                <hibernate.mapping>config/spring/mapping.xml</hibernate.mapping>
+                <hibernate.mapping>config/spring/admin/admin-mapping.xml</hibernate.mapping>
             </properties>
         </profile>
     </profiles>
