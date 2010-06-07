@@ -3,6 +3,7 @@ package org.youthnet.debug.db;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.youthnet.debug.util.DbPropertiesUtil;
 
@@ -57,8 +58,14 @@ public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
      */
     @Override
     protected Object determineCurrentLookupKey() {
-        log.info("Getting schema name: " + schema.getName());
-        if (schema != null) return schema.getName();
+        log.info("Getting schema name.");
+        try {
+            log.info("  -- Schema name is: " + schema.getName());
+            return schema.getName();
+        } catch(BeanCreationException e) {
+            log.info("  -- Schema bean not available, threw BeanCreationException: "
+                    + e.getMessage());
+        }
         return null;
     }
 
@@ -70,7 +77,7 @@ public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
             BasicDataSource dataSource = new BasicDataSource();
             dataSource.setDriverClassName(this.dbPropertiesUtil.getDriver());
             dataSource.setUrl(this.dbPropertiesUtil.getUrl());
-            dataSource.setUsername(this.dbPropertiesUtil.getSchemaPrefix() + ((String)determineCurrentLookupKey()));
+            dataSource.setUsername(((String)determineCurrentLookupKey()));
             dataSource.setPassword(this.dbPropertiesUtil.getDefaultCorePassword());
             this.targetDataSources.put((String) determineCurrentLookupKey(), dataSource);
 
