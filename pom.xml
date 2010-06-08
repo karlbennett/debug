@@ -258,7 +258,7 @@
 
                 <!-- Configuration properties -->
                 <!--    Database configuration -->
-                <db.url>jdbc:derby:derbydb;create=true</db.url>
+                <db.url>jdbc:derby:memory:derbydb;create=true</db.url>
                 <db.driver>org.hibernate.dialect.DerbyDialect</db.driver>
                 <db.default.username></db.default.username>
                 <db.default.password></db.default.password>
