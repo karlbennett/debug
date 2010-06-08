@@ -20,7 +20,7 @@ public class VolunteerAddress extends org.youthnet.debug.domain.core.Address imp
     private Volunteer contactDetails;
     private String name;
     private boolean isDefaultAddress;
-    private boolean active;
+    private boolean isActive;
 
     public VolunteerAddress() {
     }
@@ -70,12 +70,12 @@ public class VolunteerAddress extends org.youthnet.debug.domain.core.Address imp
 
 
     @Column
-    public boolean isActive() {
-        return this.active;
+    public boolean isIsActive() {
+        return this.isActive;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
+    public void setIsActive(boolean active) {
+        this.isActive = active;
     }
 
 }
