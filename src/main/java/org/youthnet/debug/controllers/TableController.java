@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.youthnet.debug.dao.jdbc.JdbcDao;
 import org.youthnet.debug.db.Schema;
-import org.youthnet.debug.util.DbPropertiesUtil;
 import org.youthnet.debug.util.HibernateUtil;
 
 import javax.annotation.Resource;
@@ -28,9 +27,6 @@ public class TableController {
 
     @Resource(name = "schema")
     private Schema schema;
-
-    @Resource(name = "dbPropertiesUtil")
-    private DbPropertiesUtil dbPropertiesUtil;
 
     @Resource(name = "adminJdbcDaoImpl")
     private JdbcDao adminJdbcDao;
