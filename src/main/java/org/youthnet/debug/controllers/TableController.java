@@ -79,6 +79,8 @@ public class TableController {
         }
 
         modelMap.addAttribute("tableRows", rows);
+
+        // If a row id has been given pass it to the page so that it will be highlighted.
         modelMap.addAttribute("rowId", id);
 
         return "tables.jsp";
@@ -105,6 +107,6 @@ public class TableController {
         schema.setName(schemaName);
         log.info("  -- Schema set to: " + schema.getName());
 
-        return "redirect:tables.html";
+        return null;
     }
 }
