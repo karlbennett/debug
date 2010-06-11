@@ -1,4 +1,4 @@
-package org.youthnet.debug.db;
+package org.youthnet.debug.db.bean.session;
 
 /**
  * User: karl

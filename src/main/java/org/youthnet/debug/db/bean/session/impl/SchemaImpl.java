@@ -1,6 +1,6 @@
-package org.youthnet.debug.db.impl;
+package org.youthnet.debug.db.bean.session.impl;
 
-import org.youthnet.debug.db.Schema;
+import org.youthnet.debug.db.bean.session.Schema;
 
 /**
  * User: karl

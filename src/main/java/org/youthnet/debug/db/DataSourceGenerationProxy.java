@@ -5,9 +5,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
+import org.youthnet.debug.db.bean.session.Schema;
 import org.youthnet.debug.util.DbPropertiesUtil;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
