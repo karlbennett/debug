@@ -1,3 +1,8 @@
+/**** Global Style Start ****/
+html, body {
+    height: 100%;
+}
+
 body
 {
     background-color:#FFFFFF;
@@ -13,136 +18,148 @@ body
     font-size: 0.8em;
     line-height: 1.1em;
 }
+/**** Global Style End ****/
 
-div.tab_row_1
-{
-    clear:both;
-    min-height: 40px;
-}
 
-div.tab_row_2
-{
-    clear:both;
-    min-height: 40px;
-}
+/**** Tab Style Start ****/
+    /**** Main Tab Style Start ****/
+    div.tab_row_1
+    {
+        clear:both;
+        min-height: 40px;
+    }
 
+    div.tab_row_2
+    {
+        clear:both;
+        min-height: 40px;
+    }
+
+    ul.tabList
+    {
+        margin: 0;
+        padding: 0;
+    }
+
+    li.tab
+    {
+        list-style-type: none;
+        list-style-image: none;
+        list-style-position: outside;
+        background-color:#F4F4F4;
+        position: relative;
+        min-width: 100px;
+        margin-left: 5px;
+        margin-right: 0px;
+        margin-top: 5px;
+        margin-bottom: 0px;
+        border-bottom: 4px solid #CCCCCC;
+        float: left;
+    }
+
+    a.tabLink
+    {
+        display: block;
+        width: 90%;
+        height: 20px;
+        padding: 5px;
+        color:#777777;
+        text-decoration: none;
+    }
+
+    li.selectedTab
+    {
+        background-color:#EAEAEA;
+        border-bottom-color: #286EA0;
+    }
+
+    a.selectedTabLink
+    {
+        color:#286EA0;
+    }
+    /**** Main Tab Style End ****/
+
+
+    /**** Table Tab Style Start ****/
+    ul.tableTabList
+    {
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 2px;
+        margin-bottom: 0px;
+        padding: 0;
+        width: 240px;
+        height: 90%;
+        overflow: auto;
+        float: left;
+    }
+
+    li.tableTab
+    {
+        list-style-type: none;
+        list-style-image: none;
+        list-style-position: outside;
+        background-color:#F4F4F4;
+        position: relative;
+        margin-left: 5px;
+        margin-right: 0px;
+        margin-top: 5px;
+        margin-bottom: 0px;
+        border-bottom: 4px solid #CCCCCC;
+    }
+    /**** Table Tab Style End ****/
+/**** Tab Style End ****/
+
+
+/**** Content Style Start ****/
 div.content
 {
-    width: auto;
-    height: auto;
-    min-height:400px;
+    width: 75.6%;
+    height: 90%;
     margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 5px;
-    margin-bottom: 0px;
-    position: absolute;
-    left: 240;
-    top: 40;
-}
-
-ul.tabList
-{
-    margin: 0;
-    padding: 0;
-}
-
-ul.tableTabList
-{
-    margin-left: 0px;
     margin-right: 0px;
-    margin-top: 5px;
+    margin-top: 0px;
     margin-bottom: 0px;
-    padding: 0;
-    width: 240px;
-    height: 95%;
     overflow: auto;
-    position: fixed;
-}
-
-li.tab
-{
-    list-style-type: none;
-    list-style-image: none;
-    list-style-position: outside;
-    background-color:#F4F4F4;
-    position: relative;
-    min-width: 100px;
-    margin-left: 5px;
-    margin-right: 0px;
-    margin-top: 5px;
-    margin-bottom: 0px;
-    border-bottom: 4px solid #CCCCCC;
     float: left;
 }
 
-li.tableTab
-{
-    list-style-type: none;
-    list-style-image: none;
-    list-style-position: outside;
-    background-color:#F4F4F4;
-    position: relative;
-    margin-left: 5px;
-    margin-right: 0px;
-    margin-top: 5px;
-    margin-bottom: 0px;
-    border-bottom: 4px solid #CCCCCC;
-}
+    /**** Table Style Start ****/
+    a.idLink
+    {
+        color:#777777;
+        text-decoration: none;
+    }
 
-li.selectedTab
-{
-    background-color:#EAEAEA;
-    border-bottom-color: #286EA0;
-}
+    td.cell
+    {
+        height: 20px;
+        padding: 5px;
+    }
 
-a.tabLink
-{
-    display: block;
-    width: 90%;
-    height: 20px;
-    padding: 5px;
-    color:#777777;
-    text-decoration: none;
-}
+    td.headingCell
+    {
+        background-color:#EAEAEA;
+    }
 
-a.selectedTabLink
-{
-    color:#286EA0;   
-}
+    td.normalCell
+    {
+        background-color:#F4F4F4;
+    }
 
-a.idLink
-{
-    color:#777777;
-    text-decoration: none;
-}
+    td.highlightCell
+    {
+        background-color:#969696;
+    }
 
-td.cell
-{
-    height: 20px;
-    padding: 5px;
-}
+    label.tableHeading
+    {
+        color:#286EA0;
+    }
 
-td.headingCell
-{
-    background-color:#EAEAEA;
-}
-
-td.normalCell
-{
-    background-color:#F4F4F4;
-}
-
-td.highlightCell
-{
-    background-color:#969696;
-}
-
-label.tableHeading
-{
-    color:#286EA0;
-}
-
-label.tableLabel
-{
-    font-weight: normal;
-}
+    label.tableLabel
+    {
+        font-weight: normal;
+    }
+    /**** Table Style End ****
+/**** Content Style End ****/
