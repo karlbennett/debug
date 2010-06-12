@@ -1,6 +1,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <UL CLASS="tableTabList">
+    <LI>
+        <FORM method="post" action="setschema.html">
+            <SELECT name="schemaName">
+                <c:forEach var="schemaName" items="${schemaNames}">
+                <c:choose>
+                    <c:when test="${schemaName == currentSchemaName}">
+                        <OPTION value="${schemaName}" selected="selected">${schemaName}</OPTION>
+                    </c:when>
+                    <c:otherwise>
+                        <OPTION value="${schemaName}">${schemaName}</OPTION>
+                    </c:otherwise>
+                </c:choose>
+                </c:forEach>
+            </SELECT>
+            <INPUT type="submit" value="Set Schema" />
+        </FORM>
+    </LI>
     <c:forEach var="tableName" items="${tableNames}">
         <c:choose>
             <c:when test="${param.tableName == fn:toLowerCase(tableName)}">

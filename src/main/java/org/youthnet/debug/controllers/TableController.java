@@ -13,6 +13,7 @@ import org.youthnet.debug.db.bean.session.Schema;
 import org.youthnet.debug.util.HibernateUtil;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -100,13 +101,21 @@ public class TableController {
     }
 
     @RequestMapping(value = "/setschema.html", method = RequestMethod.POST)
-    public String handleSetSchema(@RequestParam String schemaName) {
+    public String handleSetSchema(@RequestParam String schemaName,
+                                  HttpServletRequest request) {
         log.info("Table controller -- set schema handler");
 
         log.info("  -- Set the schema to: " + schemaName);
         schema.setName(schemaName);
         log.info("  -- Schema set to: " + schema.getName());
 
-        return null;
+        // Get the url of the page that the submit was called on.
+        String referer = request.getHeader("Referer");
+
+        // If the URL exist redirect back to it.
+        if (referer != null) return "redirect:" + referer;
+
+        // Else return to the tables page.
+        return "redirect:tables.html";
     }
 }
