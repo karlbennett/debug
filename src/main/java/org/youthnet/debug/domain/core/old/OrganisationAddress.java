@@ -1,4 +1,4 @@
-package org.youthnet.debug.domain.core;
+package org.youthnet.debug.domain.core.old;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
+import org.youthnet.debug.domain.core.Address;
 import org.youthnet.debug.domain.core.lookups.Country;
 import org.youthnet.debug.domain.core.lookups.County;
 
@@ -53,7 +54,7 @@ private boolean isDefaultAddress;
        this.isDefaultAddress = isDefaultAddress;
     }
    
-    @OneToMany(targetEntity = org.youthnet.debug.domain.core.OrganisationContact.class,
+    @OneToMany(targetEntity = OrganisationContact.class,
         cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
@@ -66,7 +67,7 @@ private boolean isDefaultAddress;
         this.Contacts = Contacts;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.Organisation.class,
+    @ManyToOne(targetEntity = Organisation.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "OrgAddConInfoId", columnDefinition = "raw(16)")
     @javax.xml.bind.annotation.XmlTransient

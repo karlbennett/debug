@@ -1,8 +1,9 @@
-package org.youthnet.debug.domain.core;
+package org.youthnet.debug.domain.core.old;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
 import org.hibernate.annotations.Cascade;
+import org.youthnet.debug.domain.core.Address;
 import org.youthnet.debug.domain.core.lookups.Country;
 import org.youthnet.debug.domain.core.lookups.County;
 
@@ -14,7 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "VolunteerAddresses")
 @PrimaryKeyJoinColumn(name = "AddressId", columnDefinition = "raw(16)")
-public class VolunteerAddress extends org.youthnet.debug.domain.core.Address implements java.io.Serializable {
+public class VolunteerAddress extends Address implements java.io.Serializable {
 
 
     private Volunteer contactDetails;
@@ -37,7 +38,7 @@ public class VolunteerAddress extends org.youthnet.debug.domain.core.Address imp
         this.isDefaultAddress = isDefaultAddress;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.Volunteer.class,
+    @ManyToOne(targetEntity = Volunteer.class,
             fetch = FetchType.EAGER)
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)")

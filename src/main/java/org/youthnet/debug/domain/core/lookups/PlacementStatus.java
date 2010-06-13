@@ -2,6 +2,7 @@ package org.youthnet.debug.domain.core.lookups;
 
 
 import org.youthnet.debug.domain.common.UuidType;
+import org.youthnet.debug.domain.core.lookups.LookupBase;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;

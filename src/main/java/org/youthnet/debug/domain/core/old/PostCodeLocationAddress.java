@@ -1,8 +1,11 @@
-package org.youthnet.debug.domain.core;
+package org.youthnet.debug.domain.core.old;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
 import java.util.Set;
+
+import org.youthnet.debug.domain.core.Address;
+import org.youthnet.debug.domain.core.ContactDetails;
 import org.youthnet.debug.domain.core.enums.LocationTypes;
 import org.youthnet.debug.domain.core.enums.PublicContactDetailsSource;
 import org.youthnet.debug.domain.core.lookups.GeographicalArea;
@@ -43,7 +46,7 @@ private boolean UseForContactDetails;
         this.UseCustomAddress = UseCustomAddress;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.Address.class,
+    @ManyToOne(targetEntity = Address.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "AddressId", columnDefinition = "raw(16)")
@@ -55,7 +58,7 @@ private boolean UseForContactDetails;
         this.CustomAddress = CustomAddress;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.OrganisationAddress.class,
+    @ManyToOne(targetEntity = OrganisationAddress.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "OrgAddressId", columnDefinition = "raw(16)")
     public OrganisationAddress getOrgAddress() {

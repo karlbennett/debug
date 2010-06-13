@@ -1,5 +1,6 @@
-package org.youthnet.debug.domain.core;
+package org.youthnet.debug.domain.core.old;
 
+import org.youthnet.debug.domain.core.GenericDTO;
 import org.youthnet.debug.domain.core.lookups.LookupBase;
 
 /**

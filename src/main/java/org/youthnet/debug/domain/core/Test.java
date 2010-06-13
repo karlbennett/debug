@@ -1,5 +1,8 @@
 package org.youthnet.debug.domain.core;
 
+import org.youthnet.debug.domain.core.GenericDTO;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
@@ -13,7 +16,7 @@ import javax.persistence.Table;
 @Table(name = "Test")
 public class Test extends GenericDTO implements java.io.Serializable {
 
-
+    @Column
     private String test;
 
     public Test() {

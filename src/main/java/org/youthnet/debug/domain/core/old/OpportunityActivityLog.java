@@ -1,8 +1,10 @@
-package org.youthnet.debug.domain.core;
+package org.youthnet.debug.domain.core.old;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
 import org.hibernate.annotations.Cascade;
+import org.youthnet.debug.domain.core.old.ActivityLog;
+import org.youthnet.debug.domain.core.GenericDTO;
 
 import javax.persistence.*;
 
@@ -27,7 +29,7 @@ private LocationBase opportunityLocation;
        this.opportunityLocation = opportunityLocation;
     }
    
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.Opportunity.class,
+    @ManyToOne(targetEntity = Opportunity.class,
             fetch = FetchType.EAGER)
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)")
@@ -39,7 +41,7 @@ private LocationBase opportunityLocation;
         this.opportunity = opportunity;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.ActivityLog.class,
+    @ManyToOne(targetEntity = ActivityLog.class,
             fetch = FetchType.EAGER)
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "ActivityLogId", columnDefinition = "raw(16)")
@@ -52,7 +54,7 @@ private LocationBase opportunityLocation;
         this.activityLog = activityLog;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.LocationBase.class,
+    @ManyToOne(targetEntity = LocationBase.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "OpportunityLocationId", columnDefinition = "raw(16)")
     public LocationBase getOpportunityLocation() {

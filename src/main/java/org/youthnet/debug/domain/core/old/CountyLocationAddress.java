@@ -1,9 +1,10 @@
-package org.youthnet.debug.domain.core;
+package org.youthnet.debug.domain.core.old;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
 import java.util.Set;
 
+import org.youthnet.debug.domain.core.ContactDetails;
 import org.youthnet.debug.domain.core.enums.LocationTypes;
 import org.youthnet.debug.domain.core.enums.PublicContactDetailsSource;
 import org.youthnet.debug.domain.core.lookups.County;
@@ -30,7 +31,7 @@ private County County;
        this.County = County;
     }
    
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.County.class,
+    @ManyToOne(targetEntity = County.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "CountyId", columnDefinition = "raw(16)")
     public County getCounty() {

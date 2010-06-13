@@ -16,13 +16,22 @@ import java.util.logging.Logger;
 @Table(name = "MetaData")
 public class MetaData extends GenericDTO {
 
-    private String type;
-    private byte[] serializedObject;
-    private byte[] digest;
-    private UuidType dtoId;
+    @Transient
     private Logger log = Logger.getLogger(this.getClass().getName());
-    
+
     @Column(length = 86)
+    private String type;
+
+    @Column(columnDefinition = "blob")
+    private byte[] serializedObject;
+
+    @Column(columnDefinition = "blob")
+    private byte[] digest;
+
+    @Column(columnDefinition = "raw(16)")
+    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
+    private UuidType dtoId;
+
     public String getType() {
         return type;
     }
@@ -31,7 +40,6 @@ public class MetaData extends GenericDTO {
         this.type = type;
     }
 
-    @Column(columnDefinition = "blob")
     public byte[] getSerializedObject() {
         return serializedObject;
     }
@@ -48,7 +56,6 @@ public class MetaData extends GenericDTO {
         this.serializedObject = serializedObject;
     }
 
-    @Column(columnDefinition = "blob")
     public byte[] getDigest() {
         return digest;
     }
@@ -57,14 +64,11 @@ public class MetaData extends GenericDTO {
         this.digest = digest;
     }
 
-    @Column(columnDefinition = "raw(16)")
-    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
     public UuidType getDtoId() {
         return dtoId;
     }
 
     public void setDtoId(UuidType dtoId) {
         this.dtoId = dtoId;
-
     }
 }

@@ -2,6 +2,7 @@ package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
+import org.youthnet.debug.domain.core.GenericDTO;
 import org.youthnet.debug.domain.core.lookups.Title;
 
 import javax.persistence.*;
@@ -14,49 +15,81 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Contact extends GenericDTO implements java.io.Serializable {
 
+    @Column
+    private Integer vbase2Id;
 
-private Integer vbase2Id;
-private Title title;
-private String firstName;
-private String surname;
-private String preferredName;
-private String jobTitle;
-private String department;
-private String email;
-private boolean usingAddressEmail;
-private String tel;
-private String fax;
-private boolean usingAddressFax;
-private boolean usingAddressTel;
-private String mobile;
-private String notes;
-private boolean isActive;
-private boolean useAsMainContact;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "TitleId", columnDefinition = "raw(16)")
+    private Title title;
+
+    @Column
+    private String firstName;
+
+    @Column
+    private String surname;
+
+    @Column
+    private String preferredName;
+
+    @Column
+    private String jobTitle;
+
+    @Column
+    private String department;
+
+    @Column
+    private String email;
+
+    @Column
+    private boolean usingAddressEmail;
+
+    @Column
+    private String tel;
+
+    @Column
+    private String fax;
+
+    @Column
+    private boolean usingAddressFax;
+
+    @Column
+    private boolean usingAddressTel;
+
+    @Column
+    private String mobile;
+
+    @Column
+    private String notes;
+
+    @Column
+    private boolean isActive;
+
+    @Column
+    private boolean useAsMainContact;
 
     public Contact() {
     }
 
     public Contact(Integer vbase2Id, Title title, String firstName, String surname, String preferredName, String jobTitle, String department, String email, boolean usingAddressEmail, String tel, String fax, boolean usingAddressFax, boolean usingAddressTel, String mobile, String notes, boolean isActive, boolean useAsMainContact) {
-       this.vbase2Id = vbase2Id;
-       this.title = title;
-       this.firstName = firstName;
-       this.surname = surname;
-       this.preferredName = preferredName;
-       this.jobTitle = jobTitle;
-       this.department = department;
-       this.email = email;
-       this.usingAddressEmail = usingAddressEmail;
-       this.tel = tel;
-       this.fax = fax;
-       this.usingAddressFax = usingAddressFax;
-       this.usingAddressTel = usingAddressTel;
-       this.mobile = mobile;
-       this.notes = notes;
-       this.isActive = isActive;
-       this.useAsMainContact = useAsMainContact;
+        this.vbase2Id = vbase2Id;
+        this.title = title;
+        this.firstName = firstName;
+        this.surname = surname;
+        this.preferredName = preferredName;
+        this.jobTitle = jobTitle;
+        this.department = department;
+        this.email = email;
+        this.usingAddressEmail = usingAddressEmail;
+        this.tel = tel;
+        this.fax = fax;
+        this.usingAddressFax = usingAddressFax;
+        this.usingAddressTel = usingAddressTel;
+        this.mobile = mobile;
+        this.notes = notes;
+        this.isActive = isActive;
+        this.useAsMainContact = useAsMainContact;
     }
-   
-    @Column
+
     public Integer getVbase2Id() {
         return this.vbase2Id;
     }
@@ -65,9 +98,6 @@ private boolean useAsMainContact;
         this.vbase2Id = vbase2Id;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.Title.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "TitleId", columnDefinition = "raw(16)")
     public Title getTitle() {
         return this.title;
     }
@@ -76,7 +106,6 @@ private boolean useAsMainContact;
         this.title = title;
     }
 
-    @Column
     public String getFirstName() {
         return this.firstName;
     }
@@ -85,7 +114,6 @@ private boolean useAsMainContact;
         this.firstName = firstName;
     }
 
-    @Column
     public String getSurname() {
         return this.surname;
     }
@@ -94,7 +122,6 @@ private boolean useAsMainContact;
         this.surname = surname;
     }
 
-    @Column
     public String getPreferredName() {
         return this.preferredName;
     }
@@ -103,7 +130,6 @@ private boolean useAsMainContact;
         this.preferredName = preferredName;
     }
 
-    @Column
     public String getJobTitle() {
         return this.jobTitle;
     }
@@ -112,7 +138,6 @@ private boolean useAsMainContact;
         this.jobTitle = jobTitle;
     }
 
-    @Column
     public String getDepartment() {
         return this.department;
     }
@@ -121,7 +146,6 @@ private boolean useAsMainContact;
         this.department = department;
     }
 
-    @Column
     public String getEmail() {
         return this.email;
     }
@@ -130,7 +154,6 @@ private boolean useAsMainContact;
         this.email = email;
     }
 
-    @Column
     public boolean isUsingAddressEmail() {
         return this.usingAddressEmail;
     }
@@ -139,7 +162,6 @@ private boolean useAsMainContact;
         this.usingAddressEmail = usingAddressEmail;
     }
 
-    @Column
     public String getTel() {
         return this.tel;
     }
@@ -148,7 +170,6 @@ private boolean useAsMainContact;
         this.tel = tel;
     }
 
-    @Column
     public String getFax() {
         return this.fax;
     }
@@ -157,7 +178,6 @@ private boolean useAsMainContact;
         this.fax = fax;
     }
 
-    @Column
     public boolean isUsingAddressFax() {
         return this.usingAddressFax;
     }
@@ -166,7 +186,6 @@ private boolean useAsMainContact;
         this.usingAddressFax = usingAddressFax;
     }
 
-    @Column
     public boolean isUsingAddressTel() {
         return this.usingAddressTel;
     }
@@ -175,7 +194,6 @@ private boolean useAsMainContact;
         this.usingAddressTel = usingAddressTel;
     }
 
-    @Column
     public String getMobile() {
         return this.mobile;
     }
@@ -184,7 +202,6 @@ private boolean useAsMainContact;
         this.mobile = mobile;
     }
 
-    @Column
     public String getNotes() {
         return this.notes;
     }
@@ -193,7 +210,6 @@ private boolean useAsMainContact;
         this.notes = notes;
     }
 
-    @Column
     public boolean isIsActive() {
         return this.isActive;
     }
@@ -202,7 +218,6 @@ private boolean useAsMainContact;
         this.isActive = isActive;
     }
 
-    @Column
     public boolean isUseAsMainContact() {
         return this.useAsMainContact;
     }
@@ -210,8 +225,6 @@ private boolean useAsMainContact;
     public void setUseAsMainContact(boolean useAsMainContact) {
         this.useAsMainContact = useAsMainContact;
     }
-
-
 
 
 }

@@ -2,6 +2,7 @@ package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
+import org.youthnet.debug.domain.core.PolicyEntry;
 import org.youthnet.debug.domain.core.lookups.Policy;
 import org.youthnet.debug.domain.core.lookups.PolicyStatus;
 
@@ -14,22 +15,23 @@ import javax.persistence.*;
 @DiscriminatorValue(value = "P")
 public class NewPolicyEntry extends PolicyEntry implements java.io.Serializable {
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "PolicyId", columnDefinition = "raw(16)")
+    private Policy policy;
 
-private Policy policy;
-private PolicyStatus policyStatus;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "PolicyStatusId", columnDefinition = "raw(16)")
+    private PolicyStatus policyStatus;
 
     public NewPolicyEntry() {
     }
 
     public NewPolicyEntry(Integer vbase2Id, String comments, Policy policy, PolicyStatus policyStatus) {
-        super(vbase2Id, comments);        
-       this.policy = policy;
-       this.policyStatus = policyStatus;
+        super(vbase2Id, comments);
+        this.policy = policy;
+        this.policyStatus = policyStatus;
     }
-   
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.Policy.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "PolicyId", columnDefinition = "raw(16)")
+
     public Policy getPolicy() {
         return this.policy;
     }
@@ -38,9 +40,6 @@ private PolicyStatus policyStatus;
         this.policy = policy;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.PolicyStatus.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "PolicyStatusId", columnDefinition = "raw(16)")
     public PolicyStatus getPolicyStatus() {
         return this.policyStatus;
     }
@@ -48,8 +47,6 @@ private PolicyStatus policyStatus;
     public void setPolicyStatus(PolicyStatus policyStatus) {
         this.policyStatus = policyStatus;
     }
-
-
 
 
 }

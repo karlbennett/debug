@@ -23,29 +23,42 @@ import javax.persistence.*;
 @DiscriminatorValue(value = "LookupBase")
 public class LookupBase extends GenericDTO implements java.io.Serializable {
 
+    @Column
+    private Integer vBase2Id;
 
-private Integer vBase2Id;
-private UuidType languageId;
-private String value;
-private boolean isActive;
-private Integer sortOrder;
-private boolean isUserEditable;
-private UuidType ownerId;
+    @Column(columnDefinition = "raw(16)")
+    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
+    private UuidType languageId;
+
+    @Column
+    private String value;
+
+    @Column
+    private boolean isActive;
+
+    @Column
+    private Integer sortOrder;
+
+    @Column
+    private boolean isUserEditable;
+
+    @Column(columnDefinition = "raw(16)")
+    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
+    private UuidType ownerId;
 
     public LookupBase() {
     }
 
     public LookupBase(Integer vBase2Id, UuidType languageId, String value, boolean isActive, Integer sortOrder, boolean isUserEditable, UuidType ownerId) {
-       this.vBase2Id = vBase2Id;
-       this.languageId = languageId;
-       this.value = value;
-       this.isActive = isActive;
-       this.sortOrder = sortOrder;
-       this.isUserEditable = isUserEditable;
-       this.ownerId = ownerId;
+        this.vBase2Id = vBase2Id;
+        this.languageId = languageId;
+        this.value = value;
+        this.isActive = isActive;
+        this.sortOrder = sortOrder;
+        this.isUserEditable = isUserEditable;
+        this.ownerId = ownerId;
     }
-   
-    @Column
+
     public Integer getvBase2Id() {
         return this.vBase2Id;
     }
@@ -54,8 +67,6 @@ private UuidType ownerId;
         this.vBase2Id = vBase2Id;
     }
 
-    @Column(columnDefinition = "raw(16)")
-    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
     public UuidType getLanguageId() {
         return this.languageId;
     }
@@ -64,7 +75,6 @@ private UuidType ownerId;
         this.languageId = languageId;
     }
 
-    @Column
     public String getValue() {
         return this.value;
     }
@@ -73,7 +83,6 @@ private UuidType ownerId;
         this.value = value;
     }
 
-    @Column
     public boolean isIsActive() {
         return this.isActive;
     }
@@ -82,7 +91,6 @@ private UuidType ownerId;
         this.isActive = isActive;
     }
 
-    @Column
     public Integer getSortOrder() {
         return this.sortOrder;
     }
@@ -91,7 +99,6 @@ private UuidType ownerId;
         this.sortOrder = sortOrder;
     }
 
-    @Column
     public boolean isIsUserEditable() {
         return this.isUserEditable;
     }
@@ -100,8 +107,6 @@ private UuidType ownerId;
         this.isUserEditable = isUserEditable;
     }
 
-    @Column(columnDefinition = "raw(16)")
-    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
     public UuidType getOwnerId() {
         return this.ownerId;
     }
@@ -109,10 +114,6 @@ private UuidType ownerId;
     public void setOwnerId(UuidType ownerId) {
         this.ownerId = ownerId;
     }
-
-
-
-
 }
 
 

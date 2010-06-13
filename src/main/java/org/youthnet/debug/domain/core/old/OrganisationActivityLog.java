@@ -1,8 +1,10 @@
-package org.youthnet.debug.domain.core;
+package org.youthnet.debug.domain.core.old;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
 import org.hibernate.annotations.Cascade;
+import org.youthnet.debug.domain.core.old.ActivityLog;
+import org.youthnet.debug.domain.core.GenericDTO;
 
 import javax.persistence.*;
 
@@ -27,7 +29,7 @@ public class OrganisationActivityLog extends GenericDTO implements java.io.Seria
         this.activityLog = activityLog;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.Organisation.class,
+    @ManyToOne(targetEntity = Organisation.class,
             fetch = FetchType.EAGER)
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "OrganisationId", columnDefinition = "raw(16)")
@@ -39,7 +41,7 @@ public class OrganisationActivityLog extends GenericDTO implements java.io.Seria
         this.organisation = organisation;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.OrganisationContact.class,
+    @ManyToOne(targetEntity = OrganisationContact.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "ContactId", columnDefinition = "raw(16)")
     public OrganisationContact getContact() {
@@ -50,7 +52,7 @@ public class OrganisationActivityLog extends GenericDTO implements java.io.Seria
         this.contact = contact;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.ActivityLog.class,
+    @ManyToOne(targetEntity = ActivityLog.class,
             fetch = FetchType.EAGER)
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "ActivityLogId", columnDefinition = "raw(16)")

@@ -1,4 +1,4 @@
-package org.youthnet.debug.domain.core;
+package org.youthnet.debug.domain.core.old;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
@@ -9,7 +9,9 @@ import java.util.Set;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.ForeignKey;
+import org.youthnet.debug.domain.core.GenericDTO;
 import org.youthnet.debug.domain.core.lookups.ActivityType;
+import org.youthnet.debug.domain.core.old.*;
 
 import javax.persistence.*;
 import javax.persistence.CascadeType;
@@ -140,7 +142,7 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.notes = notes;
     }
     
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.ActivityType.class,
+    @ManyToOne(targetEntity = ActivityType.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "ActivityTypeId", columnDefinition = "raw(16)")
     public ActivityType getActivityType() {
@@ -151,7 +153,7 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.activityType = activityType;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.OrganisationContact.class,
+    @ManyToOne(targetEntity = OrganisationContact.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "PersonHereId", columnDefinition = "raw(16)")
     public OrganisationContact getPersonHere() {
@@ -162,7 +164,7 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.personHere = personHere;
     }
 
-    @OneToMany(targetEntity = org.youthnet.debug.domain.core.VolunteerActivityLog.class,
+    @OneToMany(targetEntity = VolunteerActivityLog.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
@@ -178,7 +180,7 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.volunteerActivityLogs = volunteerActivityLogs;
     }
 
-    @OneToMany(targetEntity = org.youthnet.debug.domain.core.OrganisationActivityLog.class,
+    @OneToMany(targetEntity = OrganisationActivityLog.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
@@ -194,7 +196,7 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.organisationActivityLogs = organisationActivityLogs;
     }
 
-    @OneToMany(targetEntity = org.youthnet.debug.domain.core.OpportunityActivityLog.class,
+    @OneToMany(targetEntity = OpportunityActivityLog.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)

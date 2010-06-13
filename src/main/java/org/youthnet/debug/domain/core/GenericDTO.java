@@ -16,17 +16,28 @@ import java.util.Date;
 @MappedSuperclass
 public abstract class GenericDTO implements Serializable {
 
-    private UuidType id;
-    private int version;
-    private Date created;
-    private Date modified;
-    private UuidType modifiedBy;
-    private boolean deleted;
-
     @Id
     @Column(columnDefinition = "raw(16)")
     @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
     @Generated(GenerationTime.NEVER)
+    private UuidType id;
+
+    @Version
+    private int version;
+
+    @Column
+    private Date created;
+
+    @Column
+    private Date modified;
+
+    @Column(columnDefinition = "raw(16)")
+    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
+    private UuidType modifiedBy;
+
+    @Column
+    private boolean deleted;
+
     public UuidType getId() {
         return this.id;
     }
@@ -35,7 +46,6 @@ public abstract class GenericDTO implements Serializable {
         this.id = id;
     }
 
-    @Version
     public int getVersion() {
         return version;
     }
@@ -44,7 +54,6 @@ public abstract class GenericDTO implements Serializable {
         this.version = version;
     }
 
-    @Column
     public Date getCreated() {
         return created;
     }
@@ -53,7 +62,6 @@ public abstract class GenericDTO implements Serializable {
         this.created = created;
     }
 
-    @Column
     public Date getModified() {
         return modified;
     }
@@ -62,8 +70,6 @@ public abstract class GenericDTO implements Serializable {
         this.modified = modified;
     }
 
-    @Column(columnDefinition = "raw(16)")
-    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
     public UuidType getModifiedBy() {
         return modifiedBy;
     }
@@ -72,7 +78,6 @@ public abstract class GenericDTO implements Serializable {
         this.modifiedBy = modifiedBy;
     }
 
-    @Column
     public boolean isDeleted() {
         return deleted;
     }

@@ -13,23 +13,28 @@ import javax.persistence.Table;
 @Table(name = "QueriesForViews")
 public class QueriesForViews extends GenericDTO implements java.io.Serializable {
 
+    @Column
+    private Integer vbase2Id;
 
-private Integer vbase2Id;
-private String queryName;
-private String sqlQuery;
-private String hqlQuery;
+    @Column
+    private String queryName;
+
+    @Column(length = 2000)
+    private String sqlQuery;
+
+    @Column(length = 2000)
+    private String hqlQuery;
 
     public QueriesForViews() {
     }
 
     public QueriesForViews(Integer vbase2Id, String queryName, String sqlQuery, String hqlQuery) {
-       this.vbase2Id = vbase2Id;
-       this.queryName = queryName;
-       this.sqlQuery = sqlQuery;
-       this.hqlQuery = hqlQuery;
+        this.vbase2Id = vbase2Id;
+        this.queryName = queryName;
+        this.sqlQuery = sqlQuery;
+        this.hqlQuery = hqlQuery;
     }
-   
-    @Column
+
     public Integer getVbase2Id() {
         return this.vbase2Id;
     }
@@ -38,7 +43,6 @@ private String hqlQuery;
         this.vbase2Id = vbase2Id;
     }
 
-    @Column
     public String getQueryName() {
         return this.queryName;
     }
@@ -47,7 +51,6 @@ private String hqlQuery;
         this.queryName = queryName;
     }
 
-    @Column(length = 2000)
     public String getSqlQuery() {
         return this.sqlQuery;
     }
@@ -56,7 +59,6 @@ private String hqlQuery;
         this.sqlQuery = sqlQuery;
     }
 
-    @Column(length = 2000)
     public String getHqlQuery() {
         return this.hqlQuery;
     }

@@ -1,4 +1,4 @@
-package org.youthnet.debug.domain.core;
+package org.youthnet.debug.domain.core.old;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
@@ -10,6 +10,7 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.Index;
 import org.hibernate.annotations.Where;
+import org.youthnet.debug.domain.core.GenericDTO;
 import org.youthnet.debug.domain.core.lookups.*;
 
 import javax.persistence.*;
@@ -110,7 +111,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.campaignsAndInitiatives = campaignsAndInitiatives;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.Title.class,
+    @ManyToOne(targetEntity = Title.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "TitleId", columnDefinition = "raw(16)")
     public Title getTitle() {
@@ -179,7 +180,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.agreesToBeContacted = agreesToBeContacted;
     }
 
-    @OneToMany(targetEntity = org.youthnet.debug.domain.core.VolunteerContactTelephone.class,
+    @OneToMany(targetEntity = VolunteerContactTelephone.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
@@ -193,7 +194,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.contactTelephones = contactTelephones;
     }
 
-    @OneToMany(targetEntity = org.youthnet.debug.domain.core.VolunteerContactEmail.class,
+    @OneToMany(targetEntity = VolunteerContactEmail.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
@@ -207,7 +208,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.contactEmails = contactEmails;
     }
 
-    @OneToMany(targetEntity = org.youthnet.debug.domain.core.VolunteerAddress.class,
+    @OneToMany(targetEntity = VolunteerAddress.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
@@ -240,7 +241,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.disabilityDetails = disabilityDetails;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.Gender.class,
+    @ManyToOne(targetEntity = Gender.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "GenderId", columnDefinition = "raw(16)")
     public Gender getGender() {
@@ -251,7 +252,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.gender = gender;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.AgeRange.class,
+    @ManyToOne(targetEntity = AgeRange.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "AgeRangeId", columnDefinition = "raw(16)")
     public AgeRange getAgeRange() {
@@ -262,7 +263,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.ageRange = ageRange;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.EmploymentStatus.class,
+    @ManyToOne(targetEntity = EmploymentStatus.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "EmploymentStatusId", columnDefinition = "raw(16)")
     public EmploymentStatus getEmploymentStatus() {
@@ -273,7 +274,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.employmentStatus = employmentStatus;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.Ethnicity.class,
+    @ManyToOne(targetEntity = Ethnicity.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "EthnicityId", columnDefinition = "raw(16)")
     public Ethnicity getEthnicity() {
@@ -284,7 +285,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.ethnicity = ethnicity;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.Nationality.class,
+    @ManyToOne(targetEntity = Nationality.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "NationalityId", columnDefinition = "raw(16)")
     public Nationality getNationality() {
@@ -295,7 +296,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.nationality = nationality;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.DrivingLicence.class,
+    @ManyToOne(targetEntity = DrivingLicence.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "DrivingLicenceId", columnDefinition = "raw(16)")
     public DrivingLicence getDrivingLicence() {
@@ -306,7 +307,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.drivingLicence = drivingLicence;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.Religion.class,
+    @ManyToOne(targetEntity = Religion.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "ReligionId", columnDefinition = "raw(16)")
     public Religion getReligion() {
@@ -317,7 +318,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.religion = religion;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.DisabilityStatus.class,
+    @ManyToOne(targetEntity = DisabilityStatus.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "DisabilityStatusId", columnDefinition = "raw(16)")
     public DisabilityStatus getDisabilityStatus() {
@@ -328,7 +329,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.disabilityStatus = disabilityStatus;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.Transport.class,
+    @ManyToOne(targetEntity = Transport.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "TransportId", columnDefinition = "raw(16)")
     public Transport getTransport() {
@@ -339,7 +340,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.transport = transport;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.SexualOrientation.class,
+    @ManyToOne(targetEntity = SexualOrientation.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "SexualOrientationId", columnDefinition = "raw(16)")
     public SexualOrientation getSexualOrientation() {
@@ -350,7 +351,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.sexualOrientation = sexualOrientation;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.lookups.DisabilityType.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = DisabilityType.class, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @JoinTable(name = "VolunteerDisabilityTypeLookups",
             joinColumns = @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)"),
@@ -373,7 +374,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.qualificationsAndExperience = qualificationsAndExperience;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.lookups.Skill.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Skill.class, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @JoinTable(name = "VolunteerCurrentSkills",
             joinColumns = @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)"),
@@ -386,7 +387,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.currentSkills = currentSkills;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.lookups.Skill.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = Skill.class, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @JoinTable(name = "VolunteerWantedSkills",
             joinColumns = @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)"),
@@ -399,7 +400,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.wantedSkills = wantedSkills;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.lookups.TypeOfActivity.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = TypeOfActivity.class, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @JoinTable(name = "VolunteerTypeOfActivityLookups",
             joinColumns = @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)"),
@@ -413,7 +414,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.typeOfActivity = typeOfActivity;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.lookups.CauseInterest.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = CauseInterest.class, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @JoinTable(name = "VolunteerCausesIntsLookups",
             joinColumns = @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)"),
@@ -454,7 +455,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.eveCommitment = eveCommitment;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.lookups.CommitmentType.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = CommitmentType.class, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @JoinTable(name = "VolunteerCommitmentTypeLookups",
             joinColumns = @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)"),
@@ -468,7 +469,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.commitmentType = commitmentType;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.AvailabilityStatus.class,
+    @ManyToOne(targetEntity = AvailabilityStatus.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "AvailabilityStatusId", columnDefinition = "raw(16)")
     public AvailabilityStatus getAvailabilityStatus() {
@@ -479,7 +480,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.availabilityStatus = availabilityStatus;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.lookups.GeographicalArea.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = GeographicalArea.class, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @JoinTable(name = "VolunteerGeoAreaLookups",
             joinColumns = @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)"),
@@ -493,7 +494,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.areas = areas;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.lookups.MotivationsForVolunteering.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = MotivationsForVolunteering.class, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @JoinTable(name = "VolunteerReasonsMotivsLookups",
             joinColumns = @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)"),
@@ -516,7 +517,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.otherMotivations = otherMotivations;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.HowHeard.class,
+    @ManyToOne(targetEntity = HowHeard.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "HowHeardId", columnDefinition = "raw(16)")
     public HowHeard getHowHeard() {
@@ -536,7 +537,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.howHeardDetails = howHeardDetails;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.lookups.TaggedData.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = TaggedData.class, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @JoinTable(name = "VolunteerTagsLookups",
             joinColumns = @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)"),
@@ -550,7 +551,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.tags = tags;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.lookups.CampaignsAndInitiatives.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = CampaignsAndInitiatives.class, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @JoinTable(name = "VolunteerCampInitLookups",
             joinColumns = @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)"),
@@ -573,7 +574,7 @@ public class Volunteer extends GenericDTO implements java.io.Serializable {
         this.isActive = isActive;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.PlacementStatus.class,
+    @ManyToOne(targetEntity = PlacementStatus.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "PlacementStatusId", columnDefinition = "raw(16)")
     public PlacementStatus getPlacementStatus() {

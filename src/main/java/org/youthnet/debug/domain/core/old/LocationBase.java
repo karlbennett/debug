@@ -1,4 +1,4 @@
-package org.youthnet.debug.domain.core;
+package org.youthnet.debug.domain.core.old;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
@@ -7,6 +7,8 @@ import java.util.Set;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
+import org.youthnet.debug.domain.core.ContactDetails;
+import org.youthnet.debug.domain.core.GenericDTO;
 import org.youthnet.debug.domain.core.enums.LocationTypes;
 import org.youthnet.debug.domain.core.enums.PublicContactDetailsSource;
 import org.youthnet.debug.domain.core.lookups.GeographicalArea;
@@ -62,7 +64,7 @@ private boolean IsActive;
         this.DisplayString = DisplayString;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.Opportunity.class,
+    @ManyToOne(targetEntity = Opportunity.class,
             fetch = FetchType.EAGER)
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "OpportunityLocationId", columnDefinition = "raw(16)")
@@ -85,7 +87,7 @@ private boolean IsActive;
         this.locationType = locationType;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.ContactDetails.class,
+    @ManyToOne(targetEntity = ContactDetails.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "ContactDetailsId", columnDefinition = "raw(16)")
@@ -97,7 +99,7 @@ private boolean IsActive;
         this.contactDetails = contactDetails;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.ContactDetails.class,
+    @ManyToOne(targetEntity = ContactDetails.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "PublicContactDetailsId", columnDefinition = "raw(16)")
@@ -137,7 +139,7 @@ private boolean IsActive;
         this.publicContactDetailsSource = publicContactDetailsSource;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.lookups.GeographicalArea.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = GeographicalArea.class, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @JoinTable(name = "LocationAddressLookups",
         joinColumns = @JoinColumn(name = "LocationAddressId", columnDefinition = "raw(16)"),

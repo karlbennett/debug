@@ -2,6 +2,8 @@ package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
+import org.youthnet.debug.domain.core.GenericDTO;
+
 import javax.persistence.*;
 
 /**
@@ -15,19 +17,20 @@ import javax.persistence.*;
         name = "Discriminator")
 public class PolicyEntry extends GenericDTO implements java.io.Serializable {
 
+    @Column
+    private Integer vbase2Id;
 
-private Integer vbase2Id;
-private String comments;
+    @Column
+    private String comments;
 
     public PolicyEntry() {
     }
 
     public PolicyEntry(Integer vbase2Id, String comments) {
-       this.vbase2Id = vbase2Id;
-       this.comments = comments;
+        this.vbase2Id = vbase2Id;
+        this.comments = comments;
     }
 
-    @Column
     public Integer getVbase2Id() {
         return this.vbase2Id;
     }
@@ -36,7 +39,6 @@ private String comments;
         this.vbase2Id = vbase2Id;
     }
 
-    @Column
     public String getComments() {
         return this.comments;
     }
@@ -44,8 +46,6 @@ private String comments;
     public void setComments(String comments) {
         this.comments = comments;
     }
-
-
 
 
 }

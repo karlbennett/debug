@@ -2,6 +2,7 @@ package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
+import org.youthnet.debug.domain.core.PolicyEntry;
 import org.youthnet.debug.domain.core.lookups.QualityStdsAndAccreditations;
 import org.youthnet.debug.domain.core.lookups.QualityStdsAndAccreditationsStatus;
 
@@ -14,22 +15,23 @@ import javax.persistence.*;
 @DiscriminatorValue(value = "Q")
 public class QualityStdsAccrPolicyEntry extends PolicyEntry implements java.io.Serializable {
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "PolicyId", columnDefinition = "raw(16)")
+    private QualityStdsAndAccreditations policy;
 
-private QualityStdsAndAccreditations policy;
-private QualityStdsAndAccreditationsStatus policyStatus;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "PolicyStatusId", columnDefinition = "raw(16)")
+    private QualityStdsAndAccreditationsStatus policyStatus;
 
     public QualityStdsAccrPolicyEntry() {
     }
 
     public QualityStdsAccrPolicyEntry(Integer vbase2Id, String comments, QualityStdsAndAccreditations policy, QualityStdsAndAccreditationsStatus policyStatus) {
-        super(vbase2Id, comments);        
-       this.policy = policy;
-       this.policyStatus = policyStatus;
+        super(vbase2Id, comments);
+        this.policy = policy;
+        this.policyStatus = policyStatus;
     }
-   
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.QualityStdsAndAccreditations.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "PolicyId", columnDefinition = "raw(16)")
+
     public QualityStdsAndAccreditations getPolicy() {
         return this.policy;
     }
@@ -38,9 +40,6 @@ private QualityStdsAndAccreditationsStatus policyStatus;
         this.policy = policy;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.QualityStdsAndAccreditationsStatus.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "PolicyStatusId", columnDefinition = "raw(16)")
     public QualityStdsAndAccreditationsStatus getPolicyStatus() {
         return this.policyStatus;
     }

@@ -1,4 +1,4 @@
-package org.youthnet.debug.domain.core;
+package org.youthnet.debug.domain.core.old;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
@@ -6,10 +6,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.hibernate.annotations.*;
+import org.youthnet.debug.domain.core.GenericDTO;
+import org.youthnet.debug.domain.core.NewPolicyEntry;
+import org.youthnet.debug.domain.core.QualityStdsAccrPolicyEntry;
+import org.youthnet.debug.domain.core.lookups.*;
 import org.youthnet.debug.domain.core.lookups.CampaignsAndInitiatives;
 import org.youthnet.debug.domain.core.lookups.CauseInterest;
 import org.youthnet.debug.domain.core.lookups.GeographicalArea;
-import org.youthnet.debug.domain.core.lookups.HowHeard;
 import org.youthnet.debug.domain.core.lookups.OrganisationType;
 import org.youthnet.debug.domain.core.lookups.TaggedData;
 
@@ -124,7 +127,7 @@ public class Organisation extends GenericDTO implements java.io.Serializable {
         this.registeredCharityNumber = registeredCharityNumber;
     }
 
-    @OneToMany(targetEntity = org.youthnet.debug.domain.core.OrganisationAddress.class,
+    @OneToMany(targetEntity = OrganisationAddress.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
@@ -165,7 +168,7 @@ public class Organisation extends GenericDTO implements java.io.Serializable {
         this.openingHours = openingHours;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.lookups.CauseInterest.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = CauseInterest.class, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @JoinTable(name = "OrganisationCausesInterests",
             joinColumns = @JoinColumn(name = "OrganisationId", columnDefinition = "raw(16)"),
@@ -179,7 +182,7 @@ public class Organisation extends GenericDTO implements java.io.Serializable {
         this.causesInterests = causesInterests;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.lookups.OrganisationType.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = OrganisationType.class, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @JoinTable(name = "OrganisationOrganisationType",
             joinColumns = @JoinColumn(name = "OrganisationId", columnDefinition = "raw(16)"),
@@ -193,7 +196,7 @@ public class Organisation extends GenericDTO implements java.io.Serializable {
         this.types = types;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.lookups.GeographicalArea.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = GeographicalArea.class, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @JoinTable(name = "OrganisationGeographicalArea",
             joinColumns = @JoinColumn(name = "OrganisationId", columnDefinition = "raw(16)"),
@@ -207,7 +210,7 @@ public class Organisation extends GenericDTO implements java.io.Serializable {
         this.organisationGeographicalAreas = organisationGeographicalAreas;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.HowHeard.class,
+    @ManyToOne(targetEntity = HowHeard.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "HowHeardId", columnDefinition = "raw(16)")
     public HowHeard getHowHeard() {
@@ -227,7 +230,7 @@ public class Organisation extends GenericDTO implements java.io.Serializable {
         this.howHeardDetails = howHeardDetails;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.NewPolicyEntry.class,
+    @ManyToMany(targetEntity = NewPolicyEntry.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
@@ -244,7 +247,7 @@ public class Organisation extends GenericDTO implements java.io.Serializable {
         this.orgNewPolicyEntries = orgNewPolicyEntries;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.QualityStdsAccrPolicyEntry.class,
+    @ManyToMany(targetEntity = QualityStdsAccrPolicyEntry.class,
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
@@ -261,7 +264,7 @@ public class Organisation extends GenericDTO implements java.io.Serializable {
         this.qualityStdsAccrPolicyEntries = qualityStdsAccrPolicyEntries;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.lookups.TaggedData.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = TaggedData.class, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @JoinTable(name = "OrganisationTaggedData",
             joinColumns = @JoinColumn(name = "OrganisationId", columnDefinition = "raw(16)"),
@@ -275,7 +278,7 @@ public class Organisation extends GenericDTO implements java.io.Serializable {
         this.tags = tags;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.lookups.CampaignsAndInitiatives.class, fetch = FetchType.EAGER)
+    @ManyToMany(targetEntity = CampaignsAndInitiatives.class, fetch = FetchType.EAGER)
     @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
     @JoinTable(name = "OrganisationCampsAndInits",
             joinColumns = @JoinColumn(name = "OrganisationId", columnDefinition = "raw(16)"),

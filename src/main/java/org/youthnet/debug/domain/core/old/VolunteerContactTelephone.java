@@ -1,4 +1,4 @@
-package org.youthnet.debug.domain.core;
+package org.youthnet.debug.domain.core.old;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
@@ -36,7 +36,7 @@ private String number;
        this.number = number;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.Volunteer.class,
+    @ManyToOne(targetEntity = Volunteer.class,
             fetch = FetchType.EAGER)
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)")
@@ -49,7 +49,7 @@ private String number;
         this.contactDetails = contactDetails;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.TelephoneType.class,
+    @ManyToOne(targetEntity = TelephoneType.class,
             fetch = FetchType.EAGER)
     @JoinColumn(name = "TelephoneTypeId", columnDefinition = "raw(16)")
     public TelephoneType getType() {

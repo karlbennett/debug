@@ -13,23 +13,63 @@ import javax.persistence.*;
 @Table(name = "ContactDetails")
 public class ContactDetails extends GenericDTO implements java.io.Serializable {
 
-
+    @Column
     private boolean UseCustomAddress;
+
+    @Column
     private boolean UseCustomPerson;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "OrganisationAddressId", columnDefinition = "raw(16)")
     private Address orgAddress;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "AddressId", columnDefinition = "raw(16)")
     private Address customAddress;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "ContactId", columnDefinition = "raw(16)")
     private Contact customContact;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "OrgContactId", columnDefinition = "raw(16)")
     private Contact orgContact;
+
+    @Column
     private String CustomTelephone;
+
+    @Column
     private String CustomFax;
+
+    @Column
     private String CustomWebAddress;
+
+    @Column
     private String CustomEmail;
+
+    @Column
     private boolean UseVuoDetails;
+
+    @Column
     private boolean UseCustomOrgName;
+
+    @Column
     private String CustomOrgName;
+
+    @Column(name = "TelephoneSource", columnDefinition = "varchar(30)", nullable = false)
+    @Enumerated(EnumType.STRING)
     private ContactDetailsSource telephoneSource;
+
+    @Column(name = "FaxSource", columnDefinition = "varchar(30)", nullable = false)
+    @Enumerated(EnumType.STRING)
     private ContactDetailsSource faxSource;
+
+    @Column(name = "EmailSource", columnDefinition = "varchar(30)", nullable = false)
+    @Enumerated(EnumType.STRING)
     private ContactDetailsSource emailSource;
+
+    @Column(name = "WebAddressSource", columnDefinition = "varchar(30)", nullable = false)
+    @Enumerated(EnumType.STRING)
     private ContactDetailsSource webAddressSource;
 
     public ContactDetails() {
@@ -55,7 +95,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.webAddressSource = webAddressSource;
     }
 
-    @Column
     public boolean isUseCustomAddress() {
         return this.UseCustomAddress;
     }
@@ -64,7 +103,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.UseCustomAddress = UseCustomAddress;
     }
 
-    @Column
     public boolean isUseCustomPerson() {
         return this.UseCustomPerson;
     }
@@ -73,9 +111,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.UseCustomPerson = UseCustomPerson;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.Address.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "OrganisationAddressId", columnDefinition = "raw(16)")
     public Address getOrgAddress() {
         return this.orgAddress;
     }
@@ -84,10 +119,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.orgAddress = orgAddress;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.Address.class,
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "AddressId", columnDefinition = "raw(16)")
     public Address getCustomAddress() {
         return this.customAddress;
     }
@@ -96,10 +127,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.customAddress = customAddress;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.Contact.class,
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "ContactId", columnDefinition = "raw(16)")
     public Contact getCustomContact() {
         return this.customContact;
     }
@@ -108,9 +135,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.customContact = customContact;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.Contact.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "OrgContactId", columnDefinition = "raw(16)")
     public Contact getOrgContact() {
         return this.orgContact;
     }
@@ -119,7 +143,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.orgContact = orgContact;
     }
 
-    @Column
     public String getCustomTelephone() {
         return this.CustomTelephone;
     }
@@ -128,7 +151,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.CustomTelephone = CustomTelephone;
     }
 
-    @Column
     public String getCustomFax() {
         return this.CustomFax;
     }
@@ -137,7 +159,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.CustomFax = CustomFax;
     }
 
-    @Column
     public String getCustomWebAddress() {
         return this.CustomWebAddress;
     }
@@ -146,7 +167,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.CustomWebAddress = CustomWebAddress;
     }
 
-    @Column
     public String getCustomEmail() {
         return this.CustomEmail;
     }
@@ -155,7 +175,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.CustomEmail = CustomEmail;
     }
 
-    @Column
     public boolean isUseVuoDetails() {
         return this.UseVuoDetails;
     }
@@ -164,7 +183,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.UseVuoDetails = UseVuoDetails;
     }
 
-    @Column
     public boolean isUseCustomOrgName() {
         return this.UseCustomOrgName;
     }
@@ -173,7 +191,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.UseCustomOrgName = UseCustomOrgName;
     }
 
-    @Column
     public String getCustomOrgName() {
         return this.CustomOrgName;
     }
@@ -182,8 +199,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.CustomOrgName = CustomOrgName;
     }
 
-    @Column(name = "TelephoneSource", columnDefinition = "varchar(30)", nullable = false)
-    @Enumerated(EnumType.STRING)
     public ContactDetailsSource getTelephoneSource() {
         return this.telephoneSource;
     }
@@ -192,8 +207,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.telephoneSource = telephoneSource;
     }
 
-    @Column(name = "FaxSource", columnDefinition = "varchar(30)", nullable = false)
-    @Enumerated(EnumType.STRING)
     public ContactDetailsSource getFaxSource() {
         return this.faxSource;
     }
@@ -202,8 +215,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.faxSource = faxSource;
     }
 
-    @Column(name = "EmailSource", columnDefinition = "varchar(30)", nullable = false)
-    @Enumerated(EnumType.STRING)
     public ContactDetailsSource getEmailSource() {
         return this.emailSource;
     }
@@ -212,8 +223,6 @@ public class ContactDetails extends GenericDTO implements java.io.Serializable {
         this.emailSource = emailSource;
     }
 
-    @Column(name = "WebAddressSource", columnDefinition = "varchar(30)", nullable = false)
-    @Enumerated(EnumType.STRING)
     public ContactDetailsSource getWebAddressSource() {
         return this.webAddressSource;
     }

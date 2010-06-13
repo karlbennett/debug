@@ -4,6 +4,7 @@ package org.youthnet.debug.domain.core;
 
 import org.hibernate.annotations.Type;
 import org.youthnet.debug.domain.common.UuidType;
+import org.youthnet.debug.domain.core.GenericDTO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,24 +17,29 @@ import javax.persistence.Table;
 @Table(name = "Roles")
 public class Role extends GenericDTO implements java.io.Serializable {
 
+    @Column
+    private Integer vbase2Id;
 
-private Integer vbase2Id;
-private UuidType userId;
-private String name;
-private String description;
+    @Column(columnDefinition = "raw(16)")
+    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
+    private UuidType userId;
+
+    @Column
+    private String name;
+
+    @Column(length = 50)
+    private String description;
 
     public Role() {
     }
 
     public Role(Integer vbase2Id, UuidType userId, String name, String description) {
-       this.vbase2Id = vbase2Id;
-       this.userId = userId;
-       this.name = name;
-       this.description = description;
+        this.vbase2Id = vbase2Id;
+        this.userId = userId;
+        this.name = name;
+        this.description = description;
     }
-   
-    
-    @Column
+
     public Integer getVbase2Id() {
         return this.vbase2Id;
     }
@@ -42,8 +48,6 @@ private String description;
         this.vbase2Id = vbase2Id;
     }
 
-    @Column(columnDefinition = "raw(16)")
-    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
     public UuidType getUserId() {
         return this.userId;
     }
@@ -52,7 +56,6 @@ private String description;
         this.userId = userId;
     }
 
-    @Column
     public String getName() {
         return this.name;
     }
@@ -61,7 +64,6 @@ private String description;
         this.name = name;
     }
 
-    @Column(length = 50)
     public String getDescription() {
         return this.description;
     }
@@ -69,10 +71,6 @@ private String description;
     public void setDescription(String description) {
         this.description = description;
     }
-
-
-
-
 }
 
 

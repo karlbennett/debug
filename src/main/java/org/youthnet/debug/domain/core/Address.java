@@ -2,6 +2,7 @@ package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
+import org.youthnet.debug.domain.core.GenericDTO;
 import org.youthnet.debug.domain.core.lookups.Country;
 import org.youthnet.debug.domain.core.lookups.County;
 
@@ -15,33 +16,50 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Address extends GenericDTO implements java.io.Serializable {
 
+    @Column
+    private Integer vbase2Id;
 
-private Integer vbase2Id;
-private String address1;
-private String address2;
-private String address3;
-private String town;
-private County county;
-private Country country;
-private String PostCode;
-private String Directions;
+    @Column(length = 100)
+    private String address1;
+
+    @Column(length = 100)
+    private String address2;
+
+    @Column(length = 100)
+    private String address3;
+
+    @Column(length = 100)
+    private String town;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "CountyId", columnDefinition = "raw(16)")
+    private County county;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "CountryId", columnDefinition = "raw(16)")
+    private Country country;
+
+    @Column
+    private String PostCode;
+
+    @Column(length = 2000)
+    private String Directions;
 
     public Address() {
     }
 
     public Address(Integer vbase2Id, String address1, String address2, String address3, String town, County county, Country country, String PostCode, String Directions) {
-       this.vbase2Id = vbase2Id;
-       this.address1 = address1;
-       this.address2 = address2;
-       this.address3 = address3;
-       this.town = town;
-       this.county = county;
-       this.country = country;
-       this.PostCode = PostCode;
-       this.Directions = Directions;
+        this.vbase2Id = vbase2Id;
+        this.address1 = address1;
+        this.address2 = address2;
+        this.address3 = address3;
+        this.town = town;
+        this.county = county;
+        this.country = country;
+        this.PostCode = PostCode;
+        this.Directions = Directions;
     }
-   
-    @Column
+
     public Integer getVbase2Id() {
         return this.vbase2Id;
     }
@@ -50,7 +68,6 @@ private String Directions;
         this.vbase2Id = vbase2Id;
     }
 
-    @Column(length = 100)
     public String getAddress1() {
         return this.address1;
     }
@@ -59,7 +76,6 @@ private String Directions;
         this.address1 = address1;
     }
 
-    @Column(length = 100)
     public String getAddress2() {
         return this.address2;
     }
@@ -68,7 +84,6 @@ private String Directions;
         this.address2 = address2;
     }
 
-    @Column(length = 100)
     public String getAddress3() {
         return this.address3;
     }
@@ -77,7 +92,6 @@ private String Directions;
         this.address3 = address3;
     }
 
-    @Column(length = 100)
     public String getTown() {
         return this.town;
     }
@@ -86,9 +100,6 @@ private String Directions;
         this.town = town;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.County.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "CountyId", columnDefinition = "raw(16)")
     public County getCounty() {
         return this.county;
     }
@@ -97,9 +108,6 @@ private String Directions;
         this.county = county;
     }
 
-    @ManyToOne(targetEntity = org.youthnet.debug.domain.core.lookups.Country.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "CountryId", columnDefinition = "raw(16)")
     public Country getCountry() {
         return this.country;
     }
@@ -108,7 +116,6 @@ private String Directions;
         this.country = country;
     }
 
-    @Column
     public String getPostCode() {
         return this.PostCode;
     }
@@ -117,7 +124,6 @@ private String Directions;
         this.PostCode = PostCode;
     }
 
-    @Column(length = 2000)
     public String getDirections() {
         return this.Directions;
     }
@@ -125,10 +131,6 @@ private String Directions;
     public void setDirections(String Directions) {
         this.Directions = Directions;
     }
-
-
-
-
 }
 
 

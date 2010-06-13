@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.hibernate.annotations.Fetch;
+import org.youthnet.debug.domain.core.GenericDTO;
+import org.youthnet.debug.domain.core.Role;
 
 import javax.persistence.*;
 
@@ -17,55 +19,90 @@ import javax.persistence.*;
 @Table(name = "Users")
 public class Users extends GenericDTO implements java.io.Serializable {
 
+    @Column
+    private Integer vbase2Id;
 
-private Integer vbase2Id;
-private boolean isAccountExpired;
-private boolean isAccountLocked;
-private boolean isCredentialsExpired;
-private boolean isEnabled;
-private String userName;
-private String password;
-private String passwordHint;
-private String firstName;
-private String lastName;
-private String fullName;
-private String phoneNumber;
-private Date accountLastValidated;
-private Date lstLoggedIn;
-private Date lastLogInAttempt;
-private Integer badLogInAttempts;
-private Set<Role> roles = new HashSet<Role>(0);
+    @Column
+    private boolean isAccountExpired;
+
+    @Column
+    private boolean isAccountLocked;
+
+    @Column
+    private boolean isCredentialsExpired;
+
+    @Column
+    private boolean isEnabled;
+
+    @Column(length = 50, nullable = false)
+    private String userName;
+
+    @Column(length = 40, nullable = false)
+    private String password;
+
+    @Column(length = 50)
+    private String passwordHint;
+
+    @Column(length = 50)
+    private String firstName;
+
+    @Column(length = 50)
+    private String lastName;
+
+    @Column(length = 100)
+    private String fullName;
+
+    @Column(length = 20)
+    private String phoneNumber;
+
+    @Column
+    private Date accountLastValidated;
+
+    @Column
+    private Date lstLoggedIn;
+
+    @Column
+    private Date lastLogInAttempt;
+
+    @Column
+    private Integer badLogInAttempts;
+
+    @ManyToMany
+    @Fetch(value = org.hibernate.annotations.FetchMode.SELECT)
+    @JoinTable(name = "UsersRoles",
+            joinColumns = @JoinColumn(name = "UserId", columnDefinition = "raw(16)"),
+            inverseJoinColumns = @JoinColumn(name = "RoleId", columnDefinition = "raw(16)"))
+    private Set<Role> roles = new HashSet<Role>(0);
 
     public Users() {
     }
 
-	
+
     public Users(String userName, String password) {
         this.userName = userName;
         this.password = password;
     }
+
     public Users(Integer vbase2Id, boolean isAccountExpired, boolean isAccountLocked, boolean isCredentialsExpired, boolean isEnabled, String userName, String password, String passwordHint, String firstName, String lastName, String fullName, String phoneNumber, Date accountLastValidated, Date lstLoggedIn, Date lastLogInAttempt, Integer badLogInAttempts, Set<Role> roles) {
-       this.vbase2Id = vbase2Id;
-       this.isAccountExpired = isAccountExpired;
-       this.isAccountLocked = isAccountLocked;
-       this.isCredentialsExpired = isCredentialsExpired;
-       this.isEnabled = isEnabled;
-       this.userName = userName;
-       this.password = password;
-       this.passwordHint = passwordHint;
-       this.firstName = firstName;
-       this.lastName = lastName;
-       this.fullName = fullName;
-       this.phoneNumber = phoneNumber;
-       this.accountLastValidated = accountLastValidated;
-       this.lstLoggedIn = lstLoggedIn;
-       this.lastLogInAttempt = lastLogInAttempt;
-       this.badLogInAttempts = badLogInAttempts;
-       this.roles = roles;
+        this.vbase2Id = vbase2Id;
+        this.isAccountExpired = isAccountExpired;
+        this.isAccountLocked = isAccountLocked;
+        this.isCredentialsExpired = isCredentialsExpired;
+        this.isEnabled = isEnabled;
+        this.userName = userName;
+        this.password = password;
+        this.passwordHint = passwordHint;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fullName = fullName;
+        this.phoneNumber = phoneNumber;
+        this.accountLastValidated = accountLastValidated;
+        this.lstLoggedIn = lstLoggedIn;
+        this.lastLogInAttempt = lastLogInAttempt;
+        this.badLogInAttempts = badLogInAttempts;
+        this.roles = roles;
     }
-   
-    
-    @Column
+
     public Integer getVbase2Id() {
         return this.vbase2Id;
     }
@@ -74,7 +111,6 @@ private Set<Role> roles = new HashSet<Role>(0);
         this.vbase2Id = vbase2Id;
     }
 
-    @Column
     public boolean isIsAccountExpired() {
         return this.isAccountExpired;
     }
@@ -83,7 +119,6 @@ private Set<Role> roles = new HashSet<Role>(0);
         this.isAccountExpired = isAccountExpired;
     }
 
-    @Column
     public boolean isIsAccountLocked() {
         return this.isAccountLocked;
     }
@@ -92,7 +127,6 @@ private Set<Role> roles = new HashSet<Role>(0);
         this.isAccountLocked = isAccountLocked;
     }
 
-    @Column
     public boolean isIsCredentialsExpired() {
         return this.isCredentialsExpired;
     }
@@ -101,7 +135,6 @@ private Set<Role> roles = new HashSet<Role>(0);
         this.isCredentialsExpired = isCredentialsExpired;
     }
 
-    @Column
     public boolean isIsEnabled() {
         return this.isEnabled;
     }
@@ -110,7 +143,6 @@ private Set<Role> roles = new HashSet<Role>(0);
         this.isEnabled = isEnabled;
     }
 
-    @Column(length = 50, nullable = false)
     public String getUserName() {
         return this.userName;
     }
@@ -119,7 +151,6 @@ private Set<Role> roles = new HashSet<Role>(0);
         this.userName = userName;
     }
 
-    @Column(length = 40, nullable = false)
     public String getPassword() {
         return this.password;
     }
@@ -128,7 +159,6 @@ private Set<Role> roles = new HashSet<Role>(0);
         this.password = password;
     }
 
-    @Column(length = 50)
     public String getPasswordHint() {
         return this.passwordHint;
     }
@@ -137,7 +167,6 @@ private Set<Role> roles = new HashSet<Role>(0);
         this.passwordHint = passwordHint;
     }
 
-    @Column(length = 50)
     public String getFirstName() {
         return this.firstName;
     }
@@ -146,7 +175,6 @@ private Set<Role> roles = new HashSet<Role>(0);
         this.firstName = firstName;
     }
 
-    @Column(length = 50)
     public String getLastName() {
         return this.lastName;
     }
@@ -155,7 +183,6 @@ private Set<Role> roles = new HashSet<Role>(0);
         this.lastName = lastName;
     }
 
-    @Column(length = 100)
     public String getFullName() {
         return this.fullName;
     }
@@ -164,7 +191,6 @@ private Set<Role> roles = new HashSet<Role>(0);
         this.fullName = fullName;
     }
 
-    @Column(length = 20)
     public String getPhoneNumber() {
         return this.phoneNumber;
     }
@@ -173,7 +199,6 @@ private Set<Role> roles = new HashSet<Role>(0);
         this.phoneNumber = phoneNumber;
     }
 
-    @Column
     public Date getAccountLastValidated() {
         return this.accountLastValidated;
     }
@@ -182,7 +207,6 @@ private Set<Role> roles = new HashSet<Role>(0);
         this.accountLastValidated = accountLastValidated;
     }
 
-    @Column
     public Date getLstLoggedIn() {
         return this.lstLoggedIn;
     }
@@ -191,7 +215,6 @@ private Set<Role> roles = new HashSet<Role>(0);
         this.lstLoggedIn = lstLoggedIn;
     }
 
-    @Column
     public Date getLastLogInAttempt() {
         return this.lastLogInAttempt;
     }
@@ -200,7 +223,6 @@ private Set<Role> roles = new HashSet<Role>(0);
         this.lastLogInAttempt = lastLogInAttempt;
     }
 
-    @Column
     public Integer getBadLogInAttempts() {
         return this.badLogInAttempts;
     }
@@ -209,11 +231,6 @@ private Set<Role> roles = new HashSet<Role>(0);
         this.badLogInAttempts = badLogInAttempts;
     }
 
-    @ManyToMany(targetEntity = org.youthnet.debug.domain.core.Role.class)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @JoinTable(name = "UsersRoles",
-        joinColumns = @JoinColumn(name = "UserId", columnDefinition = "raw(16)"),
-        inverseJoinColumns = @JoinColumn(name = "RoleId", columnDefinition = "raw(16)"))
     public Set<Role> getRoles() {
         return this.roles;
     }
@@ -221,8 +238,6 @@ private Set<Role> roles = new HashSet<Role>(0);
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-
-
 
 
 }

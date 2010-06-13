@@ -4,6 +4,7 @@ package org.youthnet.debug.domain.core;
 
 import org.hibernate.annotations.Type;
 import org.youthnet.debug.domain.common.UuidType;
+import org.youthnet.debug.domain.core.GenericDTO;
 
 import java.sql.Blob;
 import java.util.Date;
@@ -17,10 +18,17 @@ import javax.persistence.*;
 @Table(name = "SearchQueries")
 public class SearchQueries extends GenericDTO implements java.io.Serializable {
 
-
+    @Lob
     private Blob data;
+
+    @Column
     private boolean isEditable;
+
+    @Column(columnDefinition = "raw(16)")
+    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
     private UuidType userId;
+
+    @Column
     private Date lastUpdated;
 
     public SearchQueries() {
@@ -33,7 +41,6 @@ public class SearchQueries extends GenericDTO implements java.io.Serializable {
         this.lastUpdated = lastUpdated;
     }
 
-    @Lob
     public Blob getData() {
         return this.data;
     }
@@ -42,7 +49,6 @@ public class SearchQueries extends GenericDTO implements java.io.Serializable {
         this.data = data;
     }
 
-    @Column
     public boolean isIsEditable() {
         return this.isEditable;
     }
@@ -51,8 +57,6 @@ public class SearchQueries extends GenericDTO implements java.io.Serializable {
         this.isEditable = isEditable;
     }
 
-    @Column(columnDefinition = "raw(16)")
-    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
     public UuidType getUserId() {
         return this.userId;
     }
@@ -61,7 +65,6 @@ public class SearchQueries extends GenericDTO implements java.io.Serializable {
         this.userId = userId;
     }
 
-    @Column
     public Date getLastUpdated() {
         return this.lastUpdated;
     }
@@ -69,8 +72,6 @@ public class SearchQueries extends GenericDTO implements java.io.Serializable {
     public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
-
-
 }
 
 
