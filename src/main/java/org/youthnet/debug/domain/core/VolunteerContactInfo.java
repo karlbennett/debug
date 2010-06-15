@@ -1,4 +1,4 @@
-package org.youthnet.debug.domain.core.old;
+package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
@@ -14,21 +14,24 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class VolunteerContactInfo extends GenericDTO implements java.io.Serializable {
 
+    @Column
+    private boolean isActive;
 
-private boolean isActive;
-private boolean isDefault;
-private String notes;
+    @Column
+    private boolean isDefault;
+
+    @Column
+    private String notes;
 
     public VolunteerContactInfo() {
     }
 
     public VolunteerContactInfo(boolean isActive, boolean isDefault, String notes) {
-       this.isActive = isActive;
-       this.isDefault = isDefault;
-       this.notes = notes;
+        this.isActive = isActive;
+        this.isDefault = isDefault;
+        this.notes = notes;
     }
-    
-    @Column
+
     public boolean isIsActive() {
         return this.isActive;
     }
@@ -37,7 +40,6 @@ private String notes;
         this.isActive = isActive;
     }
 
-    @Column
     public boolean isIsDefault() {
         return this.isDefault;
     }
@@ -46,7 +48,6 @@ private String notes;
         this.isDefault = isDefault;
     }
 
-    @Column
     public String getNotes() {
         return this.notes;
     }
@@ -54,8 +55,6 @@ private String notes;
     public void setNotes(String notes) {
         this.notes = notes;
     }
-
-
 
 
 }

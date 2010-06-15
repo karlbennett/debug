@@ -1,9 +1,9 @@
-package org.youthnet.debug.domain.core.old;
+package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
-import org.hibernate.annotations.Cascade;
 import org.youthnet.debug.domain.core.Contact;
+import org.youthnet.debug.domain.core.OrganisationAddress;
 import org.youthnet.debug.domain.core.lookups.Title;
 
 import javax.persistence.*;
@@ -16,22 +16,19 @@ import javax.persistence.*;
 @PrimaryKeyJoinColumn(name = "ContactId", columnDefinition = "raw(16)")
 public class OrganisationContact extends Contact implements java.io.Serializable {
 
-
-private OrganisationAddress organisationAddress;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "OrganisationAddressId", columnDefinition = "raw(16)")
+    @javax.xml.bind.annotation.XmlTransient
+    private OrganisationAddress organisationAddress;
 
     public OrganisationContact() {
     }
 
     public OrganisationContact(Integer vbase2Id, Title title, String firstName, String surname, String preferredName, String jobTitle, String department, String email, boolean usingAddressEmail, String tel, String fax, boolean usingAddressFax, boolean usingAddressTel, String mobile, String notes, boolean isActive, boolean useAsMainContact, OrganisationAddress organisationAddress) {
-        super(vbase2Id, title, firstName, surname, preferredName, jobTitle, department, email, usingAddressEmail, tel, fax, usingAddressFax, usingAddressTel, mobile, notes, isActive, useAsMainContact);        
-       this.organisationAddress = organisationAddress;
+        super(vbase2Id, title, firstName, surname, preferredName, jobTitle, department, email, usingAddressEmail, tel, fax, usingAddressFax, usingAddressTel, mobile, notes, isActive, useAsMainContact);
+        this.organisationAddress = organisationAddress;
     }
 
-    @ManyToOne(targetEntity = OrganisationAddress.class,
-            fetch = FetchType.EAGER)
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinColumn(name = "OrganisationAddressId", columnDefinition = "raw(16)")
-    @javax.xml.bind.annotation.XmlTransient
     public OrganisationAddress getOrganisationAddress() {
         return this.organisationAddress;
     }

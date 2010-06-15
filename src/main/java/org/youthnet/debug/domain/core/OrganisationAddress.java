@@ -1,15 +1,16 @@
-package org.youthnet.debug.domain.core.old;
+package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
 import java.util.HashSet;
 import java.util.Set;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.youthnet.debug.domain.core.Address;
+import org.youthnet.debug.domain.core.Organisation;
 import org.youthnet.debug.domain.core.lookups.Country;
 import org.youthnet.debug.domain.core.lookups.County;
+import org.youthnet.debug.domain.core.old.OrganisationContact;
 
 import javax.persistence.*;
 
@@ -21,44 +22,65 @@ import javax.persistence.*;
 @PrimaryKeyJoinColumn(name = "AddressId", columnDefinition = "raw(16)")
 public class OrganisationAddress extends Address implements java.io.Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = org.hibernate.annotations.FetchMode.SUBSELECT)
+    @JoinColumn(name = "OrganisationAddressId")
+    private Set<OrganisationContact> Contacts = new HashSet<OrganisationContact>();
 
-private Set<OrganisationContact> Contacts = new HashSet<OrganisationContact>(0);
-private Organisation OrganisationAddressInfo;
-private String friendlyName;
-private String organisationName;
-private boolean useCustomOrganisationName;
-private String email;
-private String tel;
-private String emergencyTelephone;
-private String fax;
-private String website;
-private String directions;
-private boolean isDefaultAddress;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "OrgAddConInfoId", columnDefinition = "raw(16)")
+    @javax.xml.bind.annotation.XmlTransient
+    private Organisation OrganisationAddressInfo;
+
+    @Column
+    private String friendlyName;
+
+    @Column
+    private String organisationName;
+
+    @Column
+    private boolean useCustomOrganisationName;
+
+    @Column
+    private String email;
+
+    @Column(name = "Telephone")
+    private String tel;
+
+    @Column
+    private String emergencyTelephone;
+
+    @Column
+    private String fax;
+
+    @Column
+    private String website;
+
+    @Column(length = 2000)
+    private String directions;
+
+    @Column
+    private boolean isDefaultAddress;
 
     public OrganisationAddress() {
     }
 
     public OrganisationAddress(Integer vbase2Id, String address1, String address2, String address3, String town, County county, Country country, String PostCode, String Directions, Set<OrganisationContact> Contacts, Organisation OrganisationAddressInfo, String friendlyName, String organisationName, boolean useCustomOrganisationName, String email, String tel, String emergencyTelephone, String fax, String website, String directions, boolean isDefaultAddress) {
-        super(vbase2Id, address1, address2, address3, town, county, country, PostCode, Directions);        
-       this.Contacts = Contacts;
-       this.OrganisationAddressInfo = OrganisationAddressInfo;
-       this.friendlyName = friendlyName;
-       this.organisationName = organisationName;
-       this.useCustomOrganisationName = useCustomOrganisationName;
-       this.email = email;
-       this.tel = tel;
-       this.emergencyTelephone = emergencyTelephone;
-       this.fax = fax;
-       this.website = website;
-       this.directions = directions;
-       this.isDefaultAddress = isDefaultAddress;
+        super(vbase2Id, address1, address2, address3, town, county, country, PostCode, Directions);
+        this.Contacts = Contacts;
+        this.OrganisationAddressInfo = OrganisationAddressInfo;
+        this.friendlyName = friendlyName;
+        this.organisationName = organisationName;
+        this.useCustomOrganisationName = useCustomOrganisationName;
+        this.email = email;
+        this.tel = tel;
+        this.emergencyTelephone = emergencyTelephone;
+        this.fax = fax;
+        this.website = website;
+        this.directions = directions;
+        this.isDefaultAddress = isDefaultAddress;
     }
-   
-    @OneToMany(targetEntity = OrganisationContact.class,
-        cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
-    @JoinColumn(name = "OrganisationAddressId")
+
     public Set<OrganisationContact> getContacts() {
         return this.Contacts;
     }
@@ -67,10 +89,6 @@ private boolean isDefaultAddress;
         this.Contacts = Contacts;
     }
 
-    @ManyToOne(targetEntity = Organisation.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "OrgAddConInfoId", columnDefinition = "raw(16)")
-    @javax.xml.bind.annotation.XmlTransient
     public Organisation getOrganisationAddressInfo() {
         return this.OrganisationAddressInfo;
     }
@@ -79,7 +97,6 @@ private boolean isDefaultAddress;
         this.OrganisationAddressInfo = OrganisationAddressInfo;
     }
 
-    @Column
     public String getFriendlyName() {
         return this.friendlyName;
     }
@@ -88,7 +105,6 @@ private boolean isDefaultAddress;
         this.friendlyName = friendlyName;
     }
 
-    @Column
     public String getOrganisationName() {
         return this.organisationName;
     }
@@ -97,7 +113,6 @@ private boolean isDefaultAddress;
         this.organisationName = organisationName;
     }
 
-    @Column
     public boolean isUseCustomOrganisationName() {
         return this.useCustomOrganisationName;
     }
@@ -106,7 +121,6 @@ private boolean isDefaultAddress;
         this.useCustomOrganisationName = useCustomOrganisationName;
     }
 
-    @Column
     public String getEmail() {
         return this.email;
     }
@@ -115,7 +129,6 @@ private boolean isDefaultAddress;
         this.email = email;
     }
 
-    @Column(name = "Telephone")
     public String getTel() {
         return this.tel;
     }
@@ -124,7 +137,6 @@ private boolean isDefaultAddress;
         this.tel = tel;
     }
 
-    @Column
     public String getEmergencyTelephone() {
         return this.emergencyTelephone;
     }
@@ -133,7 +145,6 @@ private boolean isDefaultAddress;
         this.emergencyTelephone = emergencyTelephone;
     }
 
-    @Column
     public String getFax() {
         return this.fax;
     }
@@ -142,7 +153,6 @@ private boolean isDefaultAddress;
         this.fax = fax;
     }
 
-    @Column
     public String getWebsite() {
         return this.website;
     }
@@ -151,7 +161,6 @@ private boolean isDefaultAddress;
         this.website = website;
     }
 
-    @Column(length = 2000)
     public String getDirections() {
         return this.directions;
     }
@@ -160,7 +169,6 @@ private boolean isDefaultAddress;
         this.directions = directions;
     }
 
-    @Column
     public boolean isIsDefaultAddress() {
         return this.isDefaultAddress;
     }
