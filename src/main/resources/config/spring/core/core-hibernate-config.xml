@@ -40,6 +40,8 @@
                 <value>org.youthnet.debug.domain.core.Organisation</value>
                 <value>org.youthnet.debug.domain.core.OrganisationAddress</value>
                 <value>org.youthnet.debug.domain.core.OrganisationContact</value>
+                <value>org.youthnet.debug.domain.core.Opportunity</value>
+                <value>org.youthnet.debug.domain.core.LocationBase</value>
             </list>
         </property>
         <property name="hibernateProperties">

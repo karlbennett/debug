@@ -1,14 +1,14 @@
-package org.youthnet.debug.domain.core.old;
+package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
 import java.util.HashSet;
 import java.util.Set;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.youthnet.debug.domain.core.ContactDetails;
 import org.youthnet.debug.domain.core.GenericDTO;
+import org.youthnet.debug.domain.core.Opportunity;
 import org.youthnet.debug.domain.core.enums.LocationTypes;
 import org.youthnet.debug.domain.core.enums.PublicContactDetailsSource;
 import org.youthnet.debug.domain.core.lookups.GeographicalArea;
@@ -27,35 +27,62 @@ import javax.persistence.*;
 @DiscriminatorValue(value = "LocationBase")
 public class LocationBase extends GenericDTO implements java.io.Serializable {
 
+    @Column(length = 50)
+    private String DisplayString;
 
-private String DisplayString;
-private Opportunity owner;
-private LocationTypes locationType;
-private ContactDetails contactDetails;
-private ContactDetails publicContactDetails;
-private boolean UseCustomOrgName;
-private String CustomOrgName;
-private PublicContactDetailsSource publicContactDetailsSource;
-private Set<GeographicalArea> geographicalAreas = new HashSet<GeographicalArea>(0);
-private boolean IsActive;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "OpportunityLocationId", columnDefinition = "raw(16)")
+    @javax.xml.bind.annotation.XmlTransient
+    private Opportunity owner;
+
+    @Column(name = "LocationType", columnDefinition = "varchar2(30 char)")
+    @Enumerated(EnumType.STRING)
+    private LocationTypes locationType;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "ContactDetailsId", columnDefinition = "raw(16)")
+    private ContactDetails contactDetails;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "PublicContactDetailsId", columnDefinition = "raw(16)")
+    private ContactDetails publicContactDetails;
+
+    @Column
+    private boolean UseCustomOrgName;
+
+    @Column
+    private String CustomOrgName;
+
+    @Column(name = "PublicContactDetailsSource", columnDefinition = "varchar2(36 char)")
+    @Enumerated(EnumType.STRING)
+    private PublicContactDetailsSource publicContactDetailsSource;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = org.hibernate.annotations.FetchMode.SUBSELECT)
+    @JoinTable(name = "LocationAddressLookups",
+            joinColumns = @JoinColumn(name = "LocationAddressId", columnDefinition = "raw(16)"),
+            inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
+    private Set<GeographicalArea> geographicalAreas = new HashSet<GeographicalArea>(0);
+
+    @Column
+    private boolean IsActive;
 
     public LocationBase() {
     }
 
     public LocationBase(String DisplayString, Opportunity owner, LocationTypes locationType, ContactDetails contactDetails, ContactDetails publicContactDetails, boolean UseCustomOrgName, String CustomOrgName, PublicContactDetailsSource publicContactDetailsSource, Set<GeographicalArea> geographicalAreas, boolean IsActive) {
-       this.DisplayString = DisplayString;
-       this.owner = owner;
-       this.locationType = locationType;
-       this.contactDetails = contactDetails;
-       this.publicContactDetails = publicContactDetails;
-       this.UseCustomOrgName = UseCustomOrgName;
-       this.CustomOrgName = CustomOrgName;
-       this.publicContactDetailsSource = publicContactDetailsSource;
-       this.geographicalAreas = geographicalAreas;
-       this.IsActive = IsActive;
+        this.DisplayString = DisplayString;
+        this.owner = owner;
+        this.locationType = locationType;
+        this.contactDetails = contactDetails;
+        this.publicContactDetails = publicContactDetails;
+        this.UseCustomOrgName = UseCustomOrgName;
+        this.CustomOrgName = CustomOrgName;
+        this.publicContactDetailsSource = publicContactDetailsSource;
+        this.geographicalAreas = geographicalAreas;
+        this.IsActive = IsActive;
     }
-   
-    @Column(length = 50)
+
     public String getDisplayString() {
         return this.DisplayString;
     }
@@ -64,11 +91,6 @@ private boolean IsActive;
         this.DisplayString = DisplayString;
     }
 
-    @ManyToOne(targetEntity = Opportunity.class,
-            fetch = FetchType.EAGER)
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinColumn(name = "OpportunityLocationId", columnDefinition = "raw(16)")
-    @javax.xml.bind.annotation.XmlTransient
     public Opportunity getOwner() {
         return this.owner;
     }
@@ -77,8 +99,6 @@ private boolean IsActive;
         this.owner = owner;
     }
 
-    @Column(name = "LocationType", columnDefinition = "varchar2(30 char)")
-    @Enumerated(EnumType.STRING)
     public LocationTypes getLocationType() {
         return this.locationType;
     }
@@ -87,10 +107,6 @@ private boolean IsActive;
         this.locationType = locationType;
     }
 
-    @ManyToOne(targetEntity = ContactDetails.class,
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "ContactDetailsId", columnDefinition = "raw(16)")
     public ContactDetails getContactDetails() {
         return this.contactDetails;
     }
@@ -99,10 +115,6 @@ private boolean IsActive;
         this.contactDetails = contactDetails;
     }
 
-    @ManyToOne(targetEntity = ContactDetails.class,
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "PublicContactDetailsId", columnDefinition = "raw(16)")
     public ContactDetails getPublicContactDetails() {
         return this.publicContactDetails;
     }
@@ -111,7 +123,6 @@ private boolean IsActive;
         this.publicContactDetails = publicContactDetails;
     }
 
-    @Column
     public boolean isUseCustomOrgName() {
         return this.UseCustomOrgName;
     }
@@ -120,7 +131,6 @@ private boolean IsActive;
         this.UseCustomOrgName = UseCustomOrgName;
     }
 
-    @Column
     public String getCustomOrgName() {
         return this.CustomOrgName;
     }
@@ -129,8 +139,6 @@ private boolean IsActive;
         this.CustomOrgName = CustomOrgName;
     }
 
-    @Column(name = "PublicContactDetailsSource", columnDefinition = "varchar2(36 char)")
-    @Enumerated(EnumType.STRING)
     public PublicContactDetailsSource getPublicContactDetailsSource() {
         return this.publicContactDetailsSource;
     }
@@ -139,11 +147,6 @@ private boolean IsActive;
         this.publicContactDetailsSource = publicContactDetailsSource;
     }
 
-    @ManyToMany(targetEntity = GeographicalArea.class, fetch = FetchType.EAGER)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @JoinTable(name = "LocationAddressLookups",
-        joinColumns = @JoinColumn(name = "LocationAddressId", columnDefinition = "raw(16)"),
-        inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
     public Set<GeographicalArea> getGeographicalAreas() {
         return this.geographicalAreas;
     }
@@ -152,7 +155,6 @@ private boolean IsActive;
         this.geographicalAreas = geographicalAreas;
     }
 
-    @Column
     public boolean isIsActive() {
         return this.IsActive;
     }
@@ -160,8 +162,6 @@ private boolean IsActive;
     public void setIsActive(boolean IsActive) {
         this.IsActive = IsActive;
     }
-
-
 
 
 }

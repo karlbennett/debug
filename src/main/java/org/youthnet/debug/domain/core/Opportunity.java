@@ -1,4 +1,4 @@
-package org.youthnet.debug.domain.core.old;
+package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
@@ -10,6 +10,7 @@ import org.hibernate.annotations.*;
 import org.youthnet.debug.domain.core.ArrangementsRecordEntry;
 import org.youthnet.debug.domain.core.ContactDetails;
 import org.youthnet.debug.domain.core.GenericDTO;
+import org.youthnet.debug.domain.core.Organisation;
 import org.youthnet.debug.domain.core.lookups.*;
 import org.youthnet.debug.domain.core.lookups.CampaignsAndInitiatives;
 import org.youthnet.debug.domain.core.lookups.CauseInterest;
@@ -18,6 +19,7 @@ import org.youthnet.debug.domain.core.lookups.Skill;
 import org.youthnet.debug.domain.core.lookups.Suitabilities;
 import org.youthnet.debug.domain.core.lookups.TaggedData;
 import org.youthnet.debug.domain.core.lookups.TypeOfActivity;
+import org.youthnet.debug.domain.core.LocationBase;
 
 import javax.persistence.*;
 import javax.persistence.CascadeType;
@@ -31,45 +33,169 @@ import javax.persistence.Table;
 @Table(name = "Opportunities")
 public class Opportunity extends GenericDTO implements java.io.Serializable {
 
-
+    @Column
     private Integer vbase2Id;
+
+    @Column(length = 255)
+    @Index(name = "OppTitle")
     private String title;
+
+    @Column(length = 150)
+    @Index(name = "OppOwnId")
     private String ownId;
+
+    @Column
     private boolean locationsPubliclyViewable;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "OrganisationId", columnDefinition = "raw(16)")
     private Organisation organisationId;
-    private Set<LocationBase> locations = new HashSet<LocationBase>(0);
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = org.hibernate.annotations.FetchMode.SUBSELECT)
+    @JoinColumn(name = "OpportunityLocationId", columnDefinition = "raw(16)")
+    @javax.xml.bind.annotation.XmlElementWrapper
+    private Set<LocationBase> locations = new HashSet<LocationBase>();
+
+    @Column(name = "useSharedIntConDets")
     private boolean useSharedInternalContactDetails;
+
+    @Column
     private boolean useSharedPublicContactDetails;
+
+    @Column
     private boolean isSharedInternalContactPublic;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "SharedInternalContactDetailsId", columnDefinition = "raw(16)")
     private ContactDetails sharedInternalContactDetails;
+
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "SharedPublicContactDetailsId", columnDefinition = "raw(16)")
     private ContactDetails sharedPublicContactDetails;
-    private Set<ArrangementsRecordEntry> arrangements = new HashSet<ArrangementsRecordEntry>(0);
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = org.hibernate.annotations.FetchMode.SUBSELECT)
+    @JoinTable(name = "OpportunityArrPolicyEntry",
+            joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
+            inverseJoinColumns = @JoinColumn(name = "PolicyId", columnDefinition = "raw(16)"))
+    private Set<ArrangementsRecordEntry> arrangements = new HashSet<ArrangementsRecordEntry>();
+
+    @Column(length = 2000)
     private String requirements;
+
+    @Column(length = 2000)
     private String benefits;
-    private Set<Skill> skillsRequired = new HashSet<Skill>(0);
-    private Set<Skill> skillsToGain = new HashSet<Skill>(0);
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = org.hibernate.annotations.FetchMode.SUBSELECT)
+    @JoinTable(name = "OpportunitySkillsRequired",
+            joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
+            inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
+    private Set<Skill> skillsRequired = new HashSet<Skill>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = org.hibernate.annotations.FetchMode.SUBSELECT)
+    @JoinTable(name = "OpportunitySkillsToGain",
+            joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
+            inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
+    private Set<Skill> skillsToGain = new HashSet<Skill>();
+
+    @Column(length = 2000)
     private String description;
+
+    @Column(length = 250)
     private String shortDescription;
+
+    @Column
     private float monetaryValuePerHour;
+
+    @Column
     private boolean isVirtualRemote;
+
+    @Column
     private boolean isResidential;
+
+    @Column
     private boolean isOneOff;
+
+    @Column
     private boolean isDateSpecific;
+
+    @Column
     private Date specificStartDate;
+
+    @Column
     private Date specificEndDate;
+
+    @Column
     private long commitmentAm;
+
+    @Column
     private long commitmentPm;
+
+    @Column
     private long commitmentEve;
-    private Set<CommitmentType> commitmentTypes = new HashSet<CommitmentType>(0);
-    private Set<TaggedData> tags = new HashSet<TaggedData>(0);
-    private Set<CampaignsAndInitiatives> campaignsAndInitiatives = new HashSet<CampaignsAndInitiatives>(0);
-    private Set<TypeOfActivity> typeOfActivity = new HashSet<TypeOfActivity>(0);
-    private Set<CauseInterest> causesInterests = new HashSet<CauseInterest>(0);
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = org.hibernate.annotations.FetchMode.SUBSELECT)
+    @JoinTable(name = "OpportunityCommitmentTypes",
+            joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
+            inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
+    private Set<CommitmentType> commitmentTypes = new HashSet<CommitmentType>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = org.hibernate.annotations.FetchMode.SUBSELECT)
+    @JoinTable(name = "OpportunityTags",
+            joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
+            inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
+    private Set<TaggedData> tags = new HashSet<TaggedData>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = org.hibernate.annotations.FetchMode.SUBSELECT)
+    @JoinTable(name = "OpportunityCampsAndInits",
+            joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
+            inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
+    private Set<CampaignsAndInitiatives> campaignsAndInitiatives = new HashSet<CampaignsAndInitiatives>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = org.hibernate.annotations.FetchMode.SUBSELECT)
+    @JoinTable(name = "OpportunityTypesOfActivity",
+            joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
+            inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
+    private Set<TypeOfActivity> typeOfActivity = new HashSet<TypeOfActivity>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = org.hibernate.annotations.FetchMode.SUBSELECT)
+    @JoinTable(name = "OpportunityCausesInterests",
+            joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
+            inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
+    private Set<CauseInterest> causesInterests = new HashSet<CauseInterest>();
+
+    @Column
     private Date advertisingStartDate;
+
+    @Column
     private Date advertisingEndDate;
+
+    @Column
     private boolean publishToDoIt;
+
+    @Column
     private boolean isActive;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = org.hibernate.annotations.FetchMode.SUBSELECT)
+    @JoinTable(name = "OpportunityAddSpecSuitabs",
+            joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
+            inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
     private Set<Suitabilities> addSpecSuitabilities = new HashSet<Suitabilities>(0);
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(value = org.hibernate.annotations.FetchMode.SUBSELECT)
+    @JoinTable(name = "OpportunitySelectionMethods",
+            joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
+            inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
     private Set<SelectionMethod> selectionMethods = new HashSet<SelectionMethod>(0);
 
     public Opportunity() {
@@ -117,7 +243,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.selectionMethods = selectionMethods;
     }
 
-    @Column
     public Integer getVbase2Id() {
         return this.vbase2Id;
     }
@@ -126,8 +251,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.vbase2Id = vbase2Id;
     }
 
-    @Column(length = 255)
-    @Index(name = "OppTitle")
     public String getTitle() {
         return this.title;
     }
@@ -136,8 +259,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.title = title;
     }
 
-    @Column(length = 150)
-    @Index(name = "OppOwnId")
     public String getOwnId() {
         return this.ownId;
     }
@@ -146,7 +267,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.ownId = ownId;
     }
 
-    @Column
     public boolean isLocationsPubliclyViewable() {
         return this.locationsPubliclyViewable;
     }
@@ -155,9 +275,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.locationsPubliclyViewable = locationsPubliclyViewable;
     }
 
-    @ManyToOne(targetEntity = Organisation.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "OrganisationId", columnDefinition = "raw(16)")
     public Organisation getOrganisationId() {
         return this.organisationId;
     }
@@ -166,14 +283,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.organisationId = organisationId;
     }
 
-    @OneToMany(targetEntity = LocationBase.class,
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
-    @JoinColumn(name = "OpportunityLocationId",
-            columnDefinition = "raw(16)")
-    @javax.xml.bind.annotation.XmlElementWrapper
     public Set<LocationBase> getLocations() {
         return this.locations;
     }
@@ -182,7 +291,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.locations = locations;
     }
 
-    @Column( name = "useSharedIntConDets")
     public boolean isUseSharedInternalContactDetails() {
         return this.useSharedInternalContactDetails;
     }
@@ -191,7 +299,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.useSharedInternalContactDetails = useSharedInternalContactDetails;
     }
 
-    @Column
     public boolean isUseSharedPublicContactDetails() {
         return this.useSharedPublicContactDetails;
     }
@@ -200,7 +307,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.useSharedPublicContactDetails = useSharedPublicContactDetails;
     }
 
-    @Column
     public boolean isIsSharedInternalContactPublic() {
         return this.isSharedInternalContactPublic;
     }
@@ -209,10 +315,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.isSharedInternalContactPublic = isSharedInternalContactPublic;
     }
 
-    @ManyToOne(targetEntity = ContactDetails.class,
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "SharedInternalContactDetailsId", columnDefinition = "raw(16)")
     public ContactDetails getSharedInternalContactDetails() {
         return this.sharedInternalContactDetails;
     }
@@ -221,10 +323,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.sharedInternalContactDetails = sharedInternalContactDetails;
     }
 
-    @ManyToOne(targetEntity = ContactDetails.class,
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "SharedPublicContactDetailsId", columnDefinition = "raw(16)")
     public ContactDetails getSharedPublicContactDetails() {
         return this.sharedPublicContactDetails;
     }
@@ -233,14 +331,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.sharedPublicContactDetails = sharedPublicContactDetails;
     }
 
-    @ManyToMany(targetEntity = ArrangementsRecordEntry.class,
-            cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @JoinTable(name = "OpportunityArrPolicyEntry",
-        joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
-        inverseJoinColumns = @JoinColumn(name = "PolicyId", columnDefinition = "raw(16)"))
-    @Where(clause = "Discriminator='A'")
     public Set<ArrangementsRecordEntry> getArrangements() {
         return this.arrangements;
     }
@@ -249,7 +339,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.arrangements = arrangements;
     }
 
-    @Column(length = 2000)
     public String getRequirements() {
         return this.requirements;
     }
@@ -258,7 +347,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.requirements = requirements;
     }
 
-    @Column(length = 2000)
     public String getBenefits() {
         return this.benefits;
     }
@@ -267,11 +355,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.benefits = benefits;
     }
 
-    @ManyToMany(targetEntity = Skill.class, fetch = FetchType.EAGER)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @JoinTable(name = "OpportunitySkillsRequired",
-        joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
-        inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
     public Set<Skill> getSkillsRequired() {
         return this.skillsRequired;
     }
@@ -280,11 +363,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.skillsRequired = skillsRequired;
     }
 
-    @ManyToMany(targetEntity = Skill.class, fetch = FetchType.EAGER)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @JoinTable(name = "OpportunitySkillsToGain",
-        joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
-        inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
     public Set<Skill> getSkillsToGain() {
         return this.skillsToGain;
     }
@@ -293,7 +371,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.skillsToGain = skillsToGain;
     }
 
-    @Column(length = 2000)
     public String getDescription() {
         return this.description;
     }
@@ -302,7 +379,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.description = description;
     }
 
-    @Column(length = 250)
     public String getShortDescription() {
         return this.shortDescription;
     }
@@ -311,7 +387,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.shortDescription = shortDescription;
     }
 
-    @Column
     public float getMonetaryValuePerHour() {
         return this.monetaryValuePerHour;
     }
@@ -320,7 +395,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.monetaryValuePerHour = monetaryValuePerHour;
     }
 
-    @Column
     public boolean isIsVirtualRemote() {
         return this.isVirtualRemote;
     }
@@ -329,7 +403,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.isVirtualRemote = isVirtualRemote;
     }
 
-    @Column
     public boolean isIsResidential() {
         return this.isResidential;
     }
@@ -338,7 +411,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.isResidential = isResidential;
     }
 
-    @Column
     public boolean isIsOneOff() {
         return this.isOneOff;
     }
@@ -347,7 +419,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.isOneOff = isOneOff;
     }
 
-    @Column
     public boolean isIsDateSpecific() {
         return this.isDateSpecific;
     }
@@ -356,7 +427,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.isDateSpecific = isDateSpecific;
     }
 
-    @Column
     public Date getSpecificStartDate() {
         return this.specificStartDate;
     }
@@ -365,7 +435,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.specificStartDate = specificStartDate;
     }
 
-    @Column
     public Date getSpecificEndDate() {
         return this.specificEndDate;
     }
@@ -374,7 +443,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.specificEndDate = specificEndDate;
     }
 
-    @Column
     public long getCommitmentAm() {
         return this.commitmentAm;
     }
@@ -383,7 +451,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.commitmentAm = commitmentAm;
     }
 
-    @Column
     public long getCommitmentPm() {
         return this.commitmentPm;
     }
@@ -392,7 +459,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.commitmentPm = commitmentPm;
     }
 
-    @Column
     public long getCommitmentEve() {
         return this.commitmentEve;
     }
@@ -401,12 +467,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.commitmentEve = commitmentEve;
     }
 
-    @ManyToMany(targetEntity = CommitmentType.class, fetch = FetchType.EAGER)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @JoinTable(name = "OpportunityCommitmentTypes",
-        joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
-        inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
-    @Where(clause = "Discriminator='CommitmentType'")
     public Set<CommitmentType> getCommitmentTypes() {
         return this.commitmentTypes;
     }
@@ -415,12 +475,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.commitmentTypes = commitmentTypes;
     }
 
-    @ManyToMany(targetEntity = TaggedData.class, fetch = FetchType.EAGER)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @JoinTable(name = "OpportunityTags",
-        joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
-        inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
-    @Where(clause = "Discriminator='TaggedData'")
     public Set<TaggedData> getTags() {
         return this.tags;
     }
@@ -429,13 +483,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.tags = tags;
     }
 
-    @ManyToMany(targetEntity = CampaignsAndInitiatives.class,
-            fetch = FetchType.EAGER)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @JoinTable(name = "OpportunityCampsAndInits",
-        joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
-        inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
-    @Where(clause = "Discriminator='CampaignsAndInitiatives'")
     public Set<CampaignsAndInitiatives> getCampaignsAndInitiatives() {
         return this.campaignsAndInitiatives;
     }
@@ -444,12 +491,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.campaignsAndInitiatives = campaignsAndInitiatives;
     }
 
-    @ManyToMany(targetEntity = TypeOfActivity.class, fetch = FetchType.EAGER)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @JoinTable(name = "OpportunityTypesOfActivity",
-        joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
-        inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
-    @Where(clause = "Discriminator='TypeOfActivity'")
     public Set<TypeOfActivity> getTypeOfActivity() {
         return this.typeOfActivity;
     }
@@ -458,12 +499,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.typeOfActivity = typeOfActivity;
     }
 
-    @ManyToMany(targetEntity = CauseInterest.class, fetch = FetchType.EAGER)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @JoinTable(name = "OpportunityCausesInterests",
-        joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
-        inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
-    @Where(clause = "Discriminator='CauseInterest'")
     public Set<CauseInterest> getCausesInterests() {
         return this.causesInterests;
     }
@@ -472,7 +507,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.causesInterests = causesInterests;
     }
 
-    @Column
     public Date getAdvertisingStartDate() {
         return this.advertisingStartDate;
     }
@@ -481,7 +515,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.advertisingStartDate = advertisingStartDate;
     }
 
-    @Column
     public Date getAdvertisingEndDate() {
         return this.advertisingEndDate;
     }
@@ -490,7 +523,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.advertisingEndDate = advertisingEndDate;
     }
 
-    @Column
     public boolean isPublishToDoIt() {
         return this.publishToDoIt;
     }
@@ -499,7 +531,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.publishToDoIt = publishToDoIt;
     }
 
-    @Column
     public boolean isIsActive() {
         return this.isActive;
     }
@@ -508,12 +539,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.isActive = isActive;
     }
 
-    @ManyToMany(targetEntity = Suitabilities.class, fetch = FetchType.EAGER)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @JoinTable(name = "OpportunityAddSpecSuitabs",
-        joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
-        inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
-    @Where(clause = "Discriminator='Suitabilities'")
     public Set<Suitabilities> getAddSpecSuitabilities() {
         return this.addSpecSuitabilities;
     }
@@ -522,12 +547,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
         this.addSpecSuitabilities = addSpecSuitabilities;
     }
 
-    @ManyToMany(targetEntity = SelectionMethod.class, fetch = FetchType.EAGER)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @JoinTable(name = "OpportunitySelectionMethods",
-        joinColumns = @JoinColumn(name = "OpportunityId", columnDefinition = "raw(16)"),
-        inverseJoinColumns = @JoinColumn(name = "LookupId", columnDefinition = "raw(16)"))
-    @Where(clause = "Discriminator='SelectionMethod'")
     public Set<SelectionMethod> getSelectionMethods() {
         return this.selectionMethods;
     }
@@ -535,8 +554,6 @@ public class Opportunity extends GenericDTO implements java.io.Serializable {
     public void setSelectionMethods(Set<SelectionMethod> selectionMethods) {
         this.selectionMethods = selectionMethods;
     }
-
-
 }
 
 
