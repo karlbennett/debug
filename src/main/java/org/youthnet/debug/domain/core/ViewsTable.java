@@ -1,8 +1,6 @@
-package org.youthnet.debug.domain.core.old;
+package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
-
-import org.youthnet.debug.domain.core.GenericDTO;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,14 +13,28 @@ import javax.persistence.Table;
 @Table(name = "ViewsTable")
 public class ViewsTable extends GenericDTO implements java.io.Serializable {
 
-
+    @Column
     private Integer vbase2Id;
+
+    @Column
     private String fieldName;
+
+    @Column
     private String sectionName;
+
+    @Column
     private String sectionLookup;
+
+    @Column
     private String lookupUpTypesValue;
+
+    @Column
     private String discriminator;
+
+    @Column
     private boolean isSKills;
+
+    @Column
     private String skillType;
 
     public ViewsTable() {
@@ -39,7 +51,6 @@ public class ViewsTable extends GenericDTO implements java.io.Serializable {
         this.skillType = skillType;
     }
 
-    @Column
     public Integer getVbase2Id() {
         return this.vbase2Id;
     }
@@ -48,7 +59,6 @@ public class ViewsTable extends GenericDTO implements java.io.Serializable {
         this.vbase2Id = vbase2Id;
     }
 
-    @Column
     public String getFieldName() {
         return this.fieldName;
     }
@@ -57,7 +67,6 @@ public class ViewsTable extends GenericDTO implements java.io.Serializable {
         this.fieldName = fieldName;
     }
 
-    @Column
     public String getSectionName() {
         return this.sectionName;
     }
@@ -66,7 +75,6 @@ public class ViewsTable extends GenericDTO implements java.io.Serializable {
         this.sectionName = sectionName;
     }
 
-    @Column
     public String getSectionLookup() {
         return this.sectionLookup;
     }
@@ -75,7 +83,6 @@ public class ViewsTable extends GenericDTO implements java.io.Serializable {
         this.sectionLookup = sectionLookup;
     }
 
-    @Column
     public String getLookupUpTypesValue() {
         return this.lookupUpTypesValue;
     }
@@ -84,7 +91,6 @@ public class ViewsTable extends GenericDTO implements java.io.Serializable {
         this.lookupUpTypesValue = lookupUpTypesValue;
     }
 
-    @Column
     public String getDiscriminator() {
         return this.discriminator;
     }
@@ -93,7 +99,6 @@ public class ViewsTable extends GenericDTO implements java.io.Serializable {
         this.discriminator = discriminator;
     }
 
-    @Column
     public boolean isIsSKills() {
         return this.isSKills;
     }
@@ -102,7 +107,6 @@ public class ViewsTable extends GenericDTO implements java.io.Serializable {
         this.isSKills = isSKills;
     }
 
-    @Column
     public String getSkillType() {
         return this.skillType;
     }

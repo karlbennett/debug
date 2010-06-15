@@ -1,4 +1,4 @@
-package org.youthnet.debug.domain.core.old;
+package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
@@ -17,18 +17,43 @@ import javax.persistence.Table;
 @Table(name = "VBase3Preference")
 public class VBase3Preference extends GenericDTO implements java.io.Serializable {
 
-
+    @Column(columnDefinition = "raw(16)")
+    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
     private UuidType languageId;
+
+    @Column
     private boolean usingVisualNotification;
+
+    @Column
     private boolean usingAudioNotification;
+
+    @Column
     private boolean usingLogNotification;
+
+    @Column
     private Integer dataSchemaVersion;
+
+    @Column
     private String applicationName;
+
+    @Column
     private String copyright;
+
+    @Column
     private Integer colourTheme;
+
+    @Column(columnDefinition = "raw(16)")
+    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
     private UuidType defaultCountyId;
+
+    @Column(columnDefinition = "raw(16)")
+    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
     private UuidType defaultCountryId;
+
+    @Column
     private boolean useDefaultCounty;
+
+    @Column
     private boolean useDefaultCountry;
 
     public VBase3Preference() {
@@ -49,8 +74,6 @@ public class VBase3Preference extends GenericDTO implements java.io.Serializable
         this.useDefaultCountry = useDefaultCountry;
     }
 
-    @Column(columnDefinition = "raw(16)")
-    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
     public UuidType getLanguageId() {
         return this.languageId;
     }
@@ -59,7 +82,6 @@ public class VBase3Preference extends GenericDTO implements java.io.Serializable
         this.languageId = languageId;
     }
 
-    @Column
     public boolean isUsingVisualNotification() {
         return this.usingVisualNotification;
     }
@@ -68,7 +90,6 @@ public class VBase3Preference extends GenericDTO implements java.io.Serializable
         this.usingVisualNotification = usingVisualNotification;
     }
 
-    @Column
     public boolean isUsingAudioNotification() {
         return this.usingAudioNotification;
     }
@@ -77,7 +98,6 @@ public class VBase3Preference extends GenericDTO implements java.io.Serializable
         this.usingAudioNotification = usingAudioNotification;
     }
 
-    @Column
     public boolean isUsingLogNotification() {
         return this.usingLogNotification;
     }
@@ -86,7 +106,6 @@ public class VBase3Preference extends GenericDTO implements java.io.Serializable
         this.usingLogNotification = usingLogNotification;
     }
 
-    @Column
     public Integer getDataSchemaVersion() {
         return this.dataSchemaVersion;
     }
@@ -95,7 +114,6 @@ public class VBase3Preference extends GenericDTO implements java.io.Serializable
         this.dataSchemaVersion = dataSchemaVersion;
     }
 
-    @Column
     public String getApplicationName() {
         return this.applicationName;
     }
@@ -104,7 +122,6 @@ public class VBase3Preference extends GenericDTO implements java.io.Serializable
         this.applicationName = applicationName;
     }
 
-    @Column
     public String getCopyright() {
         return this.copyright;
     }
@@ -113,7 +130,6 @@ public class VBase3Preference extends GenericDTO implements java.io.Serializable
         this.copyright = copyright;
     }
 
-    @Column
     public Integer getColourTheme() {
         return this.colourTheme;
     }
@@ -122,8 +138,6 @@ public class VBase3Preference extends GenericDTO implements java.io.Serializable
         this.colourTheme = colourTheme;
     }
 
-    @Column(columnDefinition = "raw(16)")
-    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
     public UuidType getDefaultCountyId() {
         return this.defaultCountyId;
     }
@@ -132,8 +146,6 @@ public class VBase3Preference extends GenericDTO implements java.io.Serializable
         this.defaultCountyId = defaultCountyId;
     }
 
-    @Column(columnDefinition = "raw(16)")
-    @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
     public UuidType getDefaultCountryId() {
         return this.defaultCountryId;
     }
@@ -142,7 +154,6 @@ public class VBase3Preference extends GenericDTO implements java.io.Serializable
         this.defaultCountryId = defaultCountryId;
     }
 
-    @Column
     public boolean isUseDefaultCounty() {
         return this.useDefaultCounty;
     }
@@ -151,7 +162,6 @@ public class VBase3Preference extends GenericDTO implements java.io.Serializable
         this.useDefaultCounty = useDefaultCounty;
     }
 
-    @Column
     public boolean isUseDefaultCountry() {
         return this.useDefaultCountry;
     }

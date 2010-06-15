@@ -29,7 +29,7 @@ public class Vuo extends BaseObject {
     @Type(type = "org.youthnet.debug.domain.common.impl.UuidTypeImpl")
     private UuidType organisationId;
 
-    @OneToMany( mappedBy = "vuo", targetEntity = User.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER )
+    @OneToMany( mappedBy = "vuo", cascade = CascadeType.ALL, fetch = FetchType.EAGER )
     private Set<User> users = new HashSet<User>();
 
 

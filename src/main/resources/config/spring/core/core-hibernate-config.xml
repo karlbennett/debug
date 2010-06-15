@@ -31,6 +31,8 @@
                 <value>org.youthnet.debug.domain.core.SearchQueries</value>
                 <value>org.youthnet.debug.domain.core.Test</value>
                 <value>org.youthnet.debug.domain.core.Users</value>
+                <value>org.youthnet.debug.domain.core.VBase3Preference</value>
+                <value>org.youthnet.debug.domain.core.ViewsTable</value>
             </list>
         </property>
         <property name="hibernateProperties">

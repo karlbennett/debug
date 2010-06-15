@@ -1,4 +1,4 @@
-package org.youthnet.debug.domain.core.old;
+package org.youthnet.debug.domain.core;
 
 import java.io.Serializable;
 import java.util.Date;

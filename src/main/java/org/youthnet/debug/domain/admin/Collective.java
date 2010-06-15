@@ -21,7 +21,7 @@ public class Collective extends BaseObject {
     @Column
     private String password;
 
-    @OneToMany( mappedBy = "collective", targetEntity = Vuo.class, cascade = CascadeType.ALL, fetch = FetchType.EAGER )
+    @OneToMany( mappedBy = "collective", cascade = CascadeType.ALL, fetch = FetchType.EAGER )
     private Set<Vuo> vuos = new HashSet<Vuo>();
 
     
