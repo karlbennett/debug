@@ -42,7 +42,7 @@ public class User extends BaseObject {
     @Version
     private Integer version;
 
-    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Role.class)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable( name="user_role",
                 joinColumns = @JoinColumn( name = "user_id", columnDefinition = "raw(16)"),
                 inverseJoinColumns = @JoinColumn( name = "role_id"))
