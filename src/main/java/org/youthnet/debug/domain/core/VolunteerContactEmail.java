@@ -2,10 +2,9 @@ package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
-import org.hibernate.annotations.Cascade;
 import org.youthnet.debug.domain.core.Volunteer;
 import org.youthnet.debug.domain.core.lookups.EmailType;
-import org.youthnet.debug.domain.core.old.VolunteerContactInfo;
+import org.youthnet.debug.domain.core.VolunteerContactInfo;
 
 import javax.persistence.*;
 

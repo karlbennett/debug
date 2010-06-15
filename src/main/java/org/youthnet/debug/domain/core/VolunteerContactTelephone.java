@@ -3,7 +3,7 @@ package org.youthnet.debug.domain.core;
 
 
 import org.youthnet.debug.domain.core.lookups.TelephoneType;
-import org.youthnet.debug.domain.core.old.VolunteerContactInfo;
+import org.youthnet.debug.domain.core.VolunteerContactInfo;
 
 import javax.persistence.*;
 import javax.persistence.Entity;

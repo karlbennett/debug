@@ -10,7 +10,7 @@ import org.youthnet.debug.domain.core.Address;
 import org.youthnet.debug.domain.core.Organisation;
 import org.youthnet.debug.domain.core.lookups.Country;
 import org.youthnet.debug.domain.core.lookups.County;
-import org.youthnet.debug.domain.core.old.OrganisationContact;
+import org.youthnet.debug.domain.core.OrganisationContact;
 
 import javax.persistence.*;
 

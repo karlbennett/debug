@@ -15,7 +15,7 @@ import org.youthnet.debug.domain.core.lookups.CauseInterest;
 import org.youthnet.debug.domain.core.lookups.GeographicalArea;
 import org.youthnet.debug.domain.core.lookups.OrganisationType;
 import org.youthnet.debug.domain.core.lookups.TaggedData;
-import org.youthnet.debug.domain.core.old.OrganisationAddress;
+import org.youthnet.debug.domain.core.OrganisationAddress;
 
 import javax.persistence.*;
 import javax.persistence.CascadeType;

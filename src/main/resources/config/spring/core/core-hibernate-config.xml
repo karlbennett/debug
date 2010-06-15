@@ -37,6 +37,9 @@
                 <value>org.youthnet.debug.domain.core.VolunteerAddress</value>
                 <value>org.youthnet.debug.domain.core.VolunteerContactEmail</value>
                 <value>org.youthnet.debug.domain.core.VolunteerContactTelephone</value>
+                <value>org.youthnet.debug.domain.core.Organisation</value>
+                <value>org.youthnet.debug.domain.core.OrganisationAddress</value>
+                <value>org.youthnet.debug.domain.core.OrganisationContact</value>
             </list>
         </property>
         <property name="hibernateProperties">

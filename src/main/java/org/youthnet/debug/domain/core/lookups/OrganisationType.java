@@ -14,8 +14,6 @@ import org.youthnet.debug.domain.core.lookups.LookupBase;
 @DiscriminatorValue(value = "OrganisationType")
 public class OrganisationType extends LookupBase implements java.io.Serializable {
 
-
-
     public OrganisationType() {
     }
 
