@@ -1,11 +1,10 @@
-package org.youthnet.debug.domain.core.old;
+package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
 import java.util.Set;
 
-import org.youthnet.debug.domain.core.Address;
-import org.youthnet.debug.domain.core.ContactDetails;
+import org.youthnet.debug.domain.core.*;
 import org.youthnet.debug.domain.core.enums.LocationTypes;
 import org.youthnet.debug.domain.core.enums.PublicContactDetailsSource;
 import org.youthnet.debug.domain.core.lookups.GeographicalArea;
@@ -19,25 +18,32 @@ import javax.persistence.*;
 @DiscriminatorValue(value = "PostCodeLocationAddress")
 public class PostCodeLocationAddress extends LocationBase implements java.io.Serializable {
 
+    @Column
+    private boolean UseCustomAddress;
 
-private boolean UseCustomAddress;
-private Address CustomAddress;
-private OrganisationAddress orgAddress;
-private boolean UseForContactDetails;
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "AddressId", columnDefinition = "raw(16)")
+    private Address CustomAddress;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "OrgAddressId", columnDefinition = "raw(16)")
+    private OrganisationAddress orgAddress;
+
+    @Column
+    private boolean UseForContactDetails;
 
     public PostCodeLocationAddress() {
         this.setLocationType(LocationTypes.POSTCODE);
     }
 
     public PostCodeLocationAddress(String DisplayString, Opportunity owner, LocationTypes locationType, ContactDetails contactDetails, ContactDetails publicContactDetails, boolean UseCustomOrgName, String CustomOrgName, PublicContactDetailsSource publicContactDetailsSource, Set<GeographicalArea> geographicalAreas, boolean IsActive, boolean UseCustomAddress, Address CustomAddress, OrganisationAddress orgAddress, boolean UseForContactDetails) {
-        super(DisplayString, owner, locationType, contactDetails, publicContactDetails, UseCustomOrgName, CustomOrgName, publicContactDetailsSource, geographicalAreas, IsActive);        
-       this.UseCustomAddress = UseCustomAddress;
-       this.CustomAddress = CustomAddress;
-       this.orgAddress = orgAddress;
-       this.UseForContactDetails = UseForContactDetails;
+        super(DisplayString, owner, locationType, contactDetails, publicContactDetails, UseCustomOrgName, CustomOrgName, publicContactDetailsSource, geographicalAreas, IsActive);
+        this.UseCustomAddress = UseCustomAddress;
+        this.CustomAddress = CustomAddress;
+        this.orgAddress = orgAddress;
+        this.UseForContactDetails = UseForContactDetails;
     }
-   
-    @Column
+
     public boolean isUseCustomAddress() {
         return this.UseCustomAddress;
     }
@@ -46,10 +52,6 @@ private boolean UseForContactDetails;
         this.UseCustomAddress = UseCustomAddress;
     }
 
-    @ManyToOne(targetEntity = Address.class,
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "AddressId", columnDefinition = "raw(16)")
     public Address getCustomAddress() {
         return this.CustomAddress;
     }
@@ -58,9 +60,6 @@ private boolean UseForContactDetails;
         this.CustomAddress = CustomAddress;
     }
 
-    @ManyToOne(targetEntity = OrganisationAddress.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "OrgAddressId", columnDefinition = "raw(16)")
     public OrganisationAddress getOrgAddress() {
         return this.orgAddress;
     }
@@ -69,7 +68,6 @@ private boolean UseForContactDetails;
         this.orgAddress = orgAddress;
     }
 
-    @Column
     public boolean isUseForContactDetails() {
         return this.UseForContactDetails;
     }
@@ -77,8 +75,6 @@ private boolean UseForContactDetails;
     public void setUseForContactDetails(boolean UseForContactDetails) {
         this.UseForContactDetails = UseForContactDetails;
     }
-
-
 
 
 }

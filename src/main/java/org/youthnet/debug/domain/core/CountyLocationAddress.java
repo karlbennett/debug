@@ -1,10 +1,12 @@
-package org.youthnet.debug.domain.core.old;
+package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
 import java.util.Set;
 
 import org.youthnet.debug.domain.core.ContactDetails;
+import org.youthnet.debug.domain.core.LocationBase;
+import org.youthnet.debug.domain.core.Opportunity;
 import org.youthnet.debug.domain.core.enums.LocationTypes;
 import org.youthnet.debug.domain.core.enums.PublicContactDetailsSource;
 import org.youthnet.debug.domain.core.lookups.County;
@@ -19,21 +21,19 @@ import javax.persistence.*;
 @DiscriminatorValue(value = "CountyLocationAddress")
 public class CountyLocationAddress extends LocationBase implements java.io.Serializable {
 
-
-private County County;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "CountyId", columnDefinition = "raw(16)")
+    private County County;
 
     public CountyLocationAddress() {
         this.setLocationType(LocationTypes.COUNTY);
     }
 
     public CountyLocationAddress(String DisplayString, Opportunity owner, LocationTypes locationType, ContactDetails contactDetails, ContactDetails publicContactDetails, boolean UseCustomOrgName, String CustomOrgName, PublicContactDetailsSource publicContactDetailsSource, Set<GeographicalArea> geographicalAreas, boolean IsActive, County County) {
-        super(DisplayString, owner, locationType, contactDetails, publicContactDetails, UseCustomOrgName, CustomOrgName, publicContactDetailsSource, geographicalAreas, IsActive);        
-       this.County = County;
+        super(DisplayString, owner, locationType, contactDetails, publicContactDetails, UseCustomOrgName, CustomOrgName, publicContactDetailsSource, geographicalAreas, IsActive);
+        this.County = County;
     }
-   
-    @ManyToOne(targetEntity = County.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "CountyId", columnDefinition = "raw(16)")
+
     public County getCounty() {
         return this.County;
     }

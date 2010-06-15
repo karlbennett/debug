@@ -42,6 +42,8 @@
                 <value>org.youthnet.debug.domain.core.OrganisationContact</value>
                 <value>org.youthnet.debug.domain.core.Opportunity</value>
                 <value>org.youthnet.debug.domain.core.LocationBase</value>
+                <value>org.youthnet.debug.domain.core.CountyLocationAddress</value>
+                <value>org.youthnet.debug.domain.core.PostCodeLocationAddress</value>
             </list>
         </property>
         <property name="hibernateProperties">
