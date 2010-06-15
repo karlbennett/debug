@@ -3,6 +3,7 @@ package org.youthnet.debug.domain.core.old;
 
 
 import org.hibernate.annotations.*;
+import org.youthnet.debug.domain.core.Volunteer;
 import org.youthnet.debug.domain.core.old.ActivityLog;
 import org.youthnet.debug.domain.core.GenericDTO;
 

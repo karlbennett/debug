@@ -1,9 +1,10 @@
-package org.youthnet.debug.domain.core.old;
+package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
 import org.hibernate.annotations.Cascade;
 import org.youthnet.debug.domain.core.Address;
+import org.youthnet.debug.domain.core.Volunteer;
 import org.youthnet.debug.domain.core.lookups.Country;
 import org.youthnet.debug.domain.core.lookups.County;
 
@@ -17,10 +18,18 @@ import javax.persistence.*;
 @PrimaryKeyJoinColumn(name = "AddressId", columnDefinition = "raw(16)")
 public class VolunteerAddress extends Address implements java.io.Serializable {
 
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)")
+    @javax.xml.bind.annotation.XmlTransient
     private Volunteer contactDetails;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column
     private boolean isDefaultAddress;
+
+    @Column
     private boolean isActive;
 
     public VolunteerAddress() {
@@ -38,11 +47,6 @@ public class VolunteerAddress extends Address implements java.io.Serializable {
         this.isDefaultAddress = isDefaultAddress;
     }
 
-    @ManyToOne(targetEntity = Volunteer.class,
-            fetch = FetchType.EAGER)
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)")
-    @javax.xml.bind.annotation.XmlTransient
     public Volunteer getContactDetails() {
         return this.contactDetails;
     }
@@ -51,7 +55,6 @@ public class VolunteerAddress extends Address implements java.io.Serializable {
         this.contactDetails = contactDetails;
     }
 
-    @Column(nullable = false)
     public String getName() {
         return this.name;
     }
@@ -60,7 +63,6 @@ public class VolunteerAddress extends Address implements java.io.Serializable {
         this.name = name;
     }
 
-    @Column
     public boolean isIsDefaultAddress() {
         return this.isDefaultAddress;
     }
@@ -69,8 +71,6 @@ public class VolunteerAddress extends Address implements java.io.Serializable {
         this.isDefaultAddress = isDefaultAddress;
     }
 
-
-    @Column
     public boolean isIsActive() {
         return this.isActive;
     }
@@ -78,7 +78,6 @@ public class VolunteerAddress extends Address implements java.io.Serializable {
     public void setIsActive(boolean active) {
         this.isActive = active;
     }
-
 }
 
 

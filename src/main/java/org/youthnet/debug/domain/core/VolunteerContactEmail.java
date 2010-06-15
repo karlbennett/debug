@@ -1,9 +1,11 @@
-package org.youthnet.debug.domain.core.old;
+package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
 import org.hibernate.annotations.Cascade;
+import org.youthnet.debug.domain.core.Volunteer;
 import org.youthnet.debug.domain.core.lookups.EmailType;
+import org.youthnet.debug.domain.core.old.VolunteerContactInfo;
 
 import javax.persistence.*;
 
@@ -15,30 +17,33 @@ import javax.persistence.*;
 @PrimaryKeyJoinColumn(name = "VolunteerContactInfoId", columnDefinition = "raw(16)")
 public class VolunteerContactEmail extends VolunteerContactInfo implements java.io.Serializable {
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)")
+    @javax.xml.bind.annotation.XmlTransient
+    private Volunteer contactDetails;
 
-private Volunteer contactDetails;
-private EmailType type;
-private String email;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "TelephoneTypeId", columnDefinition = "raw(16)")
+    private EmailType type;
+
+    @Column(length = 320, nullable = false)
+    private String email;
 
     public VolunteerContactEmail() {
     }
 
-	
+
     public VolunteerContactEmail(String email) {
         this.email = email;
     }
+
     public VolunteerContactEmail(boolean isActive, boolean isDefault, String notes, Volunteer contactDetails, EmailType type, String email) {
-        super(isActive, isDefault, notes);        
-       this.contactDetails = contactDetails;
-       this.type = type;
-       this.email = email;
+        super(isActive, isDefault, notes);
+        this.contactDetails = contactDetails;
+        this.type = type;
+        this.email = email;
     }
 
-    @ManyToOne(targetEntity = Volunteer.class,
-            fetch = FetchType.EAGER)
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)")
-    @javax.xml.bind.annotation.XmlTransient
     public Volunteer getContactDetails() {
         return this.contactDetails;
     }
@@ -47,9 +52,6 @@ private String email;
         this.contactDetails = contactDetails;
     }
 
-    @ManyToOne(targetEntity = EmailType.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "TelephoneTypeId", columnDefinition = "raw(16)")
     public EmailType getType() {
         return this.type;
     }
@@ -58,7 +60,6 @@ private String email;
         this.type = type;
     }
 
-    @Column(length = 320, nullable = false)
     public String getEmail() {
         return this.email;
     }
@@ -66,8 +67,6 @@ private String email;
     public void setEmail(String email) {
         this.email = email;
     }
-
-
 
 
 }

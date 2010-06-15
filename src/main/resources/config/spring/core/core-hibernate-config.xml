@@ -33,6 +33,10 @@
                 <value>org.youthnet.debug.domain.core.Users</value>
                 <value>org.youthnet.debug.domain.core.VBase3Preference</value>
                 <value>org.youthnet.debug.domain.core.ViewsTable</value>
+                <value>org.youthnet.debug.domain.core.Volunteer</value>
+                <value>org.youthnet.debug.domain.core.VolunteerAddress</value>
+                <value>org.youthnet.debug.domain.core.VolunteerContactEmail</value>
+                <value>org.youthnet.debug.domain.core.VolunteerContactTelephone</value>
             </list>
         </property>
         <property name="hibernateProperties">

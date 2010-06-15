@@ -1,9 +1,9 @@
-package org.youthnet.debug.domain.core.old;
+package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
-import org.hibernate.annotations.*;
 import org.youthnet.debug.domain.core.lookups.TelephoneType;
+import org.youthnet.debug.domain.core.old.VolunteerContactInfo;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -17,30 +17,33 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "VolunteerContactInfoId", columnDefinition = "raw(16)")
 public class VolunteerContactTelephone extends VolunteerContactInfo implements java.io.Serializable {
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)")
+    @javax.xml.bind.annotation.XmlTransient
+    private Volunteer contactDetails;
 
-private Volunteer contactDetails;
-private TelephoneType type;
-private String number;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "TelephoneTypeId", columnDefinition = "raw(16)")
+    private TelephoneType type;
+
+    @Column(length = 255, nullable = false, name = "tel_number")
+    private String number;
 
     public VolunteerContactTelephone() {
     }
 
-	
+
     public VolunteerContactTelephone(String number) {
         this.number = number;
     }
+
     public VolunteerContactTelephone(boolean isActive, boolean isDefault, String notes, Volunteer contactDetails, TelephoneType type, String number) {
-        super(isActive, isDefault, notes);        
-       this.contactDetails = contactDetails;
-       this.type = type;
-       this.number = number;
+        super(isActive, isDefault, notes);
+        this.contactDetails = contactDetails;
+        this.type = type;
+        this.number = number;
     }
 
-    @ManyToOne(targetEntity = Volunteer.class,
-            fetch = FetchType.EAGER)
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)")
-    @javax.xml.bind.annotation.XmlTransient
     public Volunteer getContactDetails() {
         return this.contactDetails;
     }
@@ -49,9 +52,6 @@ private String number;
         this.contactDetails = contactDetails;
     }
 
-    @ManyToOne(targetEntity = TelephoneType.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "TelephoneTypeId", columnDefinition = "raw(16)")
     public TelephoneType getType() {
         return this.type;
     }
@@ -60,7 +60,6 @@ private String number;
         this.type = type;
     }
 
-    @Column(length = 255, nullable = false, name = "tel_number")
     public String getNumber() {
         return this.number;
     }
@@ -68,8 +67,6 @@ private String number;
     public void setNumber(String number) {
         this.number = number;
     }
-
-
 
 
 }
