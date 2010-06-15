@@ -5,6 +5,8 @@ package org.youthnet.debug.domain.core.old;
 import java.util.Set;
 
 import org.youthnet.debug.domain.core.ContactDetails;
+import org.youthnet.debug.domain.core.LocationBase;
+import org.youthnet.debug.domain.core.Opportunity;
 import org.youthnet.debug.domain.core.enums.LocationTypes;
 import org.youthnet.debug.domain.core.enums.PublicContactDetailsSource;
 import org.youthnet.debug.domain.core.lookups.GeographicalArea;

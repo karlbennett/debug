@@ -10,8 +10,8 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.ForeignKey;
 import org.youthnet.debug.domain.core.GenericDTO;
+import org.youthnet.debug.domain.core.OrganisationContact;
 import org.youthnet.debug.domain.core.lookups.ActivityType;
-import org.youthnet.debug.domain.core.old.*;
 
 import javax.persistence.*;
 import javax.persistence.CascadeType;

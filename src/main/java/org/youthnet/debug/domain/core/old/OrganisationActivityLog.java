@@ -3,6 +3,8 @@ package org.youthnet.debug.domain.core.old;
 
 
 import org.hibernate.annotations.Cascade;
+import org.youthnet.debug.domain.core.Organisation;
+import org.youthnet.debug.domain.core.OrganisationContact;
 import org.youthnet.debug.domain.core.old.ActivityLog;
 import org.youthnet.debug.domain.core.GenericDTO;
 
