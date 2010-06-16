@@ -7,3 +7,6 @@ debug.iws
 
 derby.log
 derbydb
+
+admin.log
+webservice.log
