@@ -12,6 +12,7 @@
     <import resource="classpath:config/spring/core/core-hibernate-config.xml"/>
     <import resource="classpath:config/spring/core/core-jdbc-config.xml"/>
     <import resource="classpath:config/spring/client-config.xml"/>
+    <import resource="classpath:config/spring/log-config.xml"/>
 
     <context:component-scan base-package="org.youthnet.debug.controllers"/>
 </beans>

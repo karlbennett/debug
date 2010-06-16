@@ -238,13 +238,16 @@
         <sql.binTypeStart>hextoraw('</sql.binTypeStart>
         <sql.binTypeEnd>')</sql.binTypeEnd>
         <sql.selectTableNames>SELECT table_name FROM user_tables ORDER BY table_name</sql.selectTableNames>
-        <sql.selectSchemaNames>"SELECT * FROM all_users WHERE username LIKE '${db.default.username}%'</sql.selectSchemaNames>
+        <sql.selectSchemaNames>"SELECT * FROM all_users WHERE username LIKE '${db.default.username}%'
+        </sql.selectSchemaNames>
         <!--    Hibernate configuration -->
         <hibernate.dialect>org.hibernate.dialect.Oracle10gDialect</hibernate.dialect>
         <hiernate.hbm2ddl>validate</hiernate.hbm2ddl>
         <hibernate.substitutions>true '1', false '0'</hibernate.substitutions>
         <hibernate.mapping>config/spring/mapping-empty.xml</hibernate.mapping>
 
+        <admin.log.path>Get admin log path from the settings.xml</admin.log.path>
+        <webservice.log.path>Get webservice log path from the settings.xml</webservice.log.path>
     </properties>
 
     <profiles>
@@ -271,13 +274,16 @@
                 <sql.false>0</sql.false>
                 <sql.binTypeStart>X'</sql.binTypeStart>
                 <sql.binTypeEnd>'</sql.binTypeEnd>
-                <sql.selectTableNames><![CDATA[SELECT tablename FROM sys.systables WHERE tablename NOT LIKE 'GENERICTABLE' AND tablename NOT LIKE 'SYS%' ORDER BY tablename]]></sql.selectTableNames>
+                <sql.selectTableNames>
+                    <![CDATA[SELECT tablename FROM sys.systables WHERE tablename NOT LIKE 'GENERICTABLE' AND tablename NOT LIKE 'SYS%' ORDER BY tablename]]></sql.selectTableNames>
                 <sql.selectSchemaNames>SELECT schemaname FROM sys.sysschemas</sql.selectSchemaNames>
                 <!--    Hibernate configuration -->
                 <hibernate.dialect>org.hibernate.dialect.DerbyDialect</hibernate.dialect>
                 <hiernate.hbm2ddl>update</hiernate.hbm2ddl>
                 <hibernate.substitutions>true 'T', false 'F'</hibernate.substitutions>
                 <hibernate.mapping>config/spring/admin/admin-mapping.xml</hibernate.mapping>
+                <admin.log.path></admin.log.path>
+                <webservice.log.path></webservice.log.path>
             </properties>
         </profile>
     </profiles>
