@@ -23,7 +23,7 @@ import java.util.Map;
  * User: Karl
  * Date: 22-May-2010
  */
-@Repository("adminJdbcDaoImpl")
+@Repository("adminJdbcDao")
 public class AdminJdbcDaoImpl extends AbstractJdbcDao {
 
     private static final Log log = LogFactory.getLog(AdminJdbcDaoImpl.class);

@@ -22,10 +22,10 @@ public class DBServicesImpl implements DBServices {
 
     private static final Log log = LogFactory.getLog(DBServicesImpl.class);
 
-    @Resource(name = "adminJdbcDaoImpl")
+    @Resource(name = "adminJdbcDao")
     private JdbcDao adminJdbcDao;
 
-    @Resource(name = "coreJdbcDaoImpl")
+    @Resource(name = "coreJdbcDao")
     private JdbcDao coreJdbcDao;
 
     @Resource(name = "&adminSessionFactory")

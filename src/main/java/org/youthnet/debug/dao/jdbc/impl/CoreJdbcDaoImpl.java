@@ -13,7 +13,7 @@ import javax.annotation.Resource;
  * User: Karl
  * Date: 22-May-2010
  */
-@Repository("coreJdbcDaoImpl")
+@Repository("coreJdbcDao")
 public class CoreJdbcDaoImpl extends AbstractJdbcDao {
 
     private static final Log log = LogFactory.getLog(CoreJdbcDaoImpl.class);
