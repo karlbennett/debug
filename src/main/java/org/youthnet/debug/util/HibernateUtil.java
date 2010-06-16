@@ -160,6 +160,8 @@ public class HibernateUtil {
 
         if(tableClassName != null) return tableClassName;
 
+        log.info("Searching for table name");
+
         Iterator mappingIterator = sessionFactory.getConfiguration().getTableMappings();
         Iterator foreignKeyIterator = null;
         Iterator columnIterator = null;
@@ -175,7 +177,9 @@ public class HibernateUtil {
                 columnIterator = foreignKey.getColumnIterator();
                 while (columnIterator.hasNext()) {
                     column = (Column) columnIterator.next();
-                    if (column.getName().equals(columnName)) {
+                    log.info("  -- Table name: " + tableClassName + " found column name: " + column.getName()
+                            + " given column name: " + columnName);
+                    if (column.getName().toLowerCase().equals(columnName.toLowerCase())) {
                         columnToTableMap.put(columnName, tableClassName);
                         return tableClassName;
                     }
