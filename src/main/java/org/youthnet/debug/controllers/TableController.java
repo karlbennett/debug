@@ -95,6 +95,10 @@ public class TableController {
         log.info("  -- Finding the table name.");
         String tableName = HibernateUtil.getTableNameForClass(HibernateUtil.getTableClassNameForColumnReference(
                 columnName.toLowerCase(), adminSessionFactory), adminSessionFactory);
+        if (tableName == null) {
+            tableName = HibernateUtil.getTableNameForClass(HibernateUtil.getTableClassNameForColumnReference(
+                    columnName.toLowerCase(), coreSessionFactory), coreSessionFactory);
+        }
         log.info("      -- Table name found: " + tableName);
         return "redirect:tables.html?tableName="
                 + tableName + "&id=" + id + "#" + tableName;
