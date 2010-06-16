@@ -1,12 +1,6 @@
-package org.youthnet.debug.domain.core.old;
+package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
-
-import org.hibernate.annotations.Cascade;
-import org.youthnet.debug.domain.core.Organisation;
-import org.youthnet.debug.domain.core.OrganisationContact;
-import org.youthnet.debug.domain.core.old.ActivityLog;
-import org.youthnet.debug.domain.core.GenericDTO;
 
 import javax.persistence.*;
 
@@ -17,9 +11,17 @@ import javax.persistence.*;
 @Table(name = "OrganisationActivityLogs")
 public class OrganisationActivityLog extends GenericDTO implements java.io.Serializable {
 
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "OrganisationId", columnDefinition = "raw(16)")
     private Organisation organisation;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ContactId", columnDefinition = "raw(16)")
     private OrganisationContact contact;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ActivityLogId", columnDefinition = "raw(16)")
+    @javax.xml.bind.annotation.XmlTransient
     private ActivityLog activityLog;
 
     public OrganisationActivityLog() {
@@ -31,10 +33,6 @@ public class OrganisationActivityLog extends GenericDTO implements java.io.Seria
         this.activityLog = activityLog;
     }
 
-    @ManyToOne(targetEntity = Organisation.class,
-            fetch = FetchType.EAGER)
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinColumn(name = "OrganisationId", columnDefinition = "raw(16)")
     public Organisation getOrganisation() {
         return this.organisation;
     }
@@ -43,9 +41,6 @@ public class OrganisationActivityLog extends GenericDTO implements java.io.Seria
         this.organisation = organisation;
     }
 
-    @ManyToOne(targetEntity = OrganisationContact.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "ContactId", columnDefinition = "raw(16)")
     public OrganisationContact getContact() {
         return this.contact;
     }
@@ -54,11 +49,6 @@ public class OrganisationActivityLog extends GenericDTO implements java.io.Seria
         this.contact = contact;
     }
 
-    @ManyToOne(targetEntity = ActivityLog.class,
-            fetch = FetchType.EAGER)
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinColumn(name = "ActivityLogId", columnDefinition = "raw(16)")
-    @javax.xml.bind.annotation.XmlTransient
     public ActivityLog getActivityLog() {
         return this.activityLog;
     }

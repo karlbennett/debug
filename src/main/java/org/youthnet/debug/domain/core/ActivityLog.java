@@ -1,4 +1,4 @@
-package org.youthnet.debug.domain.core.old;
+package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
 
@@ -6,11 +6,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.ForeignKey;
-import org.youthnet.debug.domain.core.GenericDTO;
-import org.youthnet.debug.domain.core.OrganisationContact;
 import org.youthnet.debug.domain.core.lookups.ActivityType;
 
 import javax.persistence.*;
@@ -25,43 +22,79 @@ import javax.persistence.Table;
 @Table(name = "ActivityLogs")
 public class ActivityLog extends GenericDTO implements java.io.Serializable {
 
+    @Column
+    private Integer vbase2Id;
 
-private Integer vbase2Id;
-private Date startDate;
-private Date endDate;
-private boolean isAllDayEvent;
-private boolean showInCalender;
-private String startTime;
-private String endTime;
-private String subject;
-private String notes;
-private ActivityType activityType;
-private OrganisationContact personHere;
-private Set<VolunteerActivityLog> volunteerActivityLogs = new HashSet<VolunteerActivityLog>(0);
-private Set<OrganisationActivityLog> organisationActivityLogs = new HashSet<OrganisationActivityLog>(0);
-private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<OpportunityActivityLog>(0);
+    @Column
+    private Date startDate;
+
+    @Column
+    private Date endDate;
+
+    @Column
+    private boolean isAllDayEvent;
+
+    @Column
+    private boolean showInCalender;
+
+    @Column(length = 5)
+    private String startTime;
+
+    @Column(length = 5)
+    private String endTime;
+
+    @Column(length = 255)
+    private String subject;
+
+    @Column
+    private String notes;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ActivityTypeId", columnDefinition = "raw(16)")
+    private ActivityType activityType;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "PersonHereId", columnDefinition = "raw(16)")
+    private OrganisationContact personHere;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = org.hibernate.annotations.FetchMode.SUBSELECT)
+    @ForeignKey(name = "FK_VolunteerActivityLogs")
+    @JoinColumn(name = "ActivityLogId", columnDefinition = "raw(16)")
+    private Set<VolunteerActivityLog> volunteerActivityLogs = new HashSet<VolunteerActivityLog>(0);
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = org.hibernate.annotations.FetchMode.SUBSELECT)
+    @ForeignKey(name = "FK_OrganisationActivityLogs")
+    @JoinColumn(name = "ActivityLogId", columnDefinition = "raw(16)")
+    private Set<OrganisationActivityLog> organisationActivityLogs = new HashSet<OrganisationActivityLog>(0);
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @Fetch(value = org.hibernate.annotations.FetchMode.SUBSELECT)
+    @ForeignKey(name = "FK_OpportunityActivityLogs")
+    @JoinColumn(name = "ActivityLogId", columnDefinition = "raw(16)")
+    private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<OpportunityActivityLog>(0);
 
     public ActivityLog() {
     }
 
     public ActivityLog(Integer vbase2Id, Date startDate, Date endDate, boolean isAllDayEvent, boolean showInCalender, String startTime, String endTime, String subject, String notes, ActivityType activityType, OrganisationContact personHere, Set<VolunteerActivityLog> volunteerActivityLogs, Set<OrganisationActivityLog> organisationActivityLogs, Set<OpportunityActivityLog> opportunityActivityLogs) {
-       this.vbase2Id = vbase2Id;
-       this.startDate = startDate;
-       this.endDate = endDate;
-       this.isAllDayEvent = isAllDayEvent;
-       this.showInCalender = showInCalender;
-       this.startTime = startTime;
-       this.endTime = endTime;
-       this.subject = subject;
-       this.notes = notes;
-       this.activityType = activityType;
-       this.personHere = personHere;
-       this.volunteerActivityLogs = volunteerActivityLogs;
-       this.organisationActivityLogs = organisationActivityLogs;
-       this.opportunityActivityLogs = opportunityActivityLogs;
+        this.vbase2Id = vbase2Id;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.isAllDayEvent = isAllDayEvent;
+        this.showInCalender = showInCalender;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.subject = subject;
+        this.notes = notes;
+        this.activityType = activityType;
+        this.personHere = personHere;
+        this.volunteerActivityLogs = volunteerActivityLogs;
+        this.organisationActivityLogs = organisationActivityLogs;
+        this.opportunityActivityLogs = opportunityActivityLogs;
     }
-   
-    @Column
+
     public Integer getVbase2Id() {
         return this.vbase2Id;
     }
@@ -70,7 +103,6 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.vbase2Id = vbase2Id;
     }
 
-    @Column
     public Date getStartDate() {
         return this.startDate;
     }
@@ -79,7 +111,6 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.startDate = startDate;
     }
 
-    @Column
     public Date getEndDate() {
         return this.endDate;
     }
@@ -88,7 +119,6 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.endDate = endDate;
     }
 
-    @Column
     public boolean isIsAllDayEvent() {
         return this.isAllDayEvent;
     }
@@ -97,7 +127,6 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.isAllDayEvent = isAllDayEvent;
     }
 
-    @Column
     public boolean isShowInCalender() {
         return this.showInCalender;
     }
@@ -106,7 +135,6 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.showInCalender = showInCalender;
     }
 
-    @Column(length = 5)
     public String getStartTime() {
         return this.startTime;
     }
@@ -115,7 +143,6 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.startTime = startTime;
     }
 
-    @Column(length = 5)
     public String getEndTime() {
         return this.endTime;
     }
@@ -124,7 +151,6 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.endTime = endTime;
     }
 
-    @Column(length = 255)
     public String getSubject() {
         return this.subject;
     }
@@ -133,7 +159,6 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.subject = subject;
     }
 
-    @Column
     public String getNotes() {
         return this.notes;
     }
@@ -141,10 +166,7 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
     public void setNotes(String notes) {
         this.notes = notes;
     }
-    
-    @ManyToOne(targetEntity = ActivityType.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "ActivityTypeId", columnDefinition = "raw(16)")
+
     public ActivityType getActivityType() {
         return this.activityType;
     }
@@ -153,9 +175,6 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.activityType = activityType;
     }
 
-    @ManyToOne(targetEntity = OrganisationContact.class,
-            fetch = FetchType.EAGER)
-    @JoinColumn(name = "PersonHereId", columnDefinition = "raw(16)")
     public OrganisationContact getPersonHere() {
         return this.personHere;
     }
@@ -164,14 +183,6 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.personHere = personHere;
     }
 
-    @OneToMany(targetEntity = VolunteerActivityLog.class,
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
-    @ForeignKey(name = "FK_VolunteerActivityLogs")    
-    @JoinColumn(name = "ActivityLogId",
-            columnDefinition = "raw(16)")
     public Set<VolunteerActivityLog> getVolunteerActivityLogs() {
         return this.volunteerActivityLogs;
     }
@@ -180,14 +191,6 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.volunteerActivityLogs = volunteerActivityLogs;
     }
 
-    @OneToMany(targetEntity = OrganisationActivityLog.class,
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
-    @ForeignKey(name = "FK_OrganisationActivityLogs")
-    @JoinColumn(name = "ActivityLogId",
-            columnDefinition = "raw(16)")
     public Set<OrganisationActivityLog> getOrganisationActivityLogs() {
         return this.organisationActivityLogs;
     }
@@ -196,14 +199,6 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
         this.organisationActivityLogs = organisationActivityLogs;
     }
 
-    @OneToMany(targetEntity = OpportunityActivityLog.class,
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER)
-    @Fetch( value = org.hibernate.annotations.FetchMode.SELECT)
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
-    @ForeignKey(name = "FK_OpportunityActivityLogs")
-    @JoinColumn(name = "ActivityLogId",
-            columnDefinition = "raw(16)")
     public Set<OpportunityActivityLog> getOpportunityActivityLogs() {
         return this.opportunityActivityLogs;
     }
@@ -211,8 +206,6 @@ private Set<OpportunityActivityLog> opportunityActivityLogs = new HashSet<Opport
     public void setOpportunityActivityLogs(Set<OpportunityActivityLog> opportunityActivityLogs) {
         this.opportunityActivityLogs = opportunityActivityLogs;
     }
-
-
 
 
 }

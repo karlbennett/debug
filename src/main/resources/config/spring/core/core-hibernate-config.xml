@@ -14,38 +14,7 @@
 
     <bean id="coreSessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="coreDataSource"/>
-        <property name="packagesToScan" value="org.youthnet.debug.domain.core.lookups"/>
-        <property name="annotatedClasses">
-            <list>
-                <value>org.youthnet.debug.domain.core.GenericDTO</value>
-                <value>org.youthnet.debug.domain.core.Address</value>
-                <value>org.youthnet.debug.domain.core.PolicyEntry</value>
-                <value>org.youthnet.debug.domain.core.ArrangementsRecordEntry</value>
-                <value>org.youthnet.debug.domain.core.NewPolicyEntry</value>
-                <value>org.youthnet.debug.domain.core.Contact</value>
-                <value>org.youthnet.debug.domain.core.ContactDetails</value>
-                <value>org.youthnet.debug.domain.core.MetaData</value>
-                <value>org.youthnet.debug.domain.core.QualityStdsAccrPolicyEntry</value>
-                <value>org.youthnet.debug.domain.core.QueriesForViews</value>
-                <value>org.youthnet.debug.domain.core.Role</value>
-                <value>org.youthnet.debug.domain.core.SearchQueries</value>
-                <value>org.youthnet.debug.domain.core.Test</value>
-                <value>org.youthnet.debug.domain.core.Users</value>
-                <value>org.youthnet.debug.domain.core.VBase3Preference</value>
-                <value>org.youthnet.debug.domain.core.ViewsTable</value>
-                <value>org.youthnet.debug.domain.core.Volunteer</value>
-                <value>org.youthnet.debug.domain.core.VolunteerAddress</value>
-                <value>org.youthnet.debug.domain.core.VolunteerContactEmail</value>
-                <value>org.youthnet.debug.domain.core.VolunteerContactTelephone</value>
-                <value>org.youthnet.debug.domain.core.Organisation</value>
-                <value>org.youthnet.debug.domain.core.OrganisationAddress</value>
-                <value>org.youthnet.debug.domain.core.OrganisationContact</value>
-                <value>org.youthnet.debug.domain.core.Opportunity</value>
-                <value>org.youthnet.debug.domain.core.LocationBase</value>
-                <value>org.youthnet.debug.domain.core.CountyLocationAddress</value>
-                <value>org.youthnet.debug.domain.core.PostCodeLocationAddress</value>
-            </list>
-        </property>
+        <property name="packagesToScan" value="org.youthnet.debug.domain.core"/>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.hbm2ddl.auto">${hiernate.hbm2ddl}</prop>

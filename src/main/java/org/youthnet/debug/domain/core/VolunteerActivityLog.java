@@ -1,11 +1,6 @@
-package org.youthnet.debug.domain.core.old;
+package org.youthnet.debug.domain.core;
 // Generated 14-Dec-2009 11:46:32 by Hibernate Tools 3.2.2.GA
 
-
-import org.hibernate.annotations.*;
-import org.youthnet.debug.domain.core.Volunteer;
-import org.youthnet.debug.domain.core.old.ActivityLog;
-import org.youthnet.debug.domain.core.GenericDTO;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
@@ -18,7 +13,13 @@ import javax.persistence.Table;
 @Table(name = "VolunteerActivityLogs")
 public class VolunteerActivityLog extends GenericDTO implements java.io.Serializable {
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)")
     private Volunteer volunteer;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "ActivityLogId", columnDefinition = "raw(16)")
+    @javax.xml.bind.annotation.XmlTransient
     private ActivityLog activityLog;
 
     public VolunteerActivityLog() {
@@ -29,10 +30,6 @@ public class VolunteerActivityLog extends GenericDTO implements java.io.Serializ
         this.activityLog = activityLog;
     }
 
-    @ManyToOne(targetEntity = Volunteer.class,
-            fetch = FetchType.EAGER)
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinColumn(name = "VolunteerId", columnDefinition = "raw(16)")
     public Volunteer getVolunteer() {
         return this.volunteer;
     }
@@ -41,11 +38,6 @@ public class VolunteerActivityLog extends GenericDTO implements java.io.Serializ
         this.volunteer = volunteer;
     }
 
-    @ManyToOne(targetEntity = ActivityLog.class,
-            fetch = FetchType.EAGER)
-    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
-    @JoinColumn(name = "ActivityLogId", columnDefinition = "raw(16)")
-    @javax.xml.bind.annotation.XmlTransient
     public ActivityLog getActivityLog() {
         return this.activityLog;
     }
