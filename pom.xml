@@ -154,6 +154,12 @@
             <artifactId>jsp-2.1-glassfish</artifactId>
             <version>${jetty.jsp.version}</version>
         </dependency>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
+        </dependency>
+        
 
         <!-- Spring orm dependencies -->
         <dependency>
