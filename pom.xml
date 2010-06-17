@@ -37,19 +37,27 @@
                 </configuration>
             </plugin>
             <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>2.2-beta-2</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>1.3.3</version>
                 <executions>
                     <execution>
-                        <id>debug-deployment-package</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>single</goal>
+                            <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <descriptors>
-                                <descriptor>${project.basedir}/src/main/resources/debug-assembly.xml</descriptor>
-                            </descriptors>
+                            <outputFile>target/debug-deploy.jar</outputFile>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.handlers</resource>
+                                </transformer>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                                    <resource>META-INF/spring.schemas</resource>
+                                </transformer>
+                            </transformers>
                         </configuration>
                     </execution>
                 </executions>
@@ -152,15 +160,8 @@
         <dependency>
             <groupId>org.mortbay.jetty</groupId>
             <artifactId>jsp-2.1-glassfish</artifactId>
-            <version>${jetty.jsp.version}</version>
+            <version>${jetty.glassfish.version}</version>
         </dependency>
-        <dependency>
-            <groupId>jstl</groupId>
-            <artifactId>jstl</artifactId>
-            <version>${jstl.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        
 
         <!-- Spring orm dependencies -->
         <dependency>
@@ -204,9 +205,9 @@
         <jdbc.artifactId>ojdbc14</jdbc.artifactId>
         <jdbc.version>10.2.0.4.0</jdbc.version>
         <jetty.version>7.1.4.v20100610</jetty.version>
-        <jetty.jsp.version>9.1.1.B60.25.p2</jetty.jsp.version>
+        <jetty.glassfish.version>2.1.v20100127</jetty.glassfish.version>
         <jetty.util.version>6.0.2</jetty.util.version>
-        <jstl.version>1.1.2</jstl.version>
+        <jstl.version>1.2</jstl.version>
 
         <!-- Configuration properties -->
         <!--    Database configuration -->
