@@ -173,6 +173,12 @@
             <artifactId>jetty-util</artifactId>
             <version>${jetty.util.version}</version>
         </dependency>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
+        </dependency>
+        
 
         <!-- Spring orm dependencies -->
         <dependency>
@@ -218,6 +224,7 @@
         <jetty.version>7.0.1.v20091125</jetty.version>
         <jetty.jsp.version>2.1-6.0.2</jetty.jsp.version>
         <jetty.util.version>6.0.2</jetty.util.version>
+        <jstl.version>1.1.2</jstl.version>
 
         <!-- Configuration properties -->
         <!--    Database configuration -->
