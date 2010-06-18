@@ -7,13 +7,18 @@
 
     <package>org.youthnet.debug.domain.admin</package>
 
-    <entity class="Collective">
+    <mapped-superclass class="BaseObject">
         <attributes>
             <!-- Override the id configuration so that it will definitely work with Derby. -->
             <id name="id">
                 <!-- Make sure that the column definition is correct -->
                 <column name="id" column-definition="varchar(16) for bit data"/>
             </id>
+        </attributes>
+    </mapped-superclass>
+
+    <entity class="Collective">
+        <attributes>
             <one-to-many name="vuos"
                          target-entity="org.youthnet.debug.domain.admin.Vuo"
                          fetch="EAGER">
@@ -25,9 +30,6 @@
 
     <entity class="User">
         <attributes>
-            <id name="id">
-                <column name="id" column-definition="varchar(16) for bit data"/>
-            </id>
             <many-to-one name="vuo"
                          fetch="EAGER"
                          target-entity="org.youthnet.debug.domain.admin.Vuo">
@@ -47,9 +49,6 @@
 
     <entity class="Vuo">
         <attributes>
-            <id name="id">
-                <column name="id" column-definition="varchar(16) for bit data"/>
-            </id>
             <basic name="organisationId">
                 <column name="organisationId" column-definition="varchar(16) for bit data"/>
             </basic>
