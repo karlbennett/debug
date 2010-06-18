@@ -13,6 +13,7 @@
         <c:import url="/logTabs.jsp">
             <c:param name="tab" value="${logName}"/>
             <c:param name="monitoring" value="${param.monitoring}"/>
+            <c:param name="logLineNum" value="${logLineNum}"/>
         </c:import>
         <c:if test="${logString != null && logString != ''}">
             <A HREF="#bottom" CLASS="tabLink fontSet logNav">To bottom</A>

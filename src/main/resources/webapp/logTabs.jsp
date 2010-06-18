@@ -25,16 +25,22 @@
             </LI>
         </c:otherwise>
     </c:choose>
-    <c:choose>
-        <c:when test="${param.monitoring == true}">
-            <LI CLASS="tab selectedTab">
-                <A HREF="logs.html?logName=${param.tab}" CLASS="tabLink fontSet selectedTabLink">Stop monitoring</A>
-            </LI>
-        </c:when>
-        <c:otherwise>
-            <LI CLASS="tab">
-                <A HREF="logs.html?logName=${param.tab}&monitoring=true#bottom" CLASS="tabLink fontSet">Monitor</A>
-            </LI>
-        </c:otherwise>
-    </c:choose>
+    <c:if test="${param.tab != null && param.tab != ''}">
+        <c:choose>
+            <c:when test="${param.monitoring == true}">
+                <LI CLASS="tab selectedTab">
+                    <A HREF="logs.html?logName=${param.tab}" CLASS="tabLink fontSet selectedTabLink">Stop monitoring</A>
+                </LI>
+            </c:when>
+            <c:otherwise>
+                <LI CLASS="tab">
+                    <A HREF="logs.html?logName=${param.tab}&monitoring=true#bottom" CLASS="tabLink fontSet">Monitor</A>
+                </LI>
+            </c:otherwise>
+        </c:choose>
+    </c:if>
+    <FORM CLASS="logLinNumForm" METHOD="post" ACTION="setloglinenum.html">
+        <INPUT TYPE="text" NAME="logLineNum" VALUE="${param.logLineNum}" />
+        <INPUT TYPE="submit" VALUE="Set log line number" />
+    </FORM>
 </DIV>
