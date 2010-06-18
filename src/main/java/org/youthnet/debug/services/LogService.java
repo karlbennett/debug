@@ -7,4 +7,6 @@ package org.youthnet.debug.services;
 public interface LogService {
 
     public String getLog(String logName);
+
+    public String getLogHTML(String logName);
 }

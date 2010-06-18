@@ -6,9 +6,22 @@
         <TITLE>vBase 3 debug</TITLE>
     </HEAD>
     <BODY>
+        <A NAME="top"/>
         <c:import url="/mainTabs.jsp">
             <c:param name="tab" value="logs"/>
         </c:import>
-        <c:out value="${logString}" />
+        <c:import url="/logTabs.jsp">
+            <c:param name="tab" value="${logName}"/>
+            <c:param name="monitoring" value="${param.monitoring}"/>
+        </c:import>
+        <c:if test="${logString != null && logString != ''}">
+            <A HREF="#bottom" CLASS="tabLink fontSet logNav">To bottom</A>
+            <p>${logString}</p>
+            <c:if test="${param.monitoring == true}">
+                <META HTTP-EQUIV="REFRESH" CONTENT="5; URL=?logName=${logName}&monitoring=true#bottom">
+                <A HREF="logs.html?logName=${param.logName}" CLASS="tabLink fontSet selectedTabLink">Stop monitoring</A>
+            </c:if>
+            <A NAME="bottom" HREF="#top" CLASS="tabLink fontSet logNav">To top</A>
+        </c:if>
     </BODY>
 </HTML> 

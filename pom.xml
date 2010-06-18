@@ -162,6 +162,12 @@
             <artifactId>jsp-2.1-glassfish</artifactId>
             <version>${jetty.glassfish.version}</version>
         </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>${commons.lang.version}</version>
+        </dependency>
+        
 
         <!-- Spring orm dependencies -->
         <dependency>
@@ -208,6 +214,7 @@
         <jetty.glassfish.version>2.1.v20100127</jetty.glassfish.version>
         <jetty.util.version>6.0.2</jetty.util.version>
         <jstl.version>1.2</jstl.version>
+        <commons.lang.version>2.5</commons.lang.version>
 
         <!-- Configuration properties -->
         <!--    Database configuration -->

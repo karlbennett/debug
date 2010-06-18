@@ -178,5 +178,18 @@ div.content
     {
         font-weight: normal;
     }
-    /**** Table Style End ****
+    /**** Table Style End ****/
+
+
+    /**** Log Style Start ****/
+    a.logNav
+    {
+        width: auto;
+        margin-right: 10px;
+        float: right;
+
+    }
+    /**** Log Style End ****/
+
+
 /**** Content Style End ****/

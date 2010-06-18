@@ -27,7 +27,9 @@ public class LogController {
                                 ModelMap modelMap) throws Exception {
         
         log.info("Log controller");
-        modelMap.addAttribute("logString", logService.getLog(logName));
+
+        modelMap.addAttribute("logName", logName);
+        modelMap.addAttribute("logString", logService.getLogHTML(logName));
 
         return "logs.jsp";
     }
