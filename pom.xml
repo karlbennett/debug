@@ -11,7 +11,22 @@
 
     <url>http://maven.apache.org</url>
 
+    <distributionManagement>
+        <repository>
+            <id>ssh-repository</id>
+            <url>${ssh.url}</url>
+        </repository>
+    </distributionManagement>
+
     <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh-external</artifactId>
+                <version>1.0-beta-6</version>
+            </extension>
+        </extensions>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -47,7 +62,6 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
-                            <outputFile>target/debug-deploy.jar</outputFile>
                             <transformers>
                                 <transformer
                                         implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
@@ -167,7 +181,7 @@
             <artifactId>commons-lang</artifactId>
             <version>${commons.lang.version}</version>
         </dependency>
-        
+
 
         <!-- Spring orm dependencies -->
         <dependency>
@@ -199,6 +213,8 @@
     </dependencies>
 
     <properties>
+        <ssh.url>Get ssh url from the settings.xml</ssh.url>
+
         <!-- Dependency properties -->
         <junit.version>4.5</junit.version>
         <spring.version>3.0.0.RELEASE</spring.version>
@@ -251,6 +267,8 @@
         <profile>
             <id>derby</id>
             <properties>
+                <ssh.url>scpexe://localhost/tmp</ssh.url>
+
                 <!-- Dependency properties -->
                 <jdbc.groupId>org.apache.derby</jdbc.groupId>
                 <jdbc.artifactId>derby</jdbc.artifactId>
