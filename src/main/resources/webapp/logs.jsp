@@ -18,6 +18,14 @@
         </c:import>
         <c:if test="${logString != null && logString != ''}">
             <A HREF="#bottom" CLASS="tabLink fontSet logNav">To bottom</A>
+            <c:choose>
+                <c:when test="${param.monitoring == true}">
+                    <A HREF="logs.html?logName=${param.logName}" CLASS="tabLink fontSet selectedTabLink">Stop monitoring</A>
+                </c:when>
+                <c:otherwise>
+                    <A HREF="logs.html?logName=${param.logName}&monitoring=true#bottom" CLASS="tabLink fontSet selectedTabLink">Monitor log</A>    
+                </c:otherwise>
+            </c:choose>
             <p>${logString}</p>
             <A NAME="bottom" HREF="#top" CLASS="tabLink fontSet logNav">To top</A>
             <c:if test="${param.monitoring == true}">
