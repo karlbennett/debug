@@ -125,6 +125,14 @@ body
         border-bottom: 4px solid #CCCCCC;
     }
     /**** Table Tab Style End ****/
+
+    /**** Log Tab Style Start ****/
+    form.logTabForm
+    {
+        margin: 0;
+        padding: 0;
+    }
+    /**** Log Tab Style End ****/
 /**** Tab Style End ****/
 
 

@@ -14,6 +14,7 @@
             <c:param name="tab" value="${logName}"/>
             <c:param name="monitoring" value="${param.monitoring}"/>
             <c:param name="logLineNum" value="${logLineNum}"/>
+            <c:param name="truncate" value="${truncate}"/>
         </c:import>
         <c:if test="${logString != null && logString != ''}">
             <A HREF="#bottom" CLASS="tabLink fontSet logNav">To bottom</A>

@@ -35,8 +35,10 @@ public class LogController {
         log.info("Log controller");
 
         modelMap.addAttribute("logName", logName);
-        modelMap.addAttribute("logString", logService.getLogHTML(logName, logSettings.getLineNum()));
+        if (logSettings.isTruncate()) modelMap.addAttribute("logString", logService.getLogHTML(logName, logSettings.getLineNum()));
+        else modelMap.addAttribute("logString", logService.getLogHTML(logName));
         modelMap.addAttribute("logLineNum", logSettings.getLineNum());
+        modelMap.addAttribute("truncate", logSettings.isTruncate());
 
         return "logs.jsp";
     }
@@ -49,6 +51,23 @@ public class LogController {
         log.info("  -- Set the line number to: " + logLineNum);
         logSettings.setLineNum(logLineNum);
         
+        // Get the url of the page that the submit was called on.
+        String referer = request.getHeader("Referer");
+
+        // If the URL exist redirect back to it.
+        if (referer != null) return "redirect:" + referer;
+
+        // Else return to the tables page.
+        return "redirect:tables.html";
+    }
+
+    @RequestMapping(value = "/setlogtruncate.html", method = RequestMethod.POST)
+    public String handleSetLogTruncate(@RequestParam boolean truncate,
+                                      HttpServletRequest request) {
+        log.info("Log controller -- set log truncation to " + truncate);
+
+        logSettings.setTruncate(truncate);
+
         // Get the url of the page that the submit was called on.
         String referer = request.getHeader("Referer");
 
