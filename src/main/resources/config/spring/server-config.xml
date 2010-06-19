@@ -17,7 +17,7 @@
         <property name="connectors">
             <list>
                 <bean id="Connector" class="org.eclipse.jetty.server.nio.SelectChannelConnector">
-                    <property name="port" value="8080"/>
+                    <property name="port" value="7070"/>
                 </bean>
             </list>
         </property>
