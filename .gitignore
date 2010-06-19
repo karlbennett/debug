@@ -10,3 +10,5 @@ derbydb
 
 admin.log
 webservice.log
+
+debug.pid
