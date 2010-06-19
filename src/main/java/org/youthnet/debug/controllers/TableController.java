@@ -27,7 +27,7 @@ public class TableController {
     private Schema schema;
 
     @Resource(name = "dbServices")
-    DBServices dbServices;
+    private DBServices dbServices;
 
     @RequestMapping("/tables.html")
     public String handleRequest(@RequestParam(required = false) String tableName,
