@@ -207,6 +207,11 @@ div.content
         float: right;
 
     }
+
+    p.logText
+    {
+        font-family: "Courier New", Courier, monospace;
+    }
     /**** Log Style End ****/
 
 

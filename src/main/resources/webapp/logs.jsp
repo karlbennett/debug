@@ -26,7 +26,7 @@
                     <A HREF="logs.html?logName=${param.logName}&monitoring=true#bottom" CLASS="tabLink fontSet selectedTabLink">Monitor log</A>    
                 </c:otherwise>
             </c:choose>
-            <p>${logString}</p>
+            <P CLASS="logText">${logString}</P>
             <A NAME="bottom" HREF="#top" CLASS="tabLink fontSet logNav">To top</A>
             <c:if test="${param.monitoring == true}">
                 <META HTTP-EQUIV="REFRESH" CONTENT="5; URL=?logName=${logName}&monitoring=true#bottom">
