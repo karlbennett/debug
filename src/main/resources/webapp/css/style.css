@@ -211,6 +211,10 @@ div.content
     p.logText
     {
         font-family: "Courier New", Courier, monospace;
+        margin-left: 10px;
+        margin-right: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
     }
     /**** Log Style End ****/
 
