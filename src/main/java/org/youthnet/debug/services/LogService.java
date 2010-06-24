@@ -1,5 +1,8 @@
 package org.youthnet.debug.services;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 /**
  * User: karl
  * Date: 16-Jun-2010
@@ -12,7 +15,7 @@ public interface LogService {
      * @param  logName the name of the log file to return
      * @return  the log file as a string.
      * */
-    public String getLog(String logName);
+    public String getLogString(String logName);
 
     /**
      * Function to get the log file represented in a string and only containing a given number of the last lines in the file.
@@ -21,7 +24,7 @@ public interface LogService {
      * @param  lineNum the number of lines to return from the end of the file
      * @return  the log file as a string truncated to the last lineNum lines..
      * */
-    public String getLog(String logName, Integer lineNum);
+    public String getLogString(String logName, Integer lineNum);
 
      /**
      * Function to get the log file represented as a string and escaped for HTML along with each new line ending in <BR>.
@@ -40,4 +43,6 @@ public interface LogService {
      * @return  the log file as a string truncated to the last lineNum lines and  that has been HTML escaped with embedded <BR>'s...
      * */
     public String getLogHTML(String logName, Integer lineNum);
+
+    public InputStream getLogInputStream(String logName, Integer lineNum) throws IOException;
 }

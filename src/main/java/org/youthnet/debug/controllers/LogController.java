@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,6 +13,8 @@ import org.youthnet.debug.services.LogService;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * User: karl
@@ -76,5 +79,16 @@ public class LogController {
 
         // Else return to the tables page.
         return "redirect:tables.html";
+    }
+
+    @RequestMapping(value = "/downloadLog.html")
+    public void handleLogDownload(@RequestParam(required = false) String logName, OutputStream outputStream) {
+        log.info("Log controller -- stream log: " + logName);
+
+        try {
+            FileCopyUtils.copy(logService.getLogInputStream(logName, logSettings.getLineNum()), outputStream);
+        } catch (IOException e) {
+            log.error("Failed to open input stream for " + logName + " log file.");
+        }
     }
 }
