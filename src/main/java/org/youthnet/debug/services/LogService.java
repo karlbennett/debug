@@ -16,7 +16,7 @@ public interface LogService {
      * @param  lineNum the number of lines to return from the end of the file
      * @return  the log file as a string truncated to the last lineNum lines..
      * */
-    public String getLogString(String logName, Integer lineNum);
+    public String getLogString(String logName, int lineNum);
 
     /**
      * Function to get the log file represented as a string.
@@ -42,7 +42,7 @@ public interface LogService {
      * @param  lineNum the number of lines to return from the end of the file
      * @return  the log file as a string truncated to the last lineNum lines and  that has been HTML escaped with embedded <BR>'s...
      * */
-    public String getLogHTML(String logName, Integer lineNum);
+    public String getLogHTML(String logName, int lineNum);
 
-    public InputStream getLogInputStream(String logName, Integer lineNum) throws IOException;
+    public InputStream getLogInputStream(String logName, int lineNum) throws IOException;
 }

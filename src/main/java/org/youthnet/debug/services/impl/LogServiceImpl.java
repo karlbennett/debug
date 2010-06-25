@@ -1,17 +1,13 @@
 package org.youthnet.debug.services.impl;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
-import org.youthnet.debug.io.RandomAccessFileInputStream;
 import org.youthnet.debug.services.LogService;
-import org.youthnet.debug.util.exceptions.ExceptionsUtil;
 import org.youthnet.debug.util.io.FileUtil;
 
 import javax.annotation.Resource;
 import java.io.*;
-import java.util.Arrays;
 import java.util.Map;
 
 /**
@@ -29,7 +25,7 @@ public class LogServiceImpl implements LogService {
     private Map<String, String> logFileMap;
 
     @Override
-    public String getLogString(String logName, Integer lineNum) {
+    public String getLogString(String logName, int lineNum) {
 
         log.info("  -- Getting log string: " + logName);
 
@@ -37,7 +33,7 @@ public class LogServiceImpl implements LogService {
 
         log.info("  -- Path: " + logPath);
 
-        if (logPath != null && lineNum.intValue() > 0) {
+        if (logPath != null) {
             File logFile = new File(logPath);
             return FileUtil.getStringFromFile(logFile, FileUtil.getNCharOffset(logFile, lineNum, '\n'));
         }
@@ -52,36 +48,38 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public String getLogHTML(String logName) {
+        return getLogHTML(logName, -1);
+    }
 
-        String logString = getLogString(logName);
+    @Override
+    public String getLogHTML(String logName, int lineNum) {
 
-        if (logString != null) {
-            return StringEscapeUtils.escapeHtml(logString).replaceAll("\n", "<BR>\n").replaceAll(" ", "&nbsp;");
+        log.info("  -- Getting log HTML escaped string: " + logName);
+
+        String logPath = logFileMap.get(logName);
+
+        log.info("  -- Path: " + logPath);
+
+        if (logPath != null) {
+            File logFile = new File(logPath);
+            return FileUtil.getHTMLEscapedStringFromFile(logFile, FileUtil.getNCharOffset(logFile, lineNum, '\n'));
         }
 
         return null;
     }
 
     @Override
-    public String getLogHTML(String logName, Integer lineNum) {
-
-        String logString = getLogString(logName, lineNum);
-
-        if (logString != null) {
-            return StringEscapeUtils.escapeHtml(logString).replaceAll("\n", "<BR>\n").replaceAll(" ", "&nbsp;");
-        }
-
-        return null;
-    }
-
-    @Override
-    public InputStream getLogInputStream(String logName, Integer lineNum) throws IOException {
+    public InputStream getLogInputStream(String logName, int lineNum) throws IOException {
         log.info("  -- Getting log input stream: " + logName);
 
         String logPath = logFileMap.get(logName);
 
         log.info("  -- Path: " + logPath);
 
-        return FileUtil.getLogInputStream(new File(logPath), lineNum);
+        if (logPath != null) {
+            return FileUtil.getLogInputStream(new File(logPath), lineNum);
+        }
+
+        return null;
     }
 }
