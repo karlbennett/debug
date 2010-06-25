@@ -1,4 +1,4 @@
-package org.youthnet.debug.util;
+package org.youthnet.debug.util.hibernate;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

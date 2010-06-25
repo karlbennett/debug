@@ -2,7 +2,7 @@ package org.youthnet.debug.io;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.youthnet.debug.util.ExceptionsUtil;
+import org.youthnet.debug.util.exceptions.ExceptionsUtil;
 
 import java.io.IOException;
 import java.io.InputStream;

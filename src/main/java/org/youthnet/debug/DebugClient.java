@@ -2,19 +2,15 @@ package org.youthnet.debug;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.hibernate.SessionFactory;
-import org.hibernate.impl.SessionFactoryImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
-import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 import org.springframework.stereotype.Component;
-import org.youthnet.debug.util.HibernateUtil;
+import org.youthnet.debug.util.hibernate.HibernateUtil;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import javax.sql.DataSource;
 
 /**
  * User: karl

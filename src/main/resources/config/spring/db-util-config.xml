@@ -15,7 +15,7 @@
         <aop:scoped-proxy proxy-target-class="false"/>
     </bean>
 
-    <bean name="sqlSyntaxUtil" class="org.youthnet.debug.util.SqlSyntaxUtil">
+    <bean name="sqlSyntax" class="org.youthnet.debug.dao.jdbc.sql.SqlSyntax">
         <property name="sqlTrue" value="${sql.true}"/>
         <property name="sqlFalse" value="${sql.false}"/>
         <property name="binTypeStart" value="${sql.binTypeStart}"/>
@@ -25,7 +25,7 @@
         <property name="selectTableNamesQuery" value="${sql.selectTableNames}"/>
     </bean>
 
-    <bean name="dbPropertiesUtil" class="org.youthnet.debug.util.DbPropertiesUtil">
+    <bean name="dbProperties" class="org.youthnet.debug.db.DbProperties">
         <property name="domain" value="${db.domain}"/>
         <property name="port" value="${db.port}"/>
         <property name="sid" value="${db.sid}"/>

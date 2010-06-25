@@ -1,10 +1,10 @@
-package org.youthnet.debug.util;
+package org.youthnet.debug.db;
 
 /**
  * User: karl
  * Date: 02-Jun-2010
  */
-public class DbPropertiesUtil {
+public class DbProperties {
 
     private String domain;
     private String port;

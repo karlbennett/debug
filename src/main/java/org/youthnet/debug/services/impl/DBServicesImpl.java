@@ -6,7 +6,7 @@ import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBea
 import org.springframework.stereotype.Component;
 import org.youthnet.debug.dao.jdbc.JdbcDao;
 import org.youthnet.debug.services.DBServices;
-import org.youthnet.debug.util.HibernateUtil;
+import org.youthnet.debug.util.hibernate.HibernateUtil;
 
 import javax.annotation.Resource;
 import java.util.Collections;

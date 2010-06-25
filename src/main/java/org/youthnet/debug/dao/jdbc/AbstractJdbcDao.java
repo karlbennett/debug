@@ -5,10 +5,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.youthnet.debug.dao.jdbc.sql.SqlSyntax;
 import org.youthnet.debug.domain.common.UuidType;
 import org.youthnet.debug.domain.common.impl.UuidTypeImpl;
-import org.youthnet.debug.util.SqlSyntaxUtil;
-import org.youthnet.debug.util.UuidConverter;
+import org.youthnet.debug.util.conversion.UuidConverter;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -24,8 +24,8 @@ public abstract class AbstractJdbcDao implements JdbcDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    @Resource(name = "sqlSyntaxUtil")
-    private SqlSyntaxUtil sqlSyntaxUtil;
+    @Resource(name = "sqlSyntax")
+    private SqlSyntax sqlSyntax;
 
     @Override
     public void executeQuery(String query) {
@@ -46,12 +46,12 @@ public abstract class AbstractJdbcDao implements JdbcDao {
 
     @Override
     public List<String> getSchemaNames() {
-        return jdbcTemplate.queryForList("SELECT shortname FROM " + sqlSyntaxUtil.getAdminSchema() + "collective", String.class);
+        return jdbcTemplate.queryForList("SELECT shortname FROM " + sqlSyntax.getAdminSchema() + "collective", String.class);
     }
 
     @Override
     public List<String> getTableNames() {
-        return jdbcTemplate.queryForList(sqlSyntaxUtil.getSelectTableNamesQuery(), String.class);
+        return jdbcTemplate.queryForList(sqlSyntax.getSelectTableNamesQuery(), String.class);
     }
 
     @Override
@@ -73,7 +73,7 @@ public abstract class AbstractJdbcDao implements JdbcDao {
             try {
                 if (id instanceof UuidType) {
                     row = jdbcTemplate.queryForMap("SELECT * FROM " + tableName + " WHERE id = "
-                            + sqlSyntaxUtil.getBinTypeStart() + id.toString().replace("-", "") + sqlSyntaxUtil.getBinTypeEnd());
+                            + sqlSyntax.getBinTypeStart() + id.toString().replace("-", "") + sqlSyntax.getBinTypeEnd());
                 } else if (id instanceof Number) {
                     row = jdbcTemplate.queryForMap("SELECT * FROM " + tableName + " WHERE id = " + id.toString());
                 } else {
@@ -99,7 +99,7 @@ public abstract class AbstractJdbcDao implements JdbcDao {
     public Map<String, Object> getRowById(Object id, String tableName) {
         if (id instanceof UuidType) {
             return convertByteColumnsToUuidType(jdbcTemplate.queryForMap("SELECT * FROM " + tableName + " WHERE id = "
-                    + sqlSyntaxUtil.getBinTypeStart() + id.toString().replace("-", "") + sqlSyntaxUtil.getBinTypeEnd()));
+                    + sqlSyntax.getBinTypeStart() + id.toString().replace("-", "") + sqlSyntax.getBinTypeEnd()));
         }
 
         return convertByteColumnsToUuidType(jdbcTemplate.queryForMap("SELECT * FROM " + tableName + " WHERE id = '"

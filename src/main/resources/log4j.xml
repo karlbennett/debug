@@ -22,11 +22,11 @@
         <level value="WARN"/>
     </logger>
 
-    <logger name="org.youthnet.debug.util.HibernateUtil">
+    <logger name="org.youthnet.debug.util.hibernate.HibernateUtil">
         <level value="DEBUG"/>
     </logger>
 
-    <logger name="org.youthnet.debug.util.ClassPathWebAppContextFactoryBean">
+    <logger name="org.youthnet.debug.util.web.ClassPathWebAppContextFactoryBean">
         <level value="ERROR"/>
     </logger>
 

@@ -1,10 +1,10 @@
-package org.youthnet.debug.util;
+package org.youthnet.debug.dao.jdbc.sql;
 
 /**
  * User: Karl
  * Date: 23-May-2010
  */
-public class SqlSyntaxUtil {
+public class SqlSyntax {
     private String sqlTrue;
     private String sqlFalse;
     private String binTypeStart;

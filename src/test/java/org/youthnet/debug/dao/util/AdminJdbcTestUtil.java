@@ -2,7 +2,7 @@ package org.youthnet.debug.dao.util;
 
 import org.springframework.stereotype.Component;
 import org.youthnet.debug.dao.jdbc.JdbcDao;
-import org.youthnet.debug.util.SqlSyntaxUtil;
+import org.youthnet.debug.dao.jdbc.sql.SqlSyntax;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -18,8 +18,8 @@ public class AdminJdbcTestUtil {
     @Resource(name = "adminJdbcDaoImpl")
     private JdbcDao adminJdbcDao;
 
-    @Resource(name = "sqlSyntaxUtil")
-    private SqlSyntaxUtil sqlSyntaxUtil;
+    @Resource(name = "sqlSyntax")
+    private SqlSyntax sqlSyntax;
 
     private final Random RANDOM = new Random();
     private final int RANDNUM = RANDOM.nextInt(99999);
@@ -52,72 +52,72 @@ public class AdminJdbcTestUtil {
 
     @PostConstruct
     private void init() {
-        USRENABLE = sqlSyntaxUtil.getSqlTrue();
-        USRACCOUNTEXPIRED = sqlSyntaxUtil.getSqlFalse();
-        USRACCOUNTLOCKED = sqlSyntaxUtil.getSqlFalse();
-        USRCREDENTIALSEXPIRED = sqlSyntaxUtil.getSqlFalse();
+        USRENABLE = sqlSyntax.getSqlTrue();
+        USRACCOUNTEXPIRED = sqlSyntax.getSqlFalse();
+        USRACCOUNTLOCKED = sqlSyntax.getSqlFalse();
+        USRCREDENTIALSEXPIRED = sqlSyntax.getSqlFalse();
     }
 
     public void createCollective() {
-        adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntaxUtil.getAdminSchema()
-                + "collective(id, name, shortname) VALUES (" + sqlSyntaxUtil.getBinTypeStart()
-                + COLLECTIVEID.replace("-", "") + sqlSyntaxUtil.getBinTypeEnd() + ", '" + COLNAME + "', '"
+        adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntax.getAdminSchema()
+                + "collective(id, name, shortname) VALUES (" + sqlSyntax.getBinTypeStart()
+                + COLLECTIVEID.replace("-", "") + sqlSyntax.getBinTypeEnd() + ", '" + COLNAME + "', '"
                 + COLSHORTNAME + "')");
     }
 
     public void createVuo() {
-        adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntaxUtil.getAdminSchema()
-                + "vuo(id, name, vuoCode, col_id) VALUES (" + sqlSyntaxUtil.getBinTypeStart() + VUOID.replace("-", "")
-                + sqlSyntaxUtil.getBinTypeEnd() + ", '" + VUONAME + "', '" + VUOCODE + "', "
-                + sqlSyntaxUtil.getBinTypeStart() + COLLECTIVEID.replace("-", "") + sqlSyntaxUtil.getBinTypeEnd() + ")");
+        adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntax.getAdminSchema()
+                + "vuo(id, name, vuoCode, col_id) VALUES (" + sqlSyntax.getBinTypeStart() + VUOID.replace("-", "")
+                + sqlSyntax.getBinTypeEnd() + ", '" + VUONAME + "', '" + VUOCODE + "', "
+                + sqlSyntax.getBinTypeStart() + COLLECTIVEID.replace("-", "") + sqlSyntax.getBinTypeEnd() + ")");
     }
 
     public void createUser() {
-        adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntaxUtil.getAdminSchema()
+        adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntax.getAdminSchema()
                 + "app_user(id, username, password, password_hint, first_name, "
                 + "last_name, email, phone_number, website, account_enabled, account_expired, account_locked, "
-                + "credentials_expired, vuo_id) VALUES (" + sqlSyntaxUtil.getBinTypeStart() + USERID.replace("-", "")
-                + sqlSyntaxUtil.getBinTypeEnd() + ", '" + USERNAME + "', '" + USRPASSWORD + "', '" + USRPASSWORDHINT
+                + "credentials_expired, vuo_id) VALUES (" + sqlSyntax.getBinTypeStart() + USERID.replace("-", "")
+                + sqlSyntax.getBinTypeEnd() + ", '" + USERNAME + "', '" + USRPASSWORD + "', '" + USRPASSWORDHINT
                 + "', '" + USRFIRSTNAME + "', '" + USRLASTNAME + "', '" + USREMAL + "', '" + USRPHONENUMBER + "', '"
                 + USRWEBSITE + "', " + USRENABLE + ", " + USRACCOUNTEXPIRED + ", " + USRACCOUNTLOCKED + ", "
-                + USRCREDENTIALSEXPIRED + ", " + sqlSyntaxUtil.getBinTypeStart() + VUOID.replace("-", "")
-                + sqlSyntaxUtil.getBinTypeEnd() + ")");
+                + USRCREDENTIALSEXPIRED + ", " + sqlSyntax.getBinTypeStart() + VUOID.replace("-", "")
+                + sqlSyntax.getBinTypeEnd() + ")");
     }
 
     public void createRole() {
-        adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntaxUtil.getAdminSchema()
+        adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntax.getAdminSchema()
                 + "role(id, name, description) VALUES (" + ROLEID + ", '" + ROLNAME + "', '"
                 + ROLDESCRIPTION + "')");
     }
 
     public void addRole() {
-        adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntaxUtil.getAdminSchema()
-                + "user_role(user_id, role_id) VALUES (" + sqlSyntaxUtil.getBinTypeStart() + USERID.replace("-", "")
-                + sqlSyntaxUtil.getBinTypeEnd() + ", " + ROLEID + ")");
+        adminJdbcDao.executeQuery("INSERT INTO " + sqlSyntax.getAdminSchema()
+                + "user_role(user_id, role_id) VALUES (" + sqlSyntax.getBinTypeStart() + USERID.replace("-", "")
+                + sqlSyntax.getBinTypeEnd() + ", " + ROLEID + ")");
     }
 
     public void deleteCollective() {
-        adminJdbcDao.executeQuery("DELETE FROM " + sqlSyntaxUtil.getAdminSchema() + "collective WHERE id = "
-                + sqlSyntaxUtil.getBinTypeStart() + COLLECTIVEID.replace("-", "") + sqlSyntaxUtil.getBinTypeEnd());
+        adminJdbcDao.executeQuery("DELETE FROM " + sqlSyntax.getAdminSchema() + "collective WHERE id = "
+                + sqlSyntax.getBinTypeStart() + COLLECTIVEID.replace("-", "") + sqlSyntax.getBinTypeEnd());
     }
 
     public void deleteVuo() {
-        adminJdbcDao.executeQuery("DELETE FROM " + sqlSyntaxUtil.getAdminSchema() + "vuo WHERE id = "
-                + sqlSyntaxUtil.getBinTypeStart() + VUOID.replace("-", "") + sqlSyntaxUtil.getBinTypeEnd());
+        adminJdbcDao.executeQuery("DELETE FROM " + sqlSyntax.getAdminSchema() + "vuo WHERE id = "
+                + sqlSyntax.getBinTypeStart() + VUOID.replace("-", "") + sqlSyntax.getBinTypeEnd());
     }
 
     public void deleteUser() {
-        adminJdbcDao.executeQuery("DELETE FROM " + sqlSyntaxUtil.getAdminSchema() + "app_user WHERE id = "
-                + sqlSyntaxUtil.getBinTypeStart() + USERID.replace("-", "") + sqlSyntaxUtil.getBinTypeEnd());
+        adminJdbcDao.executeQuery("DELETE FROM " + sqlSyntax.getAdminSchema() + "app_user WHERE id = "
+                + sqlSyntax.getBinTypeStart() + USERID.replace("-", "") + sqlSyntax.getBinTypeEnd());
     }
 
     public void deleteRole() {
-        adminJdbcDao.executeQuery("DELETE FROM " + sqlSyntaxUtil.getAdminSchema() + "role WHERE id = " + ROLEID);
+        adminJdbcDao.executeQuery("DELETE FROM " + sqlSyntax.getAdminSchema() + "role WHERE id = " + ROLEID);
     }
 
     public void removeRole() {
-        adminJdbcDao.executeQuery("DELETE FROM " + sqlSyntaxUtil.getAdminSchema() + "user_role WHERE user_id = "
-                + sqlSyntaxUtil.getBinTypeStart() + USERID.replace("-", "") + sqlSyntaxUtil.getBinTypeEnd());
+        adminJdbcDao.executeQuery("DELETE FROM " + sqlSyntax.getAdminSchema() + "user_role WHERE user_id = "
+                + sqlSyntax.getBinTypeStart() + USERID.replace("-", "") + sqlSyntax.getBinTypeEnd());
     }
 
     public Random getRANDOM() {

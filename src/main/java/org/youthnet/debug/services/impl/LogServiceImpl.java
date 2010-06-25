@@ -6,6 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.youthnet.debug.io.RandomAccessFileInputStream;
 import org.youthnet.debug.services.LogService;
+import org.youthnet.debug.util.exceptions.ExceptionsUtil;
 
 import javax.annotation.Resource;
 import java.io.*;
@@ -36,29 +37,29 @@ public class LogServiceImpl implements LogService {
         log.info("  -- Path: " + logPath);
 
         if (logPath != null) {
-            File logFile = new File(logPath);
-            BufferedReader reader = null;
-            StringBuffer logStringBuffer = new StringBuffer();
+            File logFile = new File(logPath); // Link to the file.
+            BufferedReader reader = null; // Buffered reader to be used to read the file.
+            StringBuffer logStringBuffer = new StringBuffer(); // StringBuffer to hold the contents retrieved from the log.
 
             try {
-                reader = new BufferedReader(new FileReader(logFile));
+                reader = new BufferedReader(new FileReader(logFile)); // Open the file.
 
-                char[] charArray = new char[1024];
-                int charNum = 0;
+                char[] charArray = new char[1024]; // Create a buffer to hold the chars read in from the file.
+                int charNum = 0; // Variable to hold the number of chars that have been read from the file.
                 while ((charNum = reader.read(charArray)) > -1) {
-                    logStringBuffer.append(charArray, 0, charNum);
+                    logStringBuffer.append(charArray, 0, charNum); // Read the chars into the String Buffer.
                 }
             } catch (IOException e) {
-                log.error("Failed to open the " + logFile.getName() + " log file.\n" + e.getStackTrace());
+                log.error("Failed to open the " + logFile.getName() + " log file.\n" + ExceptionsUtil.getStackTrace(e));
             } finally {
                 try {
                     reader.close();
                 } catch (IOException e) {
-                    log.error("Failed to close the buffered reader.\n" + e.getStackTrace());
+                    log.error("Failed to close the buffered reader.\n" + ExceptionsUtil.getStackTrace(e));
                 }
             }
 
-            return logStringBuffer.toString();
+            return logStringBuffer.toString(); // Return the contents of the log as a string.
         }
 
         return null;

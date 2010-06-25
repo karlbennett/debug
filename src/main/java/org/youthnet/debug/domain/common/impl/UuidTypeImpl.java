@@ -3,7 +3,7 @@ package org.youthnet.debug.domain.common.impl;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.youthnet.debug.domain.common.UuidType;
-import org.youthnet.debug.util.UuidConverter;
+import org.youthnet.debug.util.conversion.UuidConverter;
 
 import java.io.Serializable;
 import java.sql.PreparedStatement;

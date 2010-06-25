@@ -1,4 +1,4 @@
-package org.youthnet.debug.util;
+package org.youthnet.debug.util.exceptions;
 
 /**
  * User: karl

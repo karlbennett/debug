@@ -13,6 +13,7 @@ import org.youthnet.debug.dao.admin.CollectiveDao;
 import org.youthnet.debug.dao.util.AdminJdbcTestUtil;
 import org.youthnet.debug.domain.admin.Collective;
 import org.youthnet.debug.domain.common.impl.UuidTypeImpl;
+import org.youthnet.debug.util.hibernate.HibernateUtil;
 
 import javax.annotation.Resource;
 import java.util.List;

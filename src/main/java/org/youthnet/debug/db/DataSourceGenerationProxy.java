@@ -6,7 +6,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.BeanCreationException;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
 import org.youthnet.debug.db.bean.session.Schema;
-import org.youthnet.debug.util.DbPropertiesUtil;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -28,7 +27,7 @@ public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
     private Schema schema;
 
     // Bean to hold all the properties that were used to configure the data sources at start up.
-    private DbPropertiesUtil dbPropertiesUtil;
+    private DbProperties dbProperties;
 
     // Map that holds all the live data sources.
     private Map<String, DataSource> targetDataSources = new HashMap<String, DataSource>();
@@ -41,12 +40,12 @@ public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
         this.schema = schema;
     }
 
-    public DbPropertiesUtil getDbPropertiesUtil() {
-        return dbPropertiesUtil;
+    public DbProperties getDbProperties() {
+        return dbProperties;
     }
 
-    public void setDbPropertiesUtil(DbPropertiesUtil dbPropertiesUtil) {
-        this.dbPropertiesUtil = dbPropertiesUtil;
+    public void setDbProperties(DbProperties dbProperties) {
+        this.dbProperties = dbProperties;
     }
 
     /**
@@ -88,10 +87,10 @@ public class DataSourceGenerationProxy extends AbstractRoutingDataSource {
         if (determineCurrentLookupKey() != null && !determineCurrentLookupKey().equals("")
                 && this.targetDataSources.get((String) determineCurrentLookupKey()) == null) {
             BasicDataSource dataSource = new BasicDataSource();
-            dataSource.setDriverClassName(this.dbPropertiesUtil.getDriver());
-            dataSource.setUrl(this.dbPropertiesUtil.getUrl());
-            dataSource.setUsername(this.dbPropertiesUtil.getSchemaPrefix() + (String)determineCurrentLookupKey());
-            dataSource.setPassword(this.dbPropertiesUtil.getDefaultCorePassword());
+            dataSource.setDriverClassName(this.dbProperties.getDriver());
+            dataSource.setUrl(this.dbProperties.getUrl());
+            dataSource.setUsername(this.dbProperties.getSchemaPrefix() + (String)determineCurrentLookupKey());
+            dataSource.setPassword(this.dbProperties.getDefaultCorePassword());
             this.targetDataSources.put((String) determineCurrentLookupKey(), dataSource);
 
             this.afterPropertiesSet(); // Reinitialise the routing data source.
