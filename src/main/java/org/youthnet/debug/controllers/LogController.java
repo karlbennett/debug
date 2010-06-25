@@ -33,6 +33,7 @@ public class LogController {
 
     @RequestMapping("/logs.html")
     public String handleRequest(@RequestParam(required = false) String logName,
+                                @RequestParam(required = false) Integer lineNum,
                                 ModelMap modelMap) throws Exception {
         
         log.info("Log controller");

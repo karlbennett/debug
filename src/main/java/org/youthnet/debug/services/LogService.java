@@ -10,14 +10,6 @@ import java.io.InputStream;
 public interface LogService {
 
     /**
-     * Function to get the log file represented as a string.
-     *
-     * @param  logName the name of the log file to return
-     * @return  the log file as a string.
-     * */
-    public String getLogString(String logName);
-
-    /**
      * Function to get the log file represented in a string and only containing a given number of the last lines in the file.
      *
      * @param  logName the name of the log file to return
@@ -25,6 +17,14 @@ public interface LogService {
      * @return  the log file as a string truncated to the last lineNum lines..
      * */
     public String getLogString(String logName, Integer lineNum);
+
+    /**
+     * Function to get the log file represented as a string.
+     *
+     * @param  logName the name of the log file to return
+     * @return  the log file as a string.
+     * */
+    public String getLogString(String logName);
 
      /**
      * Function to get the log file represented as a string and escaped for HTML along with each new line ending in <BR>.
