@@ -5,24 +5,24 @@
         <c:choose>
             <c:when test="${param.tab == 'admin'}">
                 <LI CLASS="tab selectedTab">
-                    <A HREF="logs.html?logName=admin&lineNum=500" CLASS="tabLink fontSet selectedTabLink">Admin log</A>
+                    <A HREF="logs.html?logName=admin&lineNum=${param.lineNum}" CLASS="tabLink fontSet selectedTabLink">Admin log</A>
                 </LI>
             </c:when>
             <c:otherwise>
                 <LI CLASS="tab">
-                    <A HREF="logs.html?logName=admin&lineNum=500" CLASS="tabLink fontSet">Admin log</A>
+                    <A HREF="logs.html?logName=admin&lineNum=${param.lineNum}" CLASS="tabLink fontSet">Admin log</A>
                 </LI>
             </c:otherwise>
         </c:choose>
         <c:choose>
             <c:when test="${param.tab == 'webservice'}">
                 <LI CLASS="tab selectedTab">
-                    <A HREF="logs.html?logName=webservice&lineNum=500" CLASS="tabLink fontSet selectedTabLink">Webservice log</A>
+                    <A HREF="logs.html?logName=webservice&lineNum=${param.lineNum}" CLASS="tabLink fontSet selectedTabLink">Webservice log</A>
                 </LI>
             </c:when>
             <c:otherwise>
                 <LI CLASS="tab">
-                    <A HREF="logs.html?logName=webservice&lineNum=500" CLASS="tabLink fontSet">Webservice log</A>
+                    <A HREF="logs.html?logName=webservice&lineNum=${param.lineNum}" CLASS="tabLink fontSet">Webservice log</A>
                 </LI>
             </c:otherwise>
         </c:choose>
