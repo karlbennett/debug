@@ -25,16 +25,22 @@ public class LogServiceImpl implements LogService {
     private Map<String, String> logFileMap;
 
     @Override
+    public String getLogFileName(String logName) {
+        return getLogFile(logName).getName();
+    }
+
+    @Override
+    public long getLogFileLength(String logName) {
+        return getLogFile(logName).length();
+    }
+
+    @Override
     public String getLogString(String logName, int lineNum) {
+        File logFile = getLogFile(logName);
 
-        log.info("  -- Getting log string: " + logName);
+        log.info("  -- Getting log string.");
 
-        String logPath = logFileMap.get(logName);
-
-        log.info("  -- Path: " + logPath);
-
-        if (logPath != null) {
-            File logFile = new File(logPath);
+        if (logFile != null) {
             return FileUtil.getStringFromFile(logFile, FileUtil.getNCharOffset(logFile, lineNum, '\n'));
         }
 
@@ -53,15 +59,11 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public String getLogHTML(String logName, int lineNum) {
+        File logFile = getLogFile(logName);
 
-        log.info("  -- Getting log HTML escaped string: " + logName);
+        log.info("  -- Getting log HTML escaped string.");
 
-        String logPath = logFileMap.get(logName);
-
-        log.info("  -- Path: " + logPath);
-
-        if (logPath != null) {
-            File logFile = new File(logPath);
+        if (logFile != null) {
             return FileUtil.getHTMLEscapedStringFromFile(logFile, FileUtil.getNCharOffset(logFile, lineNum, '\n'));
         }
 
@@ -69,15 +71,20 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public InputStream getLogInputStream(String logName, int lineNum) throws IOException {
-        log.info("  -- Getting log input stream: " + logName);
+    public InputStream getLogInputStream(String logName) throws IOException {
+        log.info("  -- Getting log input stream.");
+        return new BufferedInputStream(new FileInputStream(getLogFile(logName)));
+    }
+
+    private File getLogFile(String logName) {
+        log.info("  -- Getting log file: " + logName);
 
         String logPath = logFileMap.get(logName);
 
         log.info("  -- Path: " + logPath);
 
         if (logPath != null) {
-            return FileUtil.getLogInputStream(new File(logPath), lineNum);
+            return new File(logPath);
         }
 
         return null;

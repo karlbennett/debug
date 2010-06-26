@@ -1,5 +1,6 @@
 package org.youthnet.debug.services;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -8,6 +9,10 @@ import java.io.InputStream;
  * Date: 16-Jun-2010
  */
 public interface LogService {
+
+    public String getLogFileName(String logName);
+
+    public long getLogFileLength(String logName);
 
     /**
      * Function to get the log file represented in a string and only containing a given number of the last lines in the file.
@@ -44,5 +49,5 @@ public interface LogService {
      * */
     public String getLogHTML(String logName, int lineNum);
 
-    public InputStream getLogInputStream(String logName, int lineNum) throws IOException;
+    public InputStream getLogInputStream(String logName) throws IOException;
 }

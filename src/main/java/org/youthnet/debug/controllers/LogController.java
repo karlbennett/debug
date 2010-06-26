@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.youthnet.debug.services.LogService;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -41,13 +42,14 @@ public class LogController {
 
     @RequestMapping(value = "/downloadLog.html")
     public void handleLogDownload(@RequestParam String logName,
-                                  @RequestParam(required = false) Integer lineNum,
-                                  OutputStream outputStream) {
+                                  HttpServletResponse response) {
         log.info("Log controller -- stream log: " + logName);
 
         try {
-            if (lineNum == null) lineNum = 0;
-            FileCopyUtils.copy(logService.getLogInputStream(logName, lineNum), outputStream);
+            response.setContentType("text/plain");
+            response.setContentLength((int)logService.getLogFileLength(logName));
+	        response.setHeader("Content-Disposition","attachment; filename=\"" + logService.getLogFileName(logName) +"\"");
+            FileCopyUtils.copy(logService.getLogInputStream(logName), response.getOutputStream());
         } catch (IOException e) {
             log.error("Failed to open input stream for " + logName + " log file.");
         }

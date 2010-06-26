@@ -21,18 +21,6 @@ public class FileUtil {
     private FileUtil() {
     }
 
-    public static InputStream getLogInputStream(File file, Integer lineNum) throws IOException {
-        if (file != null && lineNum > 0) {
-            long offset = getNCharOffset(file, lineNum, '\n');
-            RandomAccessFile randomAccessLog = new RandomAccessFile(file, "r"); //  Open the log with random access.
-            randomAccessLog.seek(offset);
-
-            return new RandomAccessFileInputStream(randomAccessLog);
-        }
-
-        return null;
-    }
-
     public static long getNCharOffset(File file, int n, char c) {
         long offset = n; // Variable to hole the position of the file pointer.
         RandomAccessFile randomAccessLog = null;
