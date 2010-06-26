@@ -24,7 +24,7 @@
             <c:param name="lineNum" value="${lineNum}"/>
             <c:param name="truncate" value="${truncate}"/>
         </c:import>
-        <c:if test="${logString != null && logString != ''}">
+        <c:if test="${param.lineNum > 0}">
             <A HREF="#bottom" CLASS="tabLink fontSet logNav">To bottom</A>
             <c:choose>
                 <c:when test="${param.monitoring == true}">
@@ -34,7 +34,11 @@
                     <A HREF="logs.html?logName=${param.logName}&lineNum=${lineNum}&monitoring=true#bottom" CLASS="tabLink fontSet selectedTabLink">Monitor log</A>
                 </c:otherwise>
             </c:choose>
-            <P CLASS="logText">${logString}</P>
+            <P CLASS="logText">
+                <c:forEach var="line" items="${logCollection}">
+                    ${line}    
+                </c:forEach>
+            </P>
             <A NAME="bottom" HREF="#top" CLASS="tabLink fontSet logNav">To top</A>
             <c:if test="${param.monitoring == true}">
                 <META HTTP-EQUIV="REFRESH" CONTENT="5; URL=?logName=${param.logName}&lineNum=${lineNum}&monitoring=true#bottom">

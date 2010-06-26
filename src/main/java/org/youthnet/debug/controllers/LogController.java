@@ -12,7 +12,6 @@ import org.youthnet.debug.services.LogService;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.OutputStream;
 
 /**
  * User: karl
@@ -35,7 +34,7 @@ public class LogController {
 
         if (lineNum == null) lineNum = 0; // Stop any null pointer exceptions.
 
-        modelMap.addAttribute("logString", logService.getLogHTML(logName, lineNum));
+        modelMap.addAttribute("logCollection", logService.getLogInputStreamCollectionHTMLEscaped(logName, lineNum));
 
         return "logs.jsp";
     }

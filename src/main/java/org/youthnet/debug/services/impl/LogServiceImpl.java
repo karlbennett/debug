@@ -3,6 +3,8 @@ package org.youthnet.debug.services.impl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
+import org.youthnet.debug.io.InputStreamCollection;
+import org.youthnet.debug.io.InputStreamCollectionHTMLEscaped;
 import org.youthnet.debug.services.LogService;
 import org.youthnet.debug.util.io.FileUtil;
 
@@ -18,8 +20,6 @@ import java.util.Map;
 public class LogServiceImpl implements LogService {
 
     private static final Log log = LogFactory.getLog(LogServiceImpl.class);
-
-    private static final int BUFFER_SIZE = 1024;
 
     @Resource(name = "logFileMap")
     private Map<String, String> logFileMap;
@@ -71,9 +71,36 @@ public class LogServiceImpl implements LogService {
     }
 
     @Override
-    public InputStream getLogInputStream(String logName) throws IOException {
+    public InputStream getLogInputStream(String logName, Integer lines) throws IOException {
         log.info("  -- Getting log input stream.");
-        return new BufferedInputStream(new FileInputStream(getLogFile(logName)));
+
+        if (logName != null) {
+            File logFile = getLogFile(logName);
+            InputStream inputStream = new BufferedInputStream(new FileInputStream(logFile));
+
+            if (lines > -1) inputStream.skip(FileUtil.getNCharOffset(logFile, lines, '\n'));
+
+            return inputStream;
+        }
+
+        return null;
+    }
+
+    @Override
+    public InputStream getLogInputStream(String logName) throws IOException {
+        return getLogInputStream(logName, -1);
+    }
+
+    @Override
+    public InputStreamCollection getLogInputStreamCollection(String logName, int lines) throws IOException {
+        if (logName != null) return new InputStreamCollection(getLogInputStream(logName, lines));
+        return null;
+    }
+
+    @Override
+    public InputStreamCollection getLogInputStreamCollectionHTMLEscaped(String logName, int lines) throws IOException {
+        if (logName != null) return new InputStreamCollectionHTMLEscaped(getLogInputStream(logName, lines));
+        return null;
     }
 
     private File getLogFile(String logName) {

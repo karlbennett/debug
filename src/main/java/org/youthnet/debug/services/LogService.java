@@ -1,5 +1,7 @@
 package org.youthnet.debug.services;
 
+import org.youthnet.debug.io.InputStreamCollection;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,5 +51,11 @@ public interface LogService {
      * */
     public String getLogHTML(String logName, int lineNum);
 
+    public InputStream getLogInputStream(String logName, Integer lines) throws IOException;
+
     public InputStream getLogInputStream(String logName) throws IOException;
+
+    public InputStreamCollection getLogInputStreamCollection(String logName, int lines) throws IOException;
+
+    public InputStreamCollection getLogInputStreamCollectionHTMLEscaped(String logName, int lines) throws IOException;
 }

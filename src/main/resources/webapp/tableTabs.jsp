@@ -4,14 +4,14 @@
     <FORM CLASS="schemaForm" METHOD="post" ACTION="setschema.html">
         <SELECT NAME="schemaName">
             <c:forEach var="schemaName" items="${schemaNames}">
-            <c:choose>
-                <c:when test="${schemaName == currentSchemaName}">
-                    <OPTION VALUE="${schemaName}" SELECTED="selected">${schemaName}</OPTION>
-                </c:when>
-                <c:otherwise>
-                    <OPTION VALUE="${schemaName}">${schemaName}</OPTION>
-                </c:otherwise>
-            </c:choose>
+                <c:choose>
+                    <c:when test="${schemaName == currentSchemaName}">
+                        <OPTION VALUE="${schemaName}" SELECTED="selected">${schemaName}</OPTION>
+                    </c:when>
+                    <c:otherwise>
+                        <OPTION VALUE="${schemaName}">${schemaName}</OPTION>
+                    </c:otherwise>
+                </c:choose>
             </c:forEach>
         </SELECT>
         <INPUT TYPE="submit" VALUE="Set Schema" />
