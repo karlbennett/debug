@@ -38,6 +38,7 @@ public class InputStreamCollectiveIterator implements Iterator<String> {
         try {
             if ((this.bytesRead = this.inputStream.read(this.bytes)) > 0)
                 return new String(Arrays.copyOfRange(this.bytes, 0, this.bytesRead));
+            else this.inputStream.close();
         } catch (IOException e) {
             log.error(" -- Failed to read the input stream.");
         }
