@@ -5,6 +5,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Component;
 import org.youthnet.debug.io.InputStreamCollection;
 import org.youthnet.debug.io.InputStreamCollectionHTMLEscaped;
+import org.youthnet.debug.persistence.Page;
+import org.youthnet.debug.persistence.Pageable;
 import org.youthnet.debug.services.LogService;
 import org.youthnet.debug.util.io.FileUtil;
 
@@ -17,12 +19,14 @@ import java.util.Map;
  * Date: 16-Jun-2010
  */
 @Component("logService")
-public class LogServiceImpl implements LogService {
+public class LogServiceImpl implements LogService, Pageable {
 
     private static final Log log = LogFactory.getLog(LogServiceImpl.class);
 
     @Resource(name = "logFileMap")
     private Map<String, String> logFileMap;
+
+    private Integer lineNum;
 
     @Override
     public String getLogFileName(String logName) {
@@ -114,6 +118,21 @@ public class LogServiceImpl implements LogService {
             return new File(logPath);
         }
 
+        return null;
+    }
+
+    @Override
+    public Integer getLineNumber() {
+        return this.lineNum;
+    }
+
+    @Override
+    public void setLineNumber(Integer lineNum) {
+        this.lineNum = lineNum;
+    }
+
+    @Override
+    public Page getPage(Integer pageNum) {
         return null;
     }
 }
