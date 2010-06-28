@@ -1,4 +1,4 @@
-package org.youthnet.debug.dao.util;
+package org.youthnet.debug.util.test;
 
 import org.springframework.stereotype.Component;
 import org.youthnet.debug.dao.jdbc.JdbcDao;

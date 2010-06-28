@@ -1,4 +1,4 @@
-package org.youthnet.debug.util;
+package org.youthnet.debug.util.test;
 
 import static junit.framework.Assert.*;
 
@@ -10,7 +10,6 @@ import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBea
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.youthnet.debug.dao.admin.CollectiveDao;
-import org.youthnet.debug.dao.util.AdminJdbcTestUtil;
 import org.youthnet.debug.domain.admin.Collective;
 import org.youthnet.debug.domain.common.impl.UuidTypeImpl;
 import org.youthnet.debug.util.hibernate.HibernateUtil;

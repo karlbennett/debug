@@ -1,4 +1,4 @@
-package org.youthnet.debug.dao.admin;
+package org.youthnet.debug.dao;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Repository("adminGenericDao")
 @Transactional(readOnly = true)
-public class AdminGenericDao {
+public class GenericDao {
 
     @Resource(name = "adminSessionFactory")
     private SessionFactory sessionFactory;

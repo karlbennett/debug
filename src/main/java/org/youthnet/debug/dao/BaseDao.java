@@ -1,4 +1,4 @@
-package org.youthnet.debug.dao.admin;
+package org.youthnet.debug.dao;
 
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
@@ -13,14 +13,14 @@ import java.util.List;
  * Date: 19-May-2010
  */
 @Transactional(readOnly = true)
-public abstract class AdminDao<D,I> {
+public abstract class BaseDao<D,I> {
 
     @Resource(name = "adminSessionFactory")
     private SessionFactory sessionFactory;
 
     private Class<D> persistentClass;
 
-    public AdminDao(Class<D> persistentClass) {
+    public BaseDao(Class<D> persistentClass) {
         this.persistentClass = persistentClass;    
     }
 

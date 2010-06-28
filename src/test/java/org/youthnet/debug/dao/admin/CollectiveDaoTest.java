@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.youthnet.debug.dao.util.AdminJdbcTestUtil;
+import org.youthnet.debug.util.test.AdminJdbcTestUtil;
 import org.youthnet.debug.domain.admin.Collective;
 import org.youthnet.debug.domain.admin.Vuo;
 import org.youthnet.debug.domain.common.impl.UuidTypeImpl;

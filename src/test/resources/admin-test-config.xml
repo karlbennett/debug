@@ -9,6 +9,6 @@
     
     
 
-    <context:component-scan base-package="org.youthnet.debug.dao.util"/>
+    <context:component-scan base-package="org.youthnet.debug.util.test"/>
 
 </beans>

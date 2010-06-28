@@ -13,6 +13,7 @@ import org.youthnet.debug.util.conversion.UuidConverter;
 import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * User: Karl
@@ -88,7 +89,12 @@ public abstract class AbstractJdbcDao implements JdbcDao {
             }
             if (row != null) {
                 row.put("tableName", tableName);
-                return convertByteColumnsToUuidType(row);
+                row = convertByteColumnsToUuidType(row);
+
+                log.info("ID: " + id + " found in " + tableName + ".");
+                log.info(printRow(row));
+
+                return row;
             }
         }
 
@@ -129,6 +135,17 @@ public abstract class AbstractJdbcDao implements JdbcDao {
         }
 
         return row;
+    }
+
+    private String printRow(Map<String, Object> row) {
+        Set<String> keySet = row.keySet();
+        StringBuffer rowStringBuffer = new StringBuffer("ROW:\n");
+        for (String columnName : keySet) {
+            Object value = row.get(columnName);
+            if (value != null) rowStringBuffer.append("    " + columnName + ": " + value.toString() + "\n");   
+        }
+
+        return rowStringBuffer.toString();
     }
 
     public JdbcTemplate getJdbcTemplate() {
